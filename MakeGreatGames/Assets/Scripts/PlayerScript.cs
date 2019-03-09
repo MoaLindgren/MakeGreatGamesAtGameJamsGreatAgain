@@ -20,12 +20,17 @@ public class PlayerScript : TankScript
         get { return position; }
     }
 
+    public override void AddCoin()
+    {
+        base.AddCoin();
+        //uppdatera cointext
+    }
+
     protected override void MoveTank(float amount)
     {
         if (!alive)
             return;
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
-        
     }
 
     private void FixedUpdate()

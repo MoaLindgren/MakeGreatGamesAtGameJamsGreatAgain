@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class TankScript : MonoBehaviour
@@ -20,6 +20,9 @@ public class TankScript : MonoBehaviour
 
     [SerializeField]
     AudioClip shotSound, movementSound, deathSound;
+
+    [SerializeField]
+    protected Slider healthSlider;
 
     protected bool alive = true, shielded = false, canShoot = true;
     
@@ -46,6 +49,8 @@ public class TankScript : MonoBehaviour
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal };
         currentSpecialAttack = Nothing;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = health;
     }
 
     public virtual void AddCoin()
@@ -114,6 +119,7 @@ public class TankScript : MonoBehaviour
             alive = false;
             GameManager.Instance.TankDestroyed(this);
         }
+        healthSlider.value = health;
     }
 
     #region SpecialAttacks
