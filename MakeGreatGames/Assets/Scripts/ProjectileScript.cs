@@ -6,14 +6,14 @@ public class ProjectileScript : MonoBehaviour
 {
     Vector3 direction = Vector3.zero;
     float speed = 0.0f;
-    TankScript parent;
+    TankScript shooter;
     int damage;
 
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
     {
         this.direction = direction;
         this.speed = speed;
-        this.parent = parent;
+        this.shooter = parent;
         this.damage = damage;
     }
     
@@ -25,9 +25,14 @@ public class ProjectileScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         TankScript hitTank = collision.gameObject.GetComponent<TankScript>();
-        if(hitTank != null && hitTank != parent)
+        if(hitTank != null && hitTank != shooter)
         {
+            print("BOOM MADDA FAKKA");
             hitTank.TakeDamage(damage);
+        }
+        if(hitTank == null || hitTank != shooter)
+        {
+            Destroy(gameObject);
         }
     }
 }
