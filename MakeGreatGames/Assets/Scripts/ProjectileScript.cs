@@ -29,6 +29,7 @@ public class ProjectileScript : MonoBehaviour
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
+            Destroy(gameObject);
         }
         if (hitTank == null || hitTank != shooter)
         {
