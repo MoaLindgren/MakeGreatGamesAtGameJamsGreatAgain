@@ -6,9 +6,8 @@ using UnityEngine.AI;
 public class NpcScript : TankScript
 {
     NavMeshAgent agent;
-    float maxDistance;
     [SerializeField]
-    float speed;
+    float maxDistance;
     [SerializeField]
     bool move;
     PlayerScript target;
@@ -22,7 +21,7 @@ public class NpcScript : TankScript
 
     void Update()
     {
-        if(move)
+        if(Vector3.Distance(transform.position, target.Position) > maxDistance)
         {
             agent.isStopped = false;
             agent.destination = target.Position;
