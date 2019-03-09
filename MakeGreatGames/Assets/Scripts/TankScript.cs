@@ -29,7 +29,7 @@ public class TankScript : MonoBehaviour
 
     protected MovementMethod currentMovement;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         rB = GetComponent<Rigidbody>();
         currentMovement = MoveTank;
