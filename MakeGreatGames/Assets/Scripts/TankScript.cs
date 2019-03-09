@@ -9,17 +9,17 @@ public class TankScript : MonoBehaviour
     protected float turnSpeed, towerTurnSpeed, projectileSpeed;
 
     [SerializeField]
-    int health, shotDamage, specialAttackDamage;
+    protected int health, shotDamage, specialAttackDamage;
 
     [SerializeField]
     protected GameObject tankBase, tower, projectile;
 
     [SerializeField]
-    Transform shotStart;
+    protected Transform shotStart;
 
-    float charge = 0, maxCharge = 100;
+    protected float charge = 0, maxCharge = 100;
 
-    Rigidbody rB;
+    protected Rigidbody rB;
 
     protected delegate void MovementMethod(float amount);
 
