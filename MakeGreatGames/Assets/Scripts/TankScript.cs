@@ -6,10 +6,10 @@ using UnityEngine.Audio;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float turnSpeed, towerTurnSpeed, projectileSpeed, spinTime;
+    protected float speed,turnSpeed, towerTurnSpeed, projectileSpeed, spinTime;
 
     [SerializeField]
-    protected int health, shotDamage, specialAttackDamage;
+    protected int maxHealth, shotDamage, specialAttackDamage;
 
     [SerializeField]
     protected GameObject tankBase, tower, projectile, trackingMissile;
@@ -20,9 +20,11 @@ public class TankScript : MonoBehaviour
     //[SerializeField]
     //AudioClip shotSound, movementSound, deathSound
 
-    protected bool alive = true;
+    protected bool alive = true, shielded = false;
 
     protected float charge = 0, maxCharge = 100;
+
+    protected int health;
 
     protected delegate void MovementMethod(float amount);
 
@@ -36,13 +38,14 @@ public class TankScript : MonoBehaviour
 
     protected SpecialAttackMethod currentSpecialAttack;
 
-    SpecialAttackMethod[] specialAttackMethods;
+    protected SpecialAttackMethod[] specialAttackMethods;
 
     protected virtual void Awake()
     {
+        health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
-        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, Nothing, SpeedBoost, Heal };
+        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, Nothing, SpeedBoost, Heal, SuperHeal };
         currentSpecialAttack = Nothing;
     }
 
@@ -91,7 +94,7 @@ public class TankScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!alive)
+        if (!alive || shielded)
             return;
         health -= damage;
         if (health <= 0)
@@ -103,18 +106,28 @@ public class TankScript : MonoBehaviour
 
     #region SpecialAttacks
 
-    IEnumerator SpecialAttackTimer()
+    protected IEnumerator SpecialAttackTimer()
     {
         yield return new WaitForSeconds(30);
         currentSpecialAttack = Nothing;
     }
 
-    IEnumerator Shield()
+    protected IEnumerator Shield()
     {
+        shielded = true;
         yield return new WaitForSeconds(3);
+        shielded = false;
     }
 
-    void FireMissile()
+    protected IEnumerator SpeedBoosted()
+    {
+        float originalSpeed = speed;
+        speed *= 2;
+        yield return new WaitForSeconds(10);
+        speed = originalSpeed;
+    }
+
+    protected void FireMissile()
     {
         GameObject missileGO = Instantiate(trackingMissile, missileStart);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
@@ -136,28 +149,35 @@ public class TankScript : MonoBehaviour
         }
     }
 
-    void SpawnShield()
+    protected void SpawnShield()
     {
         //shieldparticles wooooooo
-
+        StartCoroutine("Shield");
     }
 
-    void Nothing()
+    protected void Nothing()
     {
-
+        return;
     }
 
-    void SpeedBoost()
+    protected void SpeedBoost()
     {
-
+        StartCoroutine("SpeedBoosted");
     }
 
-    void Heal()
+    protected void Heal()
     {
-
+        health += 30;
+        if (health > maxHealth)
+            health = maxHealth;
     }
 
-    void SuperShots()
+    protected void SuperHeal()
+    {
+        health = maxHealth;
+    }
+
+    protected void SuperShots()
     {
 
     }

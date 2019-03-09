@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class BlastRadiusScript : MonoBehaviour
 {
-    AudioSource aS;
-
     SphereCollider coll;
 
     [SerializeField]
@@ -15,7 +13,6 @@ public class BlastRadiusScript : MonoBehaviour
 
     void Start()
     {
-        aS = GetComponent<AudioSource>();
         coll = GetComponent<SphereCollider>();
         Destroy(gameObject, 2);
     }
@@ -24,6 +21,8 @@ public class BlastRadiusScript : MonoBehaviour
     {
         TankScript tank = other.GetComponent<TankScript>();
         if (tank != null)
+        {
             tank.TakeDamage(damage);
+        }
     }
 }
