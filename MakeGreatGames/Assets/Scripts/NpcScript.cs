@@ -10,8 +10,7 @@ public class NpcScript : TankScript
     float maxDistance, minDistance;
     [SerializeField]
     int points;
-    [SerializeField]
-    bool move, findDestianation;
+    bool move;
     PlayerScript target;
 
     public int Points
@@ -29,58 +28,46 @@ public class NpcScript : TankScript
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
-        findDestianation = true;
     }
 
     void Update()
     {
-        if (findDestianation)
+
+        float distance = Vector3.Distance(transform.position, target.Position);
+        if (distance > maxDistance)
         {
-            float distance = Vector3.Distance(transform.position, target.Position);
-            if (distance > maxDistance)
+            move = true;
+            if (distance < minDistance)
             {
-                move = true;
-                if (distance < minDistance)
+                print("npc within shooting range");
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, (target.Position - transform.position), out hit, 50f))
                 {
-                    print("npc within shooting range");
-
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position, (target.Position - transform.position), out hit, 50f))
+                    Debug.DrawRay(transform.position, (target.Position - transform.position));
+                    if (hit.transform.tag == "Player")
                     {
-                        Debug.DrawRay(transform.position, (target.Position - transform.position));
-                        if (hit.transform.tag == "Player")
-                        {
-                            print("npc have a clear shot");
-                            move = false;
-                        }
-
+                        print("npc have a clear shot");
+                        move = false;
                     }
                 }
             }
-            else
-            {
-                move = false;
-            }
-
-            if (move)
-            {
-                agent.isStopped = false;
-                agent.destination = target.Position;
-            }
-            else
-            {
-                agent.isStopped = true;
-            }
         }
-    }
+        else
+        {
+            move = false;
+        }
 
-    void OnTriggerEnter(Collider other)
-    {
-        //if(other.tag == "Npc")
-        //{
-        //    print("Uh");
-        //    other.GetComponent<NavMeshObstacle>().enabled = true;
-        //}
+        if (move)
+        {
+            agent.isStopped = false;
+            agent.destination = target.Position;
+        }
+        else
+        {
+            agent.isStopped = true;
+        }
+
     }
 
 }
