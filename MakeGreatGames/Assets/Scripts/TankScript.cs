@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+[RequireComponent(typeof(AudioSource))]
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
@@ -17,8 +18,8 @@ public class TankScript : MonoBehaviour
     [SerializeField]
     protected Transform shotStart, missileStart;
 
-    //[SerializeField]
-    //AudioClip shotSound, movementSound, deathSound
+    [SerializeField]
+    AudioClip shotSound, movementSound, deathSound;
 
     protected bool alive = true, shielded = false, canShoot = true;
     

@@ -6,6 +6,28 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
+struct PlayerInfo
+{
+    int score;
+    string name;
+
+    public int Score
+    {
+        get { return score; }
+    }
+
+    public string Name
+    {
+        get { return name; }
+    }
+
+    public PlayerInfo(int score, string name)
+    {
+        this.score = score;
+        this.name = name;
+    }
+}
+
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
@@ -69,5 +91,12 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         Time.timeScale = 0f;
+        PlayerInfo[] highScores = new PlayerInfo[5];
+        int index = 0;
+        foreach(XmlNode node in xNav.Select("//Player"))
+        {
+            //highScores[i] = new PlayerInfo(node())
+            index++;
+        }
     }
 }
