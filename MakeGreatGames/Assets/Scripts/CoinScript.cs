@@ -16,7 +16,8 @@ public class CoinScript : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = new Quaternion(0f, transform.rotation.y + spinAmount, 0f, 0f);
+        //transform.rotation = new Quaternion(0f, transform.rotation.y + spinAmount, 0f, 0f);
+        transform.Rotate(0f, spinAmount, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
