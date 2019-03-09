@@ -45,7 +45,7 @@ public class PlayerScript : TankScript
         }
 
         position = transform.position;
-        rB.freezeRotation = false;
+        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -69,7 +69,7 @@ public class PlayerScript : TankScript
         else
         {
             rB.velocity = Vector3.zero;
-            rB.freezeRotation = true;
+            rB.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
