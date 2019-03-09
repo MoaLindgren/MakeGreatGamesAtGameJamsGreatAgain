@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -41,6 +40,8 @@ public class GameManager : MonoBehaviour
     int score = 0;
 
     static GameManager instance;
+
+    string playerName = "Anders Ramses";
 
     public static GameManager Instance
     {
@@ -93,11 +94,22 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         PlayerInfo[] highScores = new PlayerInfo[5];
         int index = 0;
-        XPathNavigator nodeNav;
         foreach (XmlNode node in xNav.Select("//Player"))
         {
-            highScores[index] = new PlayerInfo(int.Parse(node.Attributes[0].Value), node.Attributes[1].Value);
+            highScores[index] = new PlayerInfo(int.Parse(node.Attributes[1].Value), node.Attributes[0].Value);
             index++;
         }
+        for (int i = highScores.Length - 1; i > -1; i--)
+        {
+            if (score > highScores[i].Score)
+            {
+                for (int j = highScores.Length; j > i - 1; j--)
+                {
+                    highScores[j] = j == i + 1 ? new PlayerInfo(score, playerName) : highScores[j - 1];
+                }
+                break;
+            }
+        }
+        highScoreXml.Save(Application.streamingAssetsPath + "/HighScoreXML.xml");
     }
 }

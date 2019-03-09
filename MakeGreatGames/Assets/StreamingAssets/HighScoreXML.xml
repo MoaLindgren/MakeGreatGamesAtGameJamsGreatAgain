@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <HighScores>
-  <Player Name ="1337" Score ="100" Position ="1"/>
-  <Player Name ="PRO" Score ="95" Position ="2"/>
-  <Player Name ="AVERAGE" Score ="90" Position ="3"/>
-  <Player Name ="MEH" Score ="85" Position ="4"/>
-  <Player Name ="N00B" Score ="80" Position ="5"/>
+  <Player Name ="1337" Score ="100"/>
+  <Player Name ="PRO" Score ="95"/>
+  <Player Name ="AVERAGE" Score ="90"/>
+  <Player Name ="MEH" Score ="85"/>
+  <Player Name ="N00B" Score ="80"/>
 </HighScores>
