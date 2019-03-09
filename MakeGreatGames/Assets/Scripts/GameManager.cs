@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     int score = 0;
 
+    Camera cam;
+
     static GameManager instance;
 
     string playerName = "Anders Ramses";
@@ -46,6 +48,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance
     {
         get { return instance; }
+    }
+
+    public Camera Cam
+    {
+        get { return cam; }
     }
 
     bool paused = false;
@@ -63,6 +70,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         xNav = highScoreXml.CreateNavigator();
+        cam = FindObjectOfType<Camera>();
     }
 
     public void TankDestroyed(TankScript tank)

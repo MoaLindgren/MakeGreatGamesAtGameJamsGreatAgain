@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerScript : TankScript
@@ -8,6 +9,9 @@ public class PlayerScript : TankScript
     Vector3 position;
 
     Rigidbody rB;
+
+    [SerializeField]
+    //Image 
 
     protected override void Awake()
     {
@@ -39,6 +43,8 @@ public class PlayerScript : TankScript
         {
             return;
         }
+
+        healthSlider.transform.LookAt(GameManager.Instance.Cam.transform);
 
         position = transform.position;
         rB.freezeRotation = false;
