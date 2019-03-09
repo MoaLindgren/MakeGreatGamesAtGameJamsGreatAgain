@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2518981942468308667}
   - component: {fileID: 2518981942468308657}
   - component: {fileID: 2518981942468308656}
+  - component: {fileID: 5141738201728733354}
   m_Layer: 0
   m_Name: Npc
   m_TagString: Untagged
@@ -130,12 +131,33 @@ MonoBehaviour:
   turnSpeed: 0
   towerTurnSpeed: 0
   projectileSpeed: 0
+  spinTime: 0
   health: 0
   shotDamage: 0
   specialAttackDamage: 0
   tankBase: {fileID: 0}
   tower: {fileID: 0}
   projectile: {fileID: 0}
+  trackingMissile: {fileID: 0}
   shotStart: {fileID: 0}
+  missileStart: {fileID: 0}
   maxDistance: 4
+  minDistance: 0
+  points: 0
   move: 0
+--- !u!208 &5141738201728733354
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518981942468308666}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
