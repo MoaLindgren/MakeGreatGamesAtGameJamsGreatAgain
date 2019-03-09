@@ -10,9 +10,20 @@ public class BlastRadiusScript : MonoBehaviour
 
     SphereCollider coll;
 
+    [SerializeField]
+    int damage;
+
     void Start()
     {
         aS = GetComponent<AudioSource>();
         coll = GetComponent<SphereCollider>();
+        Destroy(gameObject, 2);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        TankScript tank = other.GetComponent<TankScript>();
+        if (tank != null)
+            tank.TakeDamage(damage);
     }
 }

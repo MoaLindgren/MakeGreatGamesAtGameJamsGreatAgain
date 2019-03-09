@@ -34,6 +34,8 @@ public class TankScript : MonoBehaviour
 
     protected MovementMethod currentMovement;
 
+    protected SpecialAttackMethod currentSpecialAttack;
+
     SpecialAttackMethod[] specialAttackMethods;
 
     protected virtual void Awake()
@@ -41,6 +43,7 @@ public class TankScript : MonoBehaviour
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, Nothing, SpeedBoost, Heal };
+        currentSpecialAttack = Nothing;
     }
 
     protected void RotateTower(float amount)
@@ -100,25 +103,42 @@ public class TankScript : MonoBehaviour
 
     #region SpecialAttacks
 
+    IEnumerator SpecialAttackTimer()
+    {
+        yield return new WaitForSeconds(30);
+        currentSpecialAttack = Nothing;
+    }
+
+    IEnumerator Shield()
+    {
+        yield return new WaitForSeconds(3);
+    }
+
     void FireMissile()
     {
         GameObject missileGO = Instantiate(trackingMissile, missileStart);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
         {
-            if (FindObjectsOfType<NpcScript>().Length < 1)
+            NpcScript[] enemies = FindObjectsOfType<NpcScript>();
+            if (enemies.Length < 1)
             {
-
+                //åk nånstans random o boom
+            }
+            else
+            {
+                missile.Init(enemies[Random.Range(0, enemies.Length)], this);
             }
         }
         else
         {
-            missile.Init(FindObjectOfType<PlayerScript>());
+            missile.Init(FindObjectOfType<PlayerScript>(), this);
         }
     }
 
     void SpawnShield()
     {
+        //shieldparticles wooooooo
 
     }
 

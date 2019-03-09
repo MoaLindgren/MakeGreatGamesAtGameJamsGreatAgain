@@ -16,6 +16,9 @@ public class MissileScript : MonoBehaviour
     [SerializeField]
     int damage;
 
+    [SerializeField]
+    GameObject blast;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -39,6 +42,8 @@ public class MissileScript : MonoBehaviour
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
+            Instantiate(blast, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }
