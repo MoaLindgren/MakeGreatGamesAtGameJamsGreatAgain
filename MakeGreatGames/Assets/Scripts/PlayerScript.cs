@@ -44,8 +44,6 @@ public class PlayerScript : TankScript
             return;
         }
 
-        healthSlider.gameObject.GetComponentInParent<Transform>().rotation = new Quaternion(0f, 0f, 0f, healthSlider.gameObject.GetComponentInParent<Transform>().rotation.w);
-
         position = transform.position;
         rB.freezeRotation = false;
 

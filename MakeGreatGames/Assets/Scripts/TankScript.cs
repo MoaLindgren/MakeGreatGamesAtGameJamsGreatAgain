@@ -19,13 +19,13 @@ public class TankScript : MonoBehaviour
     protected Transform shotStart, missileStart;
 
     [SerializeField]
-    AudioClip shotSound, movementSound, deathSound;
+    protected AudioClip shotSound, movementSound, deathSound;
 
     [SerializeField]
     protected Slider healthSlider;
 
     protected bool alive = true, shielded = false, canShoot = true;
-    
+
     protected int health, coins = 0, maxCoins = 10;
 
     protected delegate void MovementMethod(float amount);
@@ -51,6 +51,11 @@ public class TankScript : MonoBehaviour
         currentSpecialAttack = Nothing;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
+    }
+
+    private void Update()
+    {
+        healthSlider.gameObject.GetComponentInParent<Transform>().rotation = new Quaternion(0f, 0f, 0f, healthSlider.gameObject.GetComponentInParent<Transform>().rotation.w);
     }
 
     public virtual void AddCoin()
