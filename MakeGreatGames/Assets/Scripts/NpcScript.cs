@@ -10,8 +10,10 @@ public class NpcScript : TankScript
     float maxDistance, minDistance;
     [SerializeField]
     int points;
-    bool move;
+    bool move, nearNpc;
     PlayerScript target;
+    GameObject[] npcs;
+    Vector3 npcGoTo;
 
     public int Points
     {
@@ -28,10 +30,39 @@ public class NpcScript : TankScript
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
+        npcs = GameObject.FindGameObjectsWithTag("Npc");
+        nearNpc = false;
     }
 
     void Update()
     {
+
+        //RAYCAST FÖR ATT HITTA NPC: 
+
+        //foreach(GameObject npc in npcs)
+        //{
+        //    RaycastHit findNpc;
+        //    if (Physics.Raycast(transform.position, (npc.transform.position - transform.position), out findNpc, 50f))
+        //    {
+        //        Debug.DrawRay(transform.position, (npc.transform.position - transform.position), Color.blue);
+        //        if(findNpc.distance < 2f)
+        //        {
+        //            nearNpc = true;
+        //            if(Vector3.Distance(transform.position, target.Position) < Vector3.Distance(npc.transform.position, target.Position))
+        //            {
+        //                GetComponent<NavMeshObstacle>().enabled = true;
+        //            }
+        //            else
+        //            {
+        //                npc.GetComponent<NavMeshObstacle>().enabled = true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            nearNpc = false;
+        //        }
+        //    }
+        //}
 
         float distance = Vector3.Distance(transform.position, target.Position);
         if (distance > maxDistance)
@@ -50,6 +81,10 @@ public class NpcScript : TankScript
                         print("npc have a clear shot");
                         move = false;
                     }
+                    else
+                    {
+                        move = true;
+                    }
                 }
             }
         }
@@ -57,7 +92,6 @@ public class NpcScript : TankScript
         {
             move = false;
         }
-
         if (move)
         {
             agent.isStopped = false;
@@ -67,7 +101,6 @@ public class NpcScript : TankScript
         {
             agent.isStopped = true;
         }
-
     }
 
 }
