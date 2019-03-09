@@ -94,7 +94,7 @@ public class TankScript : MonoBehaviour
 
     public void Shoot()
     {
-        if (!alive)
+        if (!alive || !canShoot)
             return;
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);

@@ -15,6 +15,7 @@ public class ProjectileScript : MonoBehaviour
         this.speed = speed;
         this.shooter = parent;
         this.damage = damage;
+        Destroy(gameObject, 15);
     }
 
     void Update()
@@ -24,11 +25,9 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("hit?");
         TankScript hitTank = other.gameObject.GetComponent<TankScript>();
         if (hitTank != null && hitTank != shooter)
         {
-            print("BOOM MADDA FAKKA");
             hitTank.TakeDamage(damage);
         }
         if (hitTank == null || hitTank != shooter)
