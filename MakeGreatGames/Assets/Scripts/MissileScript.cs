@@ -11,9 +11,6 @@ public class MissileScript : MonoBehaviour
     NavMeshAgent agent;
 
     [SerializeField]
-    float speed;
-
-    [SerializeField]
     int damage;
 
     [SerializeField]

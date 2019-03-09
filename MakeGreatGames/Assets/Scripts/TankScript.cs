@@ -136,6 +136,7 @@ public class TankScript : MonoBehaviour
     protected IEnumerator SuperShotTimer()
     {
         int originalDamage = shotDamage;
+        shotDamage *= 3;
         yield return new WaitForSeconds(10);
         shotDamage = originalDamage;
     }
