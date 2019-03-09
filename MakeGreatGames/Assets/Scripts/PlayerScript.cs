@@ -49,20 +49,20 @@ public class PlayerScript : TankScript
 
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
-            currentMovement(1);
+            currentMovement(speed);
         }
         else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
         {
-            currentMovement(-1);
+            currentMovement(-speed);
         }
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            currentRotationMethod(-1);
+            currentRotationMethod(-turnSpeed);
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            currentRotationMethod(1);
+            currentRotationMethod(turnSpeed);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
