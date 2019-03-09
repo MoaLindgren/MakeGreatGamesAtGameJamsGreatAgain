@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         PlayerInfo[] highScores = new PlayerInfo[5];
         int index = 0;
-        foreach(XmlNode node in xNav.Select("//Player"))
+        foreach(XmlNode node in xNav.Select("//Player/@Name"))
         {
             //highScores[i] = new PlayerInfo(node())
             index++;
