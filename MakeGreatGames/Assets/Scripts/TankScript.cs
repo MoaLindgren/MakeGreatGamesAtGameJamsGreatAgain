@@ -97,7 +97,7 @@ public class TankScript : MonoBehaviour
         if (!alive)
             return;
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
-        shot.Init(tower.transform.forward, projectileSpeed, this, shotDamage);
+        shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
         StartCoroutine("AttackCooldownTimer");
     }
 

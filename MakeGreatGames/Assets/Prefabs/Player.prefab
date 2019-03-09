@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &94565998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94565999}
+  m_Layer: 0
+  m_Name: ShotStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &94565999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94565998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.771, y: -0.075, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5520103173034257486}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2155371376883543493
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,10 +496,11 @@ MonoBehaviour:
   specialAttackDamage: 0
   tankBase: {fileID: 0}
   tower: {fileID: 616958113086764823}
-  projectile: {fileID: 0}
+  projectile: {fileID: 7609327349497566570, guid: 8aae00f9a6a3c7a41ba5e546bf65d726,
+    type: 3}
   trackingMissile: {fileID: 0}
-  shotStart: {fileID: 0}
-  missileStart: {fileID: 0}
+  shotStart: {fileID: 94565999}
+  missileStart: {fileID: 94565999}
   shotSound: {fileID: 0}
   movementSound: {fileID: 0}
   deathSound: {fileID: 0}
@@ -761,6 +792,12 @@ PrefabInstance:
     - {fileID: 58819944265922221, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
     - {fileID: 1224964739680677585, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
+--- !u!4 &5520103173034257486 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2905374835757292413, guid: abd6c544251b1834eb2d20d093fa9f40,
+    type: 3}
+  m_PrefabInstance: {fileID: 7262810398214764339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &616958113086764823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7801729552514695204, guid: abd6c544251b1834eb2d20d093fa9f40,

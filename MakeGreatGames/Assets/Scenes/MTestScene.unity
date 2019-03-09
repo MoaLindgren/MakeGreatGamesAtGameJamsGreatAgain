@@ -1563,6 +1563,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7262810398082525376, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: shotDamage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262810398082525376, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262810398082525376, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: attackCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3918613870872165249, guid: ab5354807127fda4a9381a7b7e23c60d,
         type: 3}
       propertyPath: m_Camera
@@ -1577,6 +1592,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 94565999, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 94565999, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 94565999, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
