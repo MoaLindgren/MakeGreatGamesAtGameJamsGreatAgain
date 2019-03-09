@@ -38,7 +38,7 @@ public class TankScript : MonoBehaviour
 
     protected void RotateTower(float amount)
     {
-
+        tower.transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y + amount, transform.rotation.z, transform.rotation.w);
     }
 
     protected void RotateTank(float amount)
