@@ -44,7 +44,7 @@ public class PlayerScript : TankScript
             return;
         }
 
-        healthSlider.transform.LookAt(GameManager.Instance.Cam.transform);
+        healthSlider.transform.rotation = new Quaternion(0f, 0f, 0f, healthSlider.transform.rotation.w);
 
         position = transform.position;
         rB.freezeRotation = false;
