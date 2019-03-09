@@ -24,10 +24,11 @@ public class PlayerScript : TankScript
     {
         if (!alive)
             return;
-        rB.AddForce(transform.forward * amount);
+        rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
+        
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!alive)
         {
@@ -35,6 +36,7 @@ public class PlayerScript : TankScript
         }
 
         position = transform.position;
+        rB.freezeRotation = false;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -54,6 +56,11 @@ public class PlayerScript : TankScript
         else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
         {
             currentMovement(-speed);
+        }
+        else
+        {
+            rB.velocity = Vector3.zero;
+            rB.freezeRotation = true;
         }
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
