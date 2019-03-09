@@ -57,7 +57,6 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        //tower.transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y + amount, transform.rotation.z, transform.rotation.w);
         tower.transform.Rotate(0f, amount, 0f);
     }
 
@@ -65,7 +64,6 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        //transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y + amount, transform.rotation.z, transform.rotation.w);
         transform.Rotate(0f, amount, 0f);
     }
 
