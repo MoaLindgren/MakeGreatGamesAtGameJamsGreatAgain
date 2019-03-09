@@ -20,6 +20,13 @@ public class PlayerScript : TankScript
         get { return position; }
     }
 
+    protected override void MoveTank(float amount)
+    {
+        if (!alive)
+            return;
+        rB.AddForce(Vector3.forward * amount);
+    }
+
     private void Update()
     {
         if (!alive)

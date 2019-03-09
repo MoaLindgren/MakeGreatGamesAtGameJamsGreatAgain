@@ -69,7 +69,7 @@ public class TankScript : MonoBehaviour
         transform.Rotate(0f, amount, 0f);
     }
 
-    protected void MoveTank(float amount)
+    protected virtual void MoveTank(float amount)
     {
         if (!alive)
             return;
