@@ -192,11 +192,13 @@ public class TankScript : MonoBehaviour
         health += 30;
         if (health > maxHealth)
             health = maxHealth;
+        healthSlider.value = health;
     }
 
     protected void SuperHeal()
     {
         health = maxHealth;
+        healthSlider.value = health;
     }
 
     protected void SuperShots()
