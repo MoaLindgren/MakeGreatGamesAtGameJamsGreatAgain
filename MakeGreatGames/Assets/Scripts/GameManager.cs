@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
+        Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         xNav = highScoreXml.CreateNavigator();
     }
