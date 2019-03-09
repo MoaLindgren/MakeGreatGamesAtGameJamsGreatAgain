@@ -47,6 +47,11 @@ public class TankScript : MonoBehaviour
         currentSpecialAttack = Nothing;
     }
 
+    public virtual void AddCoin()
+    {
+        coins++;
+    }
+
     protected void RotateTower(float amount)
     {
         if (!alive)
