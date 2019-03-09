@@ -16,21 +16,22 @@ public class ProjectileScript : MonoBehaviour
         this.shooter = parent;
         this.damage = damage;
     }
-    
+
     void Update()
     {
         transform.Translate(direction * speed);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        TankScript hitTank = collision.gameObject.GetComponent<TankScript>();
-        if(hitTank != null && hitTank != shooter)
+        print("hit?");
+        TankScript hitTank = other.gameObject.GetComponent<TankScript>();
+        if (hitTank != null && hitTank != shooter)
         {
             print("BOOM MADDA FAKKA");
             hitTank.TakeDamage(damage);
         }
-        if(hitTank == null || hitTank != shooter)
+        if (hitTank == null || hitTank != shooter)
         {
             Destroy(gameObject);
         }
