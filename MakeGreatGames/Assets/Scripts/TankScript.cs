@@ -42,6 +42,8 @@ public class TankScript : MonoBehaviour
 
     protected SpecialAttackMethod[] specialAttackMethods;
 
+    protected Transform canvasTF;
+
     protected virtual void Awake()
     {
         health = maxHealth;
@@ -49,13 +51,15 @@ public class TankScript : MonoBehaviour
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal };
         currentSpecialAttack = Nothing;
+        canvasTF = healthSlider.gameObject.GetComponentInParent<Transform>();
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        healthSlider.gameObject.GetComponentInParent<Transform>().rotation = new Quaternion(0f, 0f, 0f, healthSlider.gameObject.GetComponentInParent<Transform>().rotation.w);
+        canvasTF.LookAt(GameManager.Instance.Cam.transform);
+        canvasTF.rotation = new Quaternion(0f, 0f, canvasTF.rotation.z, canvasTF.rotation.w);
     }
 
     public virtual void AddCoin()
