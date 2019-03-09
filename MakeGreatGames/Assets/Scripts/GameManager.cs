@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -41,6 +43,6 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-
+        Time.timeScale = 0f;
     }
 }

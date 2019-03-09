@@ -54,7 +54,7 @@ public class TankScript : MonoBehaviour
     public void Shoot()
     {
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
-        shot.Init(tower.transform.forward, projectileSpeed, this);
+        shot.Init(tower.transform.forward, projectileSpeed, this, shotDamage);
     }
 
     public void SpecialAttack()
