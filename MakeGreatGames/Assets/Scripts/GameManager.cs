@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         foreach(XmlNode node in xNav.Select("//Player/@Name"))
         {
             //highScores[i] = new PlayerInfo(node())
-            nodeNav = node.at
+            //nodeNav = node.at
             index++;
         }
     }
