@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
@@ -17,9 +16,9 @@ public class TankScript : MonoBehaviour
     [SerializeField]
     protected Transform shotStart;
 
-    protected float charge = 0, maxCharge = 100;
+    protected bool alive = true;
 
-    protected Rigidbody rB;
+    protected float charge = 0, maxCharge = 100;
 
     protected delegate void MovementMethod(float amount);
 
@@ -31,42 +30,53 @@ public class TankScript : MonoBehaviour
 
     protected virtual void Awake()
     {
-        rB = GetComponent<Rigidbody>();
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
     }
 
     protected void RotateTower(float amount)
     {
+        if (!alive)
+            return;
         tower.transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y + amount, transform.rotation.z, transform.rotation.w);
     }
 
     protected void RotateTank(float amount)
     {
+        if (!alive)
+            return;
         transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y + amount, transform.rotation.z, transform.rotation.w);
     }
 
     protected void MoveTank(float amount)
     {
-        rB.AddForce(transform.forward * amount);
+        if (!alive)
+            return;
     }
 
     public void Shoot()
     {
+        if (!alive)
+            return;
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
         shot.Init(tower.transform.forward, projectileSpeed, this, shotDamage);
     }
 
     public void SpecialAttack()
     {
+        if (!alive)
+            return;
 
     }
 
     public void TakeDamage(int damage)
     {
+        if (!alive)
+            return;
         health -= damage;
         if (health <= 0)
         {
+            alive = false;
             GameManager.Instance.TankDestroyed(this);
         }
     }
