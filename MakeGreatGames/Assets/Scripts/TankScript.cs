@@ -58,8 +58,10 @@ public class TankScript : MonoBehaviour
 
     private void LateUpdate()
     {
-        canvasTF.LookAt(GameManager.Instance.Cam.transform);
-        canvasTF.rotation = new Quaternion(0f, 0f, canvasTF.rotation.z, canvasTF.rotation.w);
+        //canvasTF.LookAt(GameManager.Instance.Cam.transform);
+
+        //canvasTF.rotation = new Quaternion(0f, 0f, canvasTF.rotation.z, canvasTF.rotation.w);
+        canvasTF.LookAt(canvasTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
     }
 
     public virtual void AddCoin()
