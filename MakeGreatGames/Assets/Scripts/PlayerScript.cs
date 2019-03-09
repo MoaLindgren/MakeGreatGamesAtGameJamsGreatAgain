@@ -24,7 +24,7 @@ public class PlayerScript : TankScript
     {
         if (!alive)
             return;
-        rB.AddForce(Vector3.forward * amount);
+        rB.AddForce(transform.forward * amount);
     }
 
     private void Update()
