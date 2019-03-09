@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class TankScript : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class TankScript : MonoBehaviour
 
     [SerializeField]
     protected Transform shotStart;
+
+    //[SerializeField]
+    //AudioClip shotSound, movementSound, deathSound
 
     protected bool alive = true;
 
@@ -52,6 +56,11 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
+    }
+
+    protected void DontMoveTank(float amount)
+    {
+        return;
     }
 
     public void Shoot()

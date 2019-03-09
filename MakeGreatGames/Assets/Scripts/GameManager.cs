@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
+    bool paused = false;
+
+    public bool Paused
+    {
+        get { return paused; }
+    }
+
     private void Awake()
     {
         if (instance != null && instance != this)

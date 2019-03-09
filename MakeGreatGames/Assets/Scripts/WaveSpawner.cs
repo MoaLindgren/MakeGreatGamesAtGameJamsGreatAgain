@@ -15,12 +15,12 @@ public class WaveSpawner : MonoBehaviour
 
     static WaveSpawner instance;
 
-    int wave = 0, poolIndex = 0, spawnPointIndex = 0;
-
     public static WaveSpawner Instance
     {
         get { return instance; }
     }
+
+    int wave = 0, poolIndex = 0, spawnPointIndex = 0;
 
     List<GameObject> currentWave = new List<GameObject>();
 
@@ -30,17 +30,20 @@ public class WaveSpawner : MonoBehaviour
     {
         if (instance != null && instance != this)
             Destroy(this);
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 100; i++)
         {
             GameObject spawnedTank = Instantiate(tank, new Vector3(10000, 10000, 10000), Quaternion.identity);
             enemyPool.Add(spawnedTank);
+            spawnedTank.GetComponent<NpcScript>().SetAlive(false);
             spawnedTank.SetActive(false);
         }
+        StartCoroutine("SpawnWave");
     }
 
     IEnumerator SpawnWave()
     {
-        wave++;
+        if (wave < 100)
+            wave++;
         for (int i = 0; i < wave; i++)
         {
             SpawnTank();
@@ -56,14 +59,16 @@ public class WaveSpawner : MonoBehaviour
         }
         enemyPool[poolIndex].transform.position = spawnPoints[spawnPointIndex].position;
         enemyPool[poolIndex].SetActive(true);
-        //enemyPool[poolIndex].GetComponent<NpcScript>().
+        enemyPool[poolIndex].GetComponent<NpcScript>().SetAlive(true);
         poolIndex = (poolIndex + 1) % enemyPool.Count;
+        spawnPointIndex = (spawnPointIndex + 1) % spawnPoints.Length;
     }
 
     public void TankDestroyed(GameObject tank)
     {
         if (currentWave.Contains(tank))
             currentWave.Remove(tank);
+        tank.GetComponent<NpcScript>().SetAlive(false);
         tank.SetActive(false);
         tank.transform.position = new Vector3(10000, 10000, 10000);
         if (currentWave.Count < 1)
