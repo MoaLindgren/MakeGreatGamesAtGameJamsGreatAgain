@@ -19,7 +19,7 @@ public class MissileScript : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        if(agent.destination == null)
+        if (agent.destination == null)
         {
             agent.destination = CoinManager.Instance.Coins[Random.Range(0, CoinManager.Instance.Coins.Length)].transform.position;
         }
@@ -34,7 +34,17 @@ public class MissileScript : MonoBehaviour
 
     void Update()
     {
-        agent.destination = target.transform.position;
+        TankScript[] enemies = FindObjectsOfType<NpcScript>();
+        if (target == null && enemies.Length > 0)
+        {
+            target = enemies[Random.Range(0, enemies.Length)];
+        }
+        if (target != null)
+            agent.destination = target.transform.position;
+        else if (Vector3.Distance(transform.position, agent.destination) < 0.1f)
+        {
+            Instantiate(blast, transform.position, Quaternion.identity);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
