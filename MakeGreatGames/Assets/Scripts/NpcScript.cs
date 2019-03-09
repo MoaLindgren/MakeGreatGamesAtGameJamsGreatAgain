@@ -12,6 +12,11 @@ public class NpcScript : TankScript
     bool move;
     PlayerScript target;
 
+    public void SetAlive(bool alive)
+    {
+        this.alive = alive;
+    }
+
     protected override void Awake()
     {
         base.Awake();
