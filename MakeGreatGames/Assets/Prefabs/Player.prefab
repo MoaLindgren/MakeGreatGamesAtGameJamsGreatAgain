@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7262810398082525383}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   turnSpeed: 5
-  towerTurnSpeed: 0
+  towerTurnSpeed: 2
   projectileSpeed: 0
   spinTime: 0
   attackCooldown: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
   shotDamage: 0
   specialAttackDamage: 0
   tankBase: {fileID: 0}
-  tower: {fileID: 0}
+  tower: {fileID: 616958113086764823}
   projectile: {fileID: 0}
   trackingMissile: {fileID: 0}
   shotStart: {fileID: 0}
@@ -257,15 +257,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 292309832420219026, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
-    - {fileID: 7245487209037989686, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
-    - {fileID: 58819944265922221, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
-    - {fileID: 1224964739680677585, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
+    - target: {fileID: 4172674738074147934, guid: abd6c544251b1834eb2d20d093fa9f40,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
+    - target: {fileID: 5796972391371732269, guid: abd6c544251b1834eb2d20d093fa9f40,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
+    - target: {fileID: 7712951076417491828, guid: abd6c544251b1834eb2d20d093fa9f40,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
 --- !u!4 &5599374234265158003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989922451124860480, guid: abd6c544251b1834eb2d20d093fa9f40,
+    type: 3}
+  m_PrefabInstance: {fileID: 7262810398214764339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &616958113086764823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7801729552514695204, guid: abd6c544251b1834eb2d20d093fa9f40,
     type: 3}
   m_PrefabInstance: {fileID: 7262810398214764339}
   m_PrefabAsset: {fileID: 0}
