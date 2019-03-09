@@ -94,10 +94,9 @@ public class GameManager : MonoBehaviour
         PlayerInfo[] highScores = new PlayerInfo[5];
         int index = 0;
         XPathNavigator nodeNav;
-        foreach(XmlNode node in xNav.Select("//Player/@Name"))
+        foreach (XmlNode node in xNav.Select("//Player"))
         {
-            //highScores[i] = new PlayerInfo(node())
-            //nodeNav = node.at
+            highScores[index] = new PlayerInfo(int.Parse(node.Attributes[0].Value), node.Attributes[1].Value);
             index++;
         }
     }
