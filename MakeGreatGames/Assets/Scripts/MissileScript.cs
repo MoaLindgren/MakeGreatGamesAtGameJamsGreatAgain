@@ -6,15 +6,15 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class MissileScript : MonoBehaviour
 {
-    TankScript target, shooter;
-
-    NavMeshAgent agent;
-
     [SerializeField]
     int damage;
 
     [SerializeField]
     GameObject blast;
+
+    TankScript target, shooter;
+
+    NavMeshAgent agent;
 
     private void Awake()
     {

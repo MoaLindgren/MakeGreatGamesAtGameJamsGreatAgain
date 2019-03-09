@@ -156,11 +156,7 @@ public class TankScript : MonoBehaviour
         if (this is PlayerScript)
         {
             NpcScript[] enemies = FindObjectsOfType<NpcScript>();
-            if (enemies.Length < 1)
-            {
-
-            }
-            else
+            if (enemies.Length > 0)
             {
                 missile.Init(enemies[Random.Range(0, enemies.Length)], this);
             }
