@@ -8,9 +8,14 @@ public class WaveSpawner : MonoBehaviour
     GameObject tank;
 
     [SerializeField]
+    float timeBetweenSpawns, timeBetweenWaves;
+
+    [SerializeField]
     Transform[] spawnPoints;
 
     static WaveSpawner instance;
+
+    int wave = 0, poolIndex = 0, spawnPointIndex = 0;
 
     public static WaveSpawner Instance
     {
@@ -25,14 +30,50 @@ public class WaveSpawner : MonoBehaviour
     {
         if (instance != null && instance != this)
             Destroy(this);
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 1000; i++)
         {
-            enemyPool.Add(Instantiate(tank, new Vector3(10000, 10000, 10000), Quaternion.identity));
+            GameObject spawnedTank = Instantiate(tank, new Vector3(10000, 10000, 10000), Quaternion.identity);
+            enemyPool.Add(spawnedTank);
+            spawnedTank.SetActive(false);
         }
     }
 
     IEnumerator SpawnWave()
     {
-        yield return null;
+        wave++;
+        for (int i = 0; i < wave; i++)
+        {
+            SpawnTank();
+            yield return new WaitForSeconds(timeBetweenSpawns);
+        }
+    }
+
+    void SpawnTank()
+    {
+        while (enemyPool[poolIndex].activeSelf)
+        {
+            poolIndex = (poolIndex + 1) % enemyPool.Count;
+        }
+        enemyPool[poolIndex].transform.position = spawnPoints[spawnPointIndex].position;
+        enemyPool[poolIndex].SetActive(true);
+        poolIndex = (poolIndex + 1) % enemyPool.Count;
+    }
+
+    public void TankDestroyed(GameObject tank)
+    {
+        if (currentWave.Contains(tank))
+            currentWave.Remove(tank);
+        tank.SetActive(false);
+        tank.transform.position = new Vector3(10000, 10000, 10000);
+        if (currentWave.Count < 1)
+        {
+            StartCoroutine("NextWave");
+        }
+    }
+
+    IEnumerator NextWave()
+    {
+        yield return new WaitForSeconds(timeBetweenWaves);
+        StartCoroutine("SpawnWave");
     }
 }
