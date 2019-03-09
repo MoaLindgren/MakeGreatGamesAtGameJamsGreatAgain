@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class TankScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    protected float turnSpeed, towerTurnSpeed, projectileSpeed;
+
+    [SerializeField]
+    protected GameObject tankBase, tower, projectile;
+
+    [SerializeField]
+    Transform shotStart;
+
+    float charge = 0;
+
+    protected void RotateTower(float amount)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void RotateTank(float amount)
     {
-        
+
+    }
+
+    public void Shoot()
+    {
+        GameObject shot = Instantiate(projectile, shotStart.position, shotStart.rotation);
+    }
+
+    public void SpecialAttack()
+    {
+
     }
 }
