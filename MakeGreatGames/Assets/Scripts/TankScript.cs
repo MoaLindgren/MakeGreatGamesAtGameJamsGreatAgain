@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float speed,turnSpeed, towerTurnSpeed, projectileSpeed, spinTime;
+    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown;
 
     [SerializeField]
     protected int maxHealth, shotDamage, specialAttackDamage;
@@ -20,11 +20,9 @@ public class TankScript : MonoBehaviour
     //[SerializeField]
     //AudioClip shotSound, movementSound, deathSound
 
-    protected bool alive = true, shielded = false;
-
-    protected float charge = 0, maxCharge = 100;
-
-    protected int health;
+    protected bool alive = true, shielded = false, canShoot = true;
+    
+    protected int health, coins = 0, maxCoins = 10;
 
     protected delegate void MovementMethod(float amount);
 
@@ -45,7 +43,7 @@ public class TankScript : MonoBehaviour
         health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
-        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, Nothing, SpeedBoost, Heal, SuperHeal };
+        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal };
         currentSpecialAttack = Nothing;
     }
 
@@ -80,12 +78,20 @@ public class TankScript : MonoBehaviour
             return;
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
         shot.Init(tower.transform.forward, projectileSpeed, this, shotDamage);
+        StartCoroutine("AttackCooldown");
     }
 
-    protected IEnumerator SpecialAttack()
+    protected IEnumerator AttackCooldownTimer()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canShoot = true;
+    }
+
+    protected IEnumerator SpinWheel()
     {
         if (!alive)
-            StopCoroutine("SpecialAttack");
+            StopCoroutine("SpinWheel");
         //spela spinnljud && snurra hjulen
         yield return new WaitForSeconds(spinTime);
         int specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
@@ -125,6 +131,13 @@ public class TankScript : MonoBehaviour
         speed *= 2;
         yield return new WaitForSeconds(10);
         speed = originalSpeed;
+    }
+
+    protected IEnumerator SuperShotTimer()
+    {
+        int originalDamage = shotDamage;
+        yield return new WaitForSeconds(10);
+        shotDamage = originalDamage;
     }
 
     protected void FireMissile()
@@ -179,8 +192,9 @@ public class TankScript : MonoBehaviour
 
     protected void SuperShots()
     {
-
+        StartCoroutine("SuperShotTimer");
     }
 
     #endregion
+
 }

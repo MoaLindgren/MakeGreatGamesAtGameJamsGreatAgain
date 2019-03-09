@@ -39,5 +39,24 @@ public class PlayerScript : TankScript
             currentRotationMethod = RotateTank;
             currentMovement = MoveTank;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && coins >= 5)
+        {
+            coins -= 5;
+            StopCoroutine("SpecialAttackTimer");
+            StartCoroutine("SpinWheel");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && currentSpecialAttack != Nothing)
+        {
+            currentSpecialAttack();
+            StopCoroutine("SpecialAttackTimer");
+            currentSpecialAttack = Nothing;
+        }
     }
 }
