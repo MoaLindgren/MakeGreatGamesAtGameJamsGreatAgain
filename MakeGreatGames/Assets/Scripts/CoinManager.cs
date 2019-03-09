@@ -30,6 +30,7 @@ public class CoinManager : MonoBehaviour
             Destroy(this);
         instance = this;
         aS = GetComponent<AudioSource>();
+        StartCoroutine("SpawnCoin");
     }
 
     public void CoinPickedUp(GameObject coin)
