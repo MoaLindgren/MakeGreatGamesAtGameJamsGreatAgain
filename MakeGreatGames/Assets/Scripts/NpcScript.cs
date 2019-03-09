@@ -81,10 +81,7 @@ public class NpcScript : TankScript
                         print("npc have a clear shot");
                         move = false;
                     }
-                    else
-                    {
-                        move = true;
-                    }
+
                 }
             }
         }

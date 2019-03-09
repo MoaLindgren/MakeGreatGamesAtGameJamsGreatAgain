@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a024a74021428a4dab50e865d1dd016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinAmount: 2
+  spinAmount: 1
 --- !u!1 &9215156495282314277
 GameObject:
   m_ObjectHideFlags: 0

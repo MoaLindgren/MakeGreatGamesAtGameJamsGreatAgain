@@ -104,7 +104,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -128,11 +128,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6aba971e993424d9a00c56dd61223d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
   turnSpeed: 0
   towerTurnSpeed: 0
   projectileSpeed: 0
   spinTime: 0
-  health: 0
+  attackCooldown: 0
+  maxHealth: 0
   shotDamage: 0
   specialAttackDamage: 0
   tankBase: {fileID: 0}
@@ -141,10 +143,12 @@ MonoBehaviour:
   trackingMissile: {fileID: 0}
   shotStart: {fileID: 0}
   missileStart: {fileID: 0}
+  shotSound: {fileID: 0}
+  movementSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxDistance: 4
   minDistance: 0
   points: 0
-  move: 0
 --- !u!208 &5141738201728733354
 NavMeshObstacle:
   m_ObjectHideFlags: 0
