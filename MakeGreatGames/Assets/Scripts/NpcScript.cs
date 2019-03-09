@@ -24,7 +24,12 @@ public class NpcScript : TankScript
     {
         if(move)
         {
-            agent.Move(target.Position);
+            agent.isStopped = false;
+            agent.destination = target.Position;
+        }
+        else
+        {
+            agent.isStopped = true;
         }
     }
 
