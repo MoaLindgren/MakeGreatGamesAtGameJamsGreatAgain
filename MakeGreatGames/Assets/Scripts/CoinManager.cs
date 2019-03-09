@@ -8,6 +8,9 @@ public class CoinManager : MonoBehaviour
     [SerializeField]
     GameObject[] coins;
 
+    [SerializeField]
+    float minCoinTime, maxCoinTime;
+
     static CoinManager instance;
 
     public static CoinManager Instance
@@ -42,7 +45,7 @@ public class CoinManager : MonoBehaviour
 
     IEnumerator SpawnCoin()
     {
-        yield return new WaitForSeconds(Random.Range(10, 60));
+        yield return new WaitForSeconds(Random.Range(minCoinTime, maxCoinTime));
         if (activeCoins < coins.Length)
         {
             bool spawnChosen = false;
