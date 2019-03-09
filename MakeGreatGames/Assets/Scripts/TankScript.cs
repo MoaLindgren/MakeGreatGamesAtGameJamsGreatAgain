@@ -6,16 +6,16 @@ using UnityEngine.Audio;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float turnSpeed, towerTurnSpeed, projectileSpeed;
+    protected float turnSpeed, towerTurnSpeed, projectileSpeed, spinTime;
 
     [SerializeField]
     protected int health, shotDamage, specialAttackDamage;
 
     [SerializeField]
-    protected GameObject tankBase, tower, projectile;
+    protected GameObject tankBase, tower, projectile, trackingMissile;
 
     [SerializeField]
-    protected Transform shotStart;
+    protected Transform shotStart, missileStart;
 
     //[SerializeField]
     //AudioClip shotSound, movementSound, deathSound
@@ -28,14 +28,19 @@ public class TankScript : MonoBehaviour
 
     protected delegate void RotationMethod(float amount);
 
+    protected delegate void SpecialAttackMethod();
+
     protected RotationMethod currentRotationMethod;
 
     protected MovementMethod currentMovement;
+
+    SpecialAttackMethod[] specialAttackMethods;
 
     protected virtual void Awake()
     {
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
+        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, Nothing, SpeedBoost, Heal };
     }
 
     protected void RotateTower(float amount)
@@ -71,11 +76,14 @@ public class TankScript : MonoBehaviour
         shot.Init(tower.transform.forward, projectileSpeed, this, shotDamage);
     }
 
-    public void SpecialAttack()
+    protected IEnumerator SpecialAttack()
     {
         if (!alive)
-            return;
-
+            StopCoroutine("SpecialAttack");
+        //spela spinnljud && snurra hjulen
+        yield return new WaitForSeconds(spinTime);
+        int specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
+        specialAttackMethods[specialAttackIndex]();
     }
 
     public void TakeDamage(int damage)
@@ -89,4 +97,50 @@ public class TankScript : MonoBehaviour
             GameManager.Instance.TankDestroyed(this);
         }
     }
+
+    #region SpecialAttacks
+
+    void FireMissile()
+    {
+        GameObject missileGO = Instantiate(trackingMissile, missileStart);
+        MissileScript missile = missileGO.GetComponent<MissileScript>();
+        if (this is PlayerScript)
+        {
+            if (FindObjectsOfType<NpcScript>().Length < 1)
+            {
+
+            }
+        }
+        else
+        {
+            missile.Init(FindObjectOfType<PlayerScript>());
+        }
+    }
+
+    void SpawnShield()
+    {
+
+    }
+
+    void Nothing()
+    {
+
+    }
+
+    void SpeedBoost()
+    {
+
+    }
+
+    void Heal()
+    {
+
+    }
+
+    void SuperShots()
+    {
+
+    }
+
+    #endregion
 }

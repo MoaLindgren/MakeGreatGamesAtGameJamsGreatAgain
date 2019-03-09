@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using System.IO;
+using System.Xml;
+using System.Xml.XPath;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
@@ -9,14 +12,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject pauseMenu;
 
+    XmlDocument highScoreXml = new XmlDocument();
+
+    XPathNavigator xNav;
+
+    int score = 0;
+
     static GameManager instance;
 
     public static GameManager Instance
     {
         get { return instance; }
     }
-
-    int score = 0;
 
     bool paused = false;
 
@@ -30,11 +37,20 @@ public class GameManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
+        highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
+        xNav = highScoreXml.CreateNavigator();
     }
 
     public void TankDestroyed(TankScript tank)
     {
-        //if tank == spelare: game over, else points++ eller nåt
+        if (tank is PlayerScript)
+        {
+            GameOver();
+        }
+        else
+        {
+            score += ((NpcScript)tank).Points;
+        }
     }
 
     public void PauseAnUnpause(bool pause)
