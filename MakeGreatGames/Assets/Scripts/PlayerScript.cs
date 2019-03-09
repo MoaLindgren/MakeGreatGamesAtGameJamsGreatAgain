@@ -10,8 +10,7 @@ public class PlayerScript : TankScript
     {
         get { return position; }
     }
-
-    private void Start()
+    private void Update()
     {
         position = transform.position;
     }
