@@ -56,6 +56,7 @@ public class WaveSpawner : MonoBehaviour
         }
         enemyPool[poolIndex].transform.position = spawnPoints[spawnPointIndex].position;
         enemyPool[poolIndex].SetActive(true);
+        //enemyPool[poolIndex].GetComponent<NpcScript>().
         poolIndex = (poolIndex + 1) % enemyPool.Count;
     }
 
