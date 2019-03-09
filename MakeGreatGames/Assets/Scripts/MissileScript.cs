@@ -19,6 +19,10 @@ public class MissileScript : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        if(agent.destination == null)
+        {
+            agent.destination = CoinManager.Instance.Coins[Random.Range(0, CoinManager.Instance.Coins.Length)].transform.position;
+        }
     }
 
     public void Init(TankScript target, TankScript shooter)

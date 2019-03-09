@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class CoinManager : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,13 @@ public class CoinManager : MonoBehaviour
         get { return instance; }
     }
 
+    public GameObject[] Coins
+    {
+        get { return coins; }
+    }
+
+    AudioSource aS;
+
     int activeCoins = 0;
 
     private void Awake()
@@ -21,11 +29,13 @@ public class CoinManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
+        aS = GetComponent<AudioSource>();
     }
 
     public void CoinPickedUp(GameObject coin)
     {
         coin.SetActive(false);
+        aS.Play();
         activeCoins--;
     }
 

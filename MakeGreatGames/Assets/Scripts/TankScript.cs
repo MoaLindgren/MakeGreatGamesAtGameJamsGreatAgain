@@ -158,7 +158,7 @@ public class TankScript : MonoBehaviour
             NpcScript[] enemies = FindObjectsOfType<NpcScript>();
             if (enemies.Length < 1)
             {
-                //åk nånstans random o boom
+
             }
             else
             {

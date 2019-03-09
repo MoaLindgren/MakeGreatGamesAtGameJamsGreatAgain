@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class CoinScript : MonoBehaviour
 {
     [SerializeField]
@@ -24,7 +25,6 @@ public class CoinScript : MonoBehaviour
         if (tank != null)
         {
             tank.AddCoin();
-            //sound and particles
             CoinManager.Instance.CoinPickedUp(gameObject);
         }
     }
