@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
+    int score = 0;
+
     bool paused = false;
 
     public bool Paused

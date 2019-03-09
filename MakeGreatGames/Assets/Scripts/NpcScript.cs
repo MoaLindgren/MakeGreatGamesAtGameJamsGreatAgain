@@ -9,8 +9,15 @@ public class NpcScript : TankScript
     [SerializeField]
     float maxDistance, minDistance;
     [SerializeField]
+    int points;
+    [SerializeField]
     bool move;
     PlayerScript target;
+
+    public int Points
+    {
+        get { return points; }
+    }
 
     public void SetAlive(bool alive)
     {
