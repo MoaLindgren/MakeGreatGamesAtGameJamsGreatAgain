@@ -12,6 +12,8 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     GameObject specialAttackActiveImage;
     [SerializeField]
+    Sprite[] specialAttacksSprites;
+    [SerializeField]
     int maxNumberOfCoins;
     int coins, score;
     float counter;
@@ -50,9 +52,10 @@ public class UiManager : MonoBehaviour
             countCoinsText.text = coins.ToString();
         }
     }
-    public void SpecialAttack(bool specialAttack, int timer)
+    public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
     {
         this.specialAttack = specialAttack;
+        specialAttackActiveImage.GetComponent<Image>().sprite = specialAttacksSprites[specialAttackIndex];
         specialAttackActiveImage.SetActive(specialAttack);
         counter = timer;
     }
@@ -64,7 +67,7 @@ public class UiManager : MonoBehaviour
             specialAttackTimer.text = counter.ToString("0");
             if(counter <= 0)
             {
-                SpecialAttack(false, 0);
+                SpecialAttack(false, 0, 0);
             }
         }
     }

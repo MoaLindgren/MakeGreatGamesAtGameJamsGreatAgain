@@ -102,16 +102,16 @@ public class PlayerScript : TankScript
         {
             coins -= 3;
             uiManager.Coins = coins;
-            uiManager.SpecialAttack(true, specialAttackTimer);
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
+            uiManager.SpecialAttack(true, specialAttackTimer, specialAttackIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && currentSpecialAttack != Nothing)
         {
             currentSpecialAttack();
             StopCoroutine("SpecialAttackTimer");
-            uiManager.SpecialAttack(false, specialAttackTimer);
+            uiManager.SpecialAttack(false, specialAttackTimer, specialAttackIndex);
             currentSpecialAttack = Nothing;
         }
     }

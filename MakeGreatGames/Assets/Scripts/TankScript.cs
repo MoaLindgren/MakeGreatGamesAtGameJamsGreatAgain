@@ -26,7 +26,7 @@ public class TankScript : MonoBehaviour
 
     protected bool alive = true, shielded = false, canShoot = true;
 
-    protected int health, coins = 0, maxCoins = 10;
+    protected int health, coins = 0, maxCoins = 10, specialAttackIndex;
 
     protected delegate void MovementMethod(float amount);
 
@@ -114,7 +114,7 @@ public class TankScript : MonoBehaviour
             StopCoroutine("SpinWheel");
         //spela spinnljud && snurra hjulen
         yield return new WaitForSeconds(spinTime);
-        int specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
+        specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
     }
 
