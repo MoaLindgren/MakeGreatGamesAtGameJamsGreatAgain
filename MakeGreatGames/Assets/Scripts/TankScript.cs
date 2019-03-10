@@ -70,8 +70,7 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        print("amount: " + amount);
-        tower.transform.Rotate(0f, amount, 0f) ;
+        tower.transform.Rotate(0f, amount, 0f);
     }
 
     protected void RotateTank(float amount)
@@ -116,9 +115,8 @@ public class TankScript : MonoBehaviour
         yield return new WaitForSeconds(spinTime);
         specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
-        if(this is PlayerScript)
+        if (this is PlayerScript)
         {
-
             UiManager.Instance.SpecialAttack(true, specialAttackTimer, specialAttackIndex);
         }
     }
@@ -134,7 +132,7 @@ public class TankScript : MonoBehaviour
             GameManager.Instance.TankDestroyed(this);
         }
         healthSlider.value = health;
-        if(this is PlayerScript)
+        if (this is PlayerScript)
             CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
     }
 
@@ -234,7 +232,7 @@ public class TankScript : MonoBehaviour
         print("i kill you");
         StartCoroutine("SuperShotTimer");
     }
-    
+
     #endregion
 
 }

@@ -619,7 +619,10 @@ MonoBehaviour:
   projectileSpeed: 0.2
   spinTime: 0
   attackCooldown: 1
-  maxHealth: 10
+  cameraShakeTakeDamage: 0
+  cameraShakeShoot: 0
+  cameraSuperShake: 0
+  maxHealth: 100
   shotDamage: 100
   specialAttackDamage: 0
   specialAttackTimer: 0
@@ -663,12 +666,13 @@ AudioSource:
   m_GameObject: {fileID: 7262810398082525380}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  OutputAudioMixerGroup: {fileID: 243778557886981776, guid: 1fd4aba0f511b784f8032ee3110cca7d,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 7644486092b23dc4abd5f130e3e4ad50, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -710,7 +714,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.36
       inSlope: 0
       outSlope: 0
       tangentMode: 0
