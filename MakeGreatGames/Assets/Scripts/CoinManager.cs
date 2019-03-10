@@ -11,6 +11,9 @@ public class CoinManager : MonoBehaviour
     [SerializeField]
     float minCoinTime, maxCoinTime;
 
+    [SerializeField]
+    AudioSource aS;
+
     static CoinManager instance;
 
     public static CoinManager Instance
@@ -22,8 +25,6 @@ public class CoinManager : MonoBehaviour
     {
         get { return coins; }
     }
-    [SerializeField]
-    AudioSource aS;
 
     int activeCoins = 0;
 
@@ -32,7 +33,6 @@ public class CoinManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
-        aS = GetComponent<AudioSource>();
         StartCoroutine("SpawnCoin");
     }
 
