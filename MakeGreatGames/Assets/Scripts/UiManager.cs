@@ -11,7 +11,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     Slider coinProgressSlider;
     [SerializeField]
-    GameObject specialAttackImage, pauseMenu, pauseMainMenu, gameOverMenu;
+    GameObject specialAttackImage, pauseMenu, pauseMainMenu, gameOverMenu, readyText;
     [SerializeField]
     Sprite[] specialAttacksSprites;
     [SerializeField]
@@ -58,7 +58,7 @@ public class UiManager : MonoBehaviour
 
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
     {
-        if(specialAttack)
+        if (specialAttack)
         {
             counter = timer;
             specialAttackImage.GetComponent<Image>().sprite = specialAttacksSprites[specialAttackIndex];
@@ -73,17 +73,17 @@ public class UiManager : MonoBehaviour
     }
     void Update()
     {
-        if(specialAttack)
+        if (specialAttack)
         {
             counter -= Time.deltaTime;
             specialAttackTimer.gameObject.SetActive(true);
             specialAttackTimer.text = counter.ToString("0");
-            if(counter <= 0)
+            if (counter <= 0)
             {
                 SpecialAttack(false, 0, 0);
             }
         }
-        if(GameManager.Instance.Paused)
+        if (GameManager.Instance.Paused)
         {
             pauseMenu.SetActive(true);
         }
@@ -112,17 +112,11 @@ public class UiManager : MonoBehaviour
     }
     public void CoinsCollected(bool fullyCollected)
     {
-        if(fullyCollected)
-        {
-
-        }
-        else
-        {
-
-        }
+        readyText.SetActive(fullyCollected);
     }
     public void Restart()
     {
+        GameManager.Instance.RestartGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void MainMenu()

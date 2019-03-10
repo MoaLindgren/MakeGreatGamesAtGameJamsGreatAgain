@@ -88,6 +88,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RestartGame()
+    {
+        using(StreamWriter writer = File.CreateText(Application.persistentDataPath + "/PlayerName.dat"))
+        {
+            writer.WriteLine(playerName);
+        }
+    }
+
     public void ResetTimescale(Scene scene, LoadSceneMode lsm)
     {
         Time.timeScale = 1;
