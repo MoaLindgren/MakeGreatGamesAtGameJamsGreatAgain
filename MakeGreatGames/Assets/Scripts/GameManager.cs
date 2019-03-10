@@ -69,10 +69,11 @@ public class GameManager : MonoBehaviour
         cam = FindObjectOfType<Camera>();
         if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
         {
-            using(StreamReader reader = File.OpenText(Application.persistentDataPath + "/PlayerName.dat"))
+            using (StreamReader reader = File.OpenText(Application.persistentDataPath + "/PlayerName.dat"))
             {
                 playerName = reader.ReadLine();
             }
+            File.Delete(Application.persistentDataPath + "/PlayerName.dat");
         }
     }
 
