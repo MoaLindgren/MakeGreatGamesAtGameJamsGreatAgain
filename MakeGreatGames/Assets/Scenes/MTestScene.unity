@@ -1516,6 +1516,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cd3b64341654844bab2fb96fdb58f54, type: 3}
+--- !u!114 &1564697132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9184353473842344825, guid: 8158f7de3ec2b1b408041d688ea1364c,
+    type: 3}
+  m_PrefabInstance: {fileID: 9184353472411865429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1606987611
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,6 +2113,11 @@ PrefabInstance:
       propertyPath: specialAttackActiveImage
       value: 
       objectReference: {fileID: 2118558883}
+    - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: specialAttackTimer
+      value: 
+      objectReference: {fileID: 1564697132}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dfb805a7fda1024fa9404ea381cf5a2, type: 3}
 --- !u!1001 &7262810399170711709
@@ -2229,6 +2246,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxHealth
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262810398082525376, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: specialAttackTimer
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
@@ -2469,6 +2491,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473678636548, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.4000244
       objectReference: {fileID: 0}
     - target: {fileID: 9184353472684428620, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
