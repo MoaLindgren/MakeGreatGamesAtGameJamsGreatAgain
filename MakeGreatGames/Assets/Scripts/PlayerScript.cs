@@ -71,14 +71,38 @@ public class PlayerScript : TankScript
 
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
+            foreach (ParticleSystem p in backSmoke)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.Play();
+            }
             currentMovement(speed);
         }
         else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
         {
+            foreach (ParticleSystem p in backSmoke)
+            {
+                p.Play();
+            }
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.Stop();
+            }
             currentMovement(-speed);
         }
         else
         {
+            foreach (ParticleSystem p in backSmoke)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.Stop();
+            }
             rB.velocity = Vector3.zero;
             rB.constraints = RigidbodyConstraints.FreezeAll;
         }

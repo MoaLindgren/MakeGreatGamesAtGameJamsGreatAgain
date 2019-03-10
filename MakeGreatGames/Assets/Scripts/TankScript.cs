@@ -50,8 +50,6 @@ public class TankScript : MonoBehaviour
 
     protected Transform canvasTF;
 
-    protected Vector3 lastPos;
-
     protected virtual void Awake()
     {
         foreach(ParticleSystem p in frontSmoke)
@@ -70,7 +68,6 @@ public class TankScript : MonoBehaviour
         {
             p.Stop();
         }
-        lastPos = transform.position;
         health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
