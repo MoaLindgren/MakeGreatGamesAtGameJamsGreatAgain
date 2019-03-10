@@ -16,6 +16,10 @@ public class MissileScript : MonoBehaviour
 
     NavMeshAgent agent;
 
+    Material mat;
+
+    float sinPos = 0f, colorAmount = 127.5f;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -23,6 +27,7 @@ public class MissileScript : MonoBehaviour
         {
             agent.destination = CoinManager.Instance.Coins[Random.Range(0, CoinManager.Instance.Coins.Length)].transform.position;
         }
+        mat = GetComponentInChildren<MeshRenderer>().materials[0];
     }
 
     public void Init(TankScript target, TankScript shooter)
@@ -34,6 +39,13 @@ public class MissileScript : MonoBehaviour
 
     void Update()
     {
+        sinPos += Time.deltaTime;
+        colorAmount = 0.5f + (Mathf.Lerp(-1, 1, Mathf.Sin(sinPos)) / 2);
+        mat.SetColor("_EmissionColor", new Color(colorAmount, colorAmount, colorAmount));
+        if (colorAmount == 0f)
+        {
+            sinPos = 0f;
+        }
         TankScript[] enemies = FindObjectsOfType<NpcScript>();
         if (target == null && enemies.Length > 0)
         {
