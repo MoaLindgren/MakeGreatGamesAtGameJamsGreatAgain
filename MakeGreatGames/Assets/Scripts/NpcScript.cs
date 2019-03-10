@@ -31,14 +31,15 @@ public class NpcScript : TankScript
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
-        generateNewValue = false;
+        generateNewValue = true;
         nearNpc = false;
     }
 
     private void Start()
     {
         vips = CoinManager.Instance.Coins;
-        agent.stoppingDistance = 4f;
+        agent.stoppingDistance = 1f;
+        agent.isStopped = false;
     }
 
     void Update()
@@ -50,21 +51,18 @@ public class NpcScript : TankScript
             Debug.DrawRay(transform.position, (target.Position - transform.position));
             if (hit.transform.tag == "Player")
             {
-                //print("npc can see the player");
-                agent.destination = target.Position;
-                move = true;
                 if (distance > maxDistance)
                 {
-                    move = false;
+                    agent.destination = target.Position;
                 }
-                if (distance < minDistance)
+                else
                 {
-                    move = false;
+                    canShoot = true;
                 }
             }
             else
             {
-                move = true;
+                canShoot = false;
                 MoveToRandomVIP();
             }
         }
@@ -72,16 +70,6 @@ public class NpcScript : TankScript
         if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 2f)
         {
             Shoot();
-        }
-
-        if (move)
-        {
-            agent.isStopped = false;
-
-        }
-        else
-        {
-            agent.isStopped = true;
         }
         if (currentSpecialAttack != Nothing)
         {
@@ -95,7 +83,6 @@ public class NpcScript : TankScript
     }
     void MoveToRandomVIP()
     {
-
         if (generateNewValue)
         {
             rnd = Random.Range(0, vips.Length);
@@ -103,8 +90,8 @@ public class NpcScript : TankScript
         }
 
         agent.destination = vips[rnd].transform.position;
-        //print(Vector3.Distance(transform.position, vips[rnd].transform.position));
-        if (Vector3.Distance(transform.position, vips[rnd].transform.position) < 1)
+        print(Vector3.Distance(transform.position, vips[rnd].transform.position));
+        if (Vector3.Distance(transform.position, vips[rnd].transform.position) < agent.stoppingDistance)
         {
             generateNewValue = true;
         }
