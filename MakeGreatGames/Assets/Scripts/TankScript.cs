@@ -164,7 +164,7 @@ public class TankScript : MonoBehaviour
     protected void FireMissile()
     {
         print("NUKEM");
-        GameObject missileGO = Instantiate(trackingMissile, missileStart);
+        GameObject missileGO = Instantiate(trackingMissile, missileStart.position, Quaternion.identity);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
         {

@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94565998}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.771, y: -0.075, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5520103173034257486}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &2155371376883543493
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,17 +488,18 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 5
   towerTurnSpeed: 2
-  projectileSpeed: 0
+  projectileSpeed: 0.2
   spinTime: 0
-  attackCooldown: 0
+  attackCooldown: 1
   maxHealth: 10
-  shotDamage: 0
+  shotDamage: 100
   specialAttackDamage: 0
   tankBase: {fileID: 0}
   tower: {fileID: 616958113086764823}
   projectile: {fileID: 7609327349497566570, guid: 8aae00f9a6a3c7a41ba5e546bf65d726,
     type: 3}
-  trackingMissile: {fileID: 0}
+  trackingMissile: {fileID: 4541278210141351676, guid: a9e5de65cca515849829fc8b3c64f58d,
+    type: 3}
   shotStart: {fileID: 94565999}
   missileStart: {fileID: 94565999}
   shotSound: {fileID: 0}
@@ -771,17 +772,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4172674738074147934, guid: abd6c544251b1834eb2d20d093fa9f40,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
     - target: {fileID: 5796972391371732269, guid: abd6c544251b1834eb2d20d093fa9f40,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
     - target: {fileID: 7712951076417491828, guid: abd6c544251b1834eb2d20d093fa9f40,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
+    - target: {fileID: 4172674738074147934, guid: abd6c544251b1834eb2d20d093fa9f40,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

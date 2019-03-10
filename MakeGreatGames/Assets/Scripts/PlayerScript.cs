@@ -27,6 +27,7 @@ public class PlayerScript : TankScript
     public override void AddCoin()
     {
         base.AddCoin();
+        print(coins + " coins");
         //uppdatera cointext
     }
 
@@ -86,9 +87,9 @@ public class PlayerScript : TankScript
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && coins >= 5)
+        if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
         {
-            coins -= 5;
+            coins -= 3;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
