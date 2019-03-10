@@ -9,7 +9,7 @@ using System.Xml;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject pauseMenu, newGameMenu, highScoreMenu;
+    GameObject newGameMenu, highScoreMenu;
 
     [SerializeField]
     InputField playerNameInput;
@@ -26,29 +26,11 @@ public class MenuManager : MonoBehaviour
         get { return instance; }
     }
 
-    bool paused = false;
-
-    public bool Paused
-    {
-        get { return paused; }
-    }
-
     private void Awake()
     {
         if (instance != null && instance != this)
             Destroy(this);
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            highscoreDoc.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu != null)
-        {
-            PauseAndUnpause(!paused);
-        }
+        highscoreDoc.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
     }
 
     public void ShowHighScores(bool show)
@@ -94,18 +76,5 @@ public class MenuManager : MonoBehaviour
     void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
-    }
-
-    public void PauseAndUnpause(bool pause)
-    {
-        if (pause)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-        pauseMenu.SetActive(pause);
     }
 }

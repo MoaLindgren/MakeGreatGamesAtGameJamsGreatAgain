@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using System.Xml;
 using System.IO;
 
@@ -30,6 +29,9 @@ struct PlayerInfo
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject pauseMenu;
+
     XmlDocument highScoreXml = new XmlDocument();
 
     int score = 0;
@@ -39,6 +41,13 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
 
     string playerName = "Anders Ramses";
+
+    bool paused = false;
+
+    public bool Paused
+    {
+        get { return paused; }
+    }
 
     public static GameManager Instance
     {
@@ -67,6 +76,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseAndUnpause(!paused);
+        }
+    }
+
     public void TankDestroyed(TankScript tank)
     {
         if (tank is PlayerScript)
@@ -77,6 +94,19 @@ public class GameManager : MonoBehaviour
         {
             score += ((NpcScript)tank).Points;
         }
+    }
+
+    public void PauseAndUnpause(bool pause)
+    {
+        if (pause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+        pauseMenu.SetActive(pause);
     }
 
     void GameOver()
