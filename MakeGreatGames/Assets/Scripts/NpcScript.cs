@@ -65,7 +65,7 @@ public class NpcScript : TankScript
             }
         }
         tower.transform.rotation = Quaternion.Lerp(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position), towerTurnSpeed * Time.deltaTime);
-        if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 2f)
+        if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 5f && Vector3.Distance(tower.transform.position, target.transform.position) < maxDistance)
         {
             Shoot();
         }
