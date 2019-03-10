@@ -5747,6 +5747,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.107
       objectReference: {fileID: 0}
+    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: cameraShakeShoot
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: cameraShakeTakeDamage
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: cameraSuperShake
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: shotDamage
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7648117725039690787, guid: ab5354807127fda4a9381a7b7e23c60d,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5935,6 +5960,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473779342230, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473779342230, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 9184353472684428620, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
