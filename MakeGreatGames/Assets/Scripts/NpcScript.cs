@@ -101,4 +101,12 @@ public class NpcScript : TankScript
             generateNewValue = true;
         }
     }
+
+    protected override IEnumerator SpeedBoosted()
+    {
+        float originalSpeed = agent.speed;
+        agent.speed *= 2;
+        yield return new WaitForSeconds(10);
+        agent.speed = originalSpeed;
+    }
 }

@@ -148,7 +148,7 @@ public class TankScript : MonoBehaviour
         shielded = false;
     }
 
-    protected IEnumerator SpeedBoosted()
+    protected virtual IEnumerator SpeedBoosted()
     {
         float originalSpeed = speed;
         speed *= 2;
