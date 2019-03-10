@@ -45,21 +45,21 @@ public class NpcScript : TankScript
             Debug.DrawRay(transform.position, (target.Position - transform.position));
             if (hit.transform.tag == "Player")
             {
-                print("npc can see the player");
+                //print("npc can see the player");
                 agent.destination = target.Position;
                 move = true;
                 if (distance > maxDistance)
                 {
                     if (distance < minDistance)
                     {
-                        print("npc can see the player and is within range to shoot");
+                        //print("npc can see the player and is within range to shoot");
                         move = false;
                     }
                 }
             }
             else
             {
-                print("i cant see the player");
+                //print("i cant see the player");
                 move = true;
                 MoveToRandomVIP();
             }
