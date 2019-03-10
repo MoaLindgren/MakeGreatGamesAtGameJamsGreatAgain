@@ -11,15 +11,13 @@ public class PlayerScript : TankScript
     Rigidbody rB;
     [SerializeField]
     LineRenderer line;
-
-    [SerializeField]
-    //Image 
-
+    UiManager uiManager;
 
     protected override void Awake()
     {
         base.Awake();
         rB = GetComponent<Rigidbody>();
+        uiManager = FindObjectOfType<UiManager>();
     }
 
     public Vector3 Position
@@ -30,8 +28,7 @@ public class PlayerScript : TankScript
     public override void AddCoin()
     {
         base.AddCoin();
-        print(coins + " coins");
-        //uppdatera cointext
+        uiManager.Coins = coins;
     }
 
     protected override void MoveTank(float amount)
@@ -43,8 +40,6 @@ public class PlayerScript : TankScript
 
     private void FixedUpdate()
     {
-
-
         if (!alive)
         {
             return;
@@ -106,6 +101,7 @@ public class PlayerScript : TankScript
         if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
         {
             coins -= 3;
+            uiManager.Coins = coins;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
