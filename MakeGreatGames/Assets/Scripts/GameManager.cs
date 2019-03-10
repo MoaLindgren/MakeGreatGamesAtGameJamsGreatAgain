@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
         else
         {
             score += ((NpcScript)tank).Points;
+            WaveSpawner.Instance.TankDestroyed(tank.gameObject);
         }
     }
 

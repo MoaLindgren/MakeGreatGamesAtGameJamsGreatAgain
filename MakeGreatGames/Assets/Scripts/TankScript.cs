@@ -182,6 +182,7 @@ public class TankScript : MonoBehaviour
     protected void SpawnShield()
     {
         //shieldparticles wooooooo
+        print("sköld yao");
         StartCoroutine("Shield");
     }
 
@@ -192,11 +193,13 @@ public class TankScript : MonoBehaviour
 
     protected void SpeedBoost()
     {
+        print("VROOOOOOM");
         StartCoroutine("SpeedBoosted");
     }
 
     protected void Heal()
     {
+        print("healing");
         health += 30;
         if (health > maxHealth)
             health = maxHealth;
@@ -205,12 +208,14 @@ public class TankScript : MonoBehaviour
 
     protected void SuperHeal()
     {
+        print("SUPERHEEEEEAL");
         health = maxHealth;
         healthSlider.value = health;
     }
 
     protected void SuperShots()
     {
+        print("i kill you");
         StartCoroutine("SuperShotTimer");
     }
 
