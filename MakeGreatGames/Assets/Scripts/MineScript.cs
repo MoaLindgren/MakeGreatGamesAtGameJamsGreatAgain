@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class MineScript : MonoBehaviour
 {
     [SerializeField]
@@ -37,6 +38,7 @@ public class MineScript : MonoBehaviour
         if (tank != null)
         {
             //spawna partiklar o ljud o skit
+            GetComponent<AudioSource>().Play();
             tank.TakeDamage(damage);
             Destroy(gameObject, 2f);
         }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class MissileScript : MonoBehaviour
 {
     [SerializeField]
     int damage;
-
+    
     [SerializeField]
     GameObject blast;
 

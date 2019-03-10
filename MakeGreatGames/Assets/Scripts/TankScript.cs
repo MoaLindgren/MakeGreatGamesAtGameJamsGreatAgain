@@ -19,7 +19,7 @@ public class TankScript : MonoBehaviour
     protected Transform shotStart, missileStart;
 
     [SerializeField]
-    protected AudioClip shotSound, movementSound, deathSound;
+    protected AudioClip shotSound, movementSound, deathSound, missileLaunchSound;
 
     [SerializeField]
     protected Slider healthSlider;
@@ -177,6 +177,7 @@ public class TankScript : MonoBehaviour
     protected void FireMissile()
     {
         print("NUKEM");
+        missileStart.GetComponent<AudioSource>().Play();
         GameObject missileGO = Instantiate(trackingMissile, missileStart.position, Quaternion.identity);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2177,6 +2177,22 @@ PrefabInstance:
       propertyPath: coins.Array.data[4]
       value: 
       objectReference: {fileID: 974170076}
+    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dc26aea717af25f438c9ea1cc615dbf8, type: 3}
+    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243048368485749068, guid: 1fd4aba0f511b784f8032ee3110cca7d,
+        type: 2}
     - target: {fileID: 151544142720354241, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
       propertyPath: spawnPoints.Array.data[0]
@@ -2714,6 +2730,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9184353472684428620, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473110926767, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473678636548, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.4000244
+      objectReference: {fileID: 0}
     - target: {fileID: 9184353474121399633, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_Name
@@ -2742,21 +2773,6 @@ PrefabInstance:
     - target: {fileID: 9184353473842344825, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_Text
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184353473678636548, guid: 8158f7de3ec2b1b408041d688ea1364c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.4000244
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184353472684428620, guid: 8158f7de3ec2b1b408041d688ea1364c,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184353473110926767, guid: 8158f7de3ec2b1b408041d688ea1364c,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
