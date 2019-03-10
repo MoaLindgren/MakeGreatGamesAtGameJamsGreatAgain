@@ -51,7 +51,7 @@ public class PlayerScript : TankScript
         }
 
         position = transform.position;
-        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ; // Ska det inte va & ?
+        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
