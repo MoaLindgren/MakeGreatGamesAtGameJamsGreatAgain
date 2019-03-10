@@ -10,9 +10,10 @@ public class NpcScript : TankScript
     float maxDistance, minDistance;
     [SerializeField]
     int points;
-    bool move, nearNpc;
+    int rnd;
+    bool move, nearNpc, generateNewValue;
     PlayerScript target;
-    GameObject[] npcs;
+    GameObject[] vips; //very important places, ye
     Vector3 npcGoTo;
 
     public int Points
@@ -30,75 +31,66 @@ public class NpcScript : TankScript
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
-        npcs = GameObject.FindGameObjectsWithTag("Npc");
+        vips = CoinManager.Instance.Coins;
+        generateNewValue = false;
         nearNpc = false;
     }
 
     void Update()
     {
-
-        //RAYCAST FÖR ATT HITTA NPC: 
-
-        //foreach(GameObject npc in npcs)
-        //{
-        //    RaycastHit findNpc;
-        //    if (Physics.Raycast(transform.position, (npc.transform.position - transform.position), out findNpc, 50f))
-        //    {
-        //        Debug.DrawRay(transform.position, (npc.transform.position - transform.position), Color.blue);
-        //        if(findNpc.distance < 2f)
-        //        {
-        //            nearNpc = true;
-        //            if(Vector3.Distance(transform.position, target.Position) < Vector3.Distance(npc.transform.position, target.Position))
-        //            {
-        //                GetComponent<NavMeshObstacle>().enabled = true;
-        //            }
-        //            else
-        //            {
-        //                npc.GetComponent<NavMeshObstacle>().enabled = true;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            nearNpc = false;
-        //        }
-        //    }
-        //}
-
         float distance = Vector3.Distance(transform.position, target.Position);
-        if (distance > maxDistance)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (target.Position - transform.position), out hit, Mathf.Infinity))
         {
-            move = true;
-            if (distance < minDistance)
+            Debug.DrawRay(transform.position, (target.Position - transform.position));
+            if (hit.transform.tag == "Player")
             {
-                print("npc within shooting range");
-
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, (target.Position - transform.position), out hit, 50f))
+                print("npc can see the player");
+                agent.destination = target.Position;
+                move = true;
+                if (distance > maxDistance)
                 {
-                    Debug.DrawRay(transform.position, (target.Position - transform.position));
-                    if (hit.transform.tag == "Player")
+                    if (distance < minDistance)
                     {
-                        print("npc have a clear shot");
+                        print("npc can see the player and is within range to shoot");
                         move = false;
                     }
-
                 }
             }
+            else
+            {
+                print("i cant see the player");
+                move = true;
+                MoveToRandomVIP();
+            }
         }
-        else
-        {
-            move = false;
-        }
+
         if (move)
         {
             agent.isStopped = false;
-            agent.destination = target.Position;
+
         }
         else
         {
             agent.isStopped = true;
         }
+
     }
+    void MoveToRandomVIP()
+    {
 
+        if (generateNewValue)
+        {
+            rnd = Random.Range(0, vips.Length);
+            generateNewValue = false;
+        }
+
+        agent.destination = vips[rnd].transform.position;
+        print(Vector3.Distance(transform.position, vips[rnd].transform.position));
+        if (Vector3.Distance(transform.position, vips[rnd].transform.position) < 1)
+        {
+            generateNewValue = true;
+        }
+
+    }
 }
-
