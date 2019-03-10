@@ -34,6 +34,11 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void HowToPlay()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public void ShowHighScores(bool show)
     {
         highScoreMenu.SetActive(show);
