@@ -131,20 +131,6 @@ public class GameManager : MonoBehaviour
             highScores[index] = new PlayerInfo(int.Parse(node.Attributes[1].Value), node.Attributes[0].Value);
             index++;
         }
-        /*
-        for (int i = highScores.Length - 1; i > -1; i--)
-        {
-            if (score > highScores[i].Score)
-            {
-                print("slog highscore!");
-                for (int j = highScores.Length - 1; j > i - 1; j--)
-                {
-                    
-                    highScores[j] = j == i + 1 ? new PlayerInfo(score, playerName) : highScores[j - 1];
-                }
-            }
-        }
-        */
         for (int i = 0; i < highScores.Length; i++)
         {
             if (score > highScores[i].Score)

@@ -19,10 +19,13 @@ public class TankScript : MonoBehaviour
     protected Transform shotStart, missileStart;
 
     [SerializeField]
-    protected AudioClip shotSound, movementSound, deathSound, missileLaunchSound;
+    protected AudioClip movementSound, deathSound, missileLaunchSound;
 
     [SerializeField]
     protected Slider healthSlider;
+
+    [SerializeField]
+    AudioSource shotSound;
 
     protected bool alive = true, shielded = false, canShoot = true;
 
@@ -97,6 +100,7 @@ public class TankScript : MonoBehaviour
             return;
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
+        shotSound.Play();
         StartCoroutine("AttackCooldownTimer");
     }
 
