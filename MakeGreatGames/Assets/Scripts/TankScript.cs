@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown;
+    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake;
 
     [SerializeField]
     protected int maxHealth, shotDamage, specialAttackDamage, specialAttackTimer;
@@ -135,7 +135,7 @@ public class TankScript : MonoBehaviour
         }
         healthSlider.value = health;
         if(this is PlayerScript)
-            CameraShaker.Instance.ShakeCamera(damage / 2, 2f);
+            CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
     }
 
     #region SpecialAttacks
@@ -177,6 +177,7 @@ public class TankScript : MonoBehaviour
     protected void FireMissile()
     {
         print("NUKEM");
+        CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
         missileStart.GetComponent<AudioSource>().Play();
         GameObject missileGO = Instantiate(trackingMissile, missileStart.position, Quaternion.identity);
         MissileScript missile = missileGO.GetComponent<MissileScript>();

@@ -95,7 +95,7 @@ public class PlayerScript : TankScript
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
-            CameraShaker.Instance.ShakeCamera(5f, 0.5f);
+            CameraShaker.Instance.ShakeCamera(cameraShakeShoot, 0.5f);
             Shoot();
         }
 
