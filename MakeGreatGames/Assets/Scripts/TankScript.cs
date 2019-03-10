@@ -13,7 +13,7 @@ public class TankScript : MonoBehaviour
     protected int maxHealth, shotDamage, specialAttackDamage;
 
     [SerializeField]
-    protected GameObject tankBase, tower, projectile, trackingMissile;
+    protected GameObject tankBase, tower, projectile, trackingMissile, mine;
 
     [SerializeField]
     protected Transform shotStart, missileStart;
@@ -49,7 +49,7 @@ public class TankScript : MonoBehaviour
         health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
-        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal };
+        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine };
         currentSpecialAttack = Nothing;
         canvasTF = healthSlider.gameObject.GetComponentInParent<Transform>();
         healthSlider.maxValue = maxHealth;
@@ -115,12 +115,11 @@ public class TankScript : MonoBehaviour
         //spela spinnljud && snurra hjulen
         yield return new WaitForSeconds(spinTime);
         int specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
-        specialAttackMethods[specialAttackIndex]();
+        currentSpecialAttack = specialAttackMethods[specialAttackIndex];
     }
 
     public void TakeDamage(int damage)
     {
-        print("AJSOMFAN");
         if (!alive || shielded)
             return;
         health -= damage;
@@ -161,6 +160,11 @@ public class TankScript : MonoBehaviour
         shotDamage *= 3;
         yield return new WaitForSeconds(10);
         shotDamage = originalDamage;
+    }
+
+    protected void DeployMine()
+    {
+        Instantiate(mine, transform.position, Quaternion.identity);
     }
 
     protected void FireMissile()

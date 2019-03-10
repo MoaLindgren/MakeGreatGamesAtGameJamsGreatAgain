@@ -465,7 +465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7262810398082525380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.53, y: 0, z: 7.01}
+  m_LocalPosition: {x: -8.53, y: 0.5, z: 7.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5599374234265158003}
@@ -494,18 +494,20 @@ MonoBehaviour:
   maxHealth: 10
   shotDamage: 100
   specialAttackDamage: 0
-  tankBase: {fileID: 0}
+  tankBase: {fileID: 2013621839839681982}
   tower: {fileID: 616958113086764823}
   projectile: {fileID: 7609327349497566570, guid: 8aae00f9a6a3c7a41ba5e546bf65d726,
     type: 3}
   trackingMissile: {fileID: 4541278210141351676, guid: a9e5de65cca515849829fc8b3c64f58d,
     type: 3}
+  mine: {fileID: 709937350, guid: 14c3c297c7774ea4887c74b8165be2c6, type: 3}
   shotStart: {fileID: 94565999}
   missileStart: {fileID: 94565999}
   shotSound: {fileID: 0}
   movementSound: {fileID: 0}
   deathSound: {fileID: 0}
   healthSlider: {fileID: 8162525945430244515}
+  line: {fileID: 0}
 --- !u!54 &7262810398082525377
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -533,7 +535,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -630,7 +632,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.74, y: 0.55, z: 1.56}
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!1 &8858443216936318178
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,11 +714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7262810398082525379}
     m_Modifications:
-    - target: {fileID: 9168059965364398733, guid: abd6c544251b1834eb2d20d093fa9f40,
-        type: 3}
-      propertyPath: m_Name
-      value: Tank
-      objectReference: {fileID: 0}
     - target: {fileID: 2989922451124860480, guid: abd6c544251b1834eb2d20d093fa9f40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -725,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 2989922451124860480, guid: abd6c544251b1834eb2d20d093fa9f40,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2989922451124860480, guid: abd6c544251b1834eb2d20d093fa9f40,
         type: 3}
@@ -772,6 +769,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9168059965364398733, guid: abd6c544251b1834eb2d20d093fa9f40,
+        type: 3}
+      propertyPath: m_Name
+      value: Tank
+      objectReference: {fileID: 0}
     - target: {fileID: 5796972391371732269, guid: abd6c544251b1834eb2d20d093fa9f40,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -787,6 +789,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 64c242828bd3f7b45ac4cf44d32dc6cf, type: 2}
+    - target: {fileID: 4003639459174686497, guid: abd6c544251b1834eb2d20d093fa9f40,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 292309832420219026, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
     - {fileID: 7245487209037989686, guid: abd6c544251b1834eb2d20d093fa9f40, type: 3}
@@ -808,6 +815,12 @@ GameObject:
 --- !u!4 &5599374234265158003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989922451124860480, guid: abd6c544251b1834eb2d20d093fa9f40,
+    type: 3}
+  m_PrefabInstance: {fileID: 7262810398214764339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2013621839839681982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9168059965364398733, guid: abd6c544251b1834eb2d20d093fa9f40,
     type: 3}
   m_PrefabInstance: {fileID: 7262810398214764339}
   m_PrefabAsset: {fileID: 0}
