@@ -16,6 +16,8 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     Sprite specialAttackDefaultSprite;
     [SerializeField]
+    GameObject pauseMenu, pauseMainMenu;
+    [SerializeField]
     int maxNumberOfCoins;
     int coins, score;
     float counter;
@@ -82,5 +84,42 @@ public class UiManager : MonoBehaviour
                 SpecialAttack(false, 0, 0);
             }
         }
+        if(GameManager.Instance.Paused)
+        {
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+        }
     }
+
+    public void OpenCofirmMenu(GameObject confirm)
+    {
+        pauseMainMenu.SetActive(false);
+        confirm.SetActive(true);
+    }
+    public void Back(GameObject closeThis)
+    {
+        pauseMainMenu.SetActive(true);
+        closeThis.SetActive(false);
+        if (closeThis.name == "PauseMenu")
+        {
+            GameManager.Instance.Paused = false;
+            GameManager.Instance.PauseAndUnpause(false);
+        }
+    }
+    public void Restart()
+    {
+        //Restarta spelet
+    }
+    public void MainMenu()
+    {
+        //Scenemanager.Load("MenuScene");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
