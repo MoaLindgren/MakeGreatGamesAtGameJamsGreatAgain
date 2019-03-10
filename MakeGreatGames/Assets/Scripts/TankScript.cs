@@ -163,6 +163,7 @@ public class TankScript : MonoBehaviour
 
     protected void FireMissile()
     {
+        print("NUKEM");
         GameObject missileGO = Instantiate(trackingMissile, missileStart);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
@@ -218,7 +219,7 @@ public class TankScript : MonoBehaviour
         print("i kill you");
         StartCoroutine("SuperShotTimer");
     }
-
+    
     #endregion
 
 }
