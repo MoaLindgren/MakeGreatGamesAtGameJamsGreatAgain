@@ -72,13 +72,13 @@ public class NpcScript : TankScript
         if (currentSpecialAttack != Nothing)
         {
             currentSpecialAttack();
+            currentSpecialAttack = Nothing;
         }
         if (coins >= 3)
         {
             coins -= 3;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
-            currentSpecialAttack = Nothing;
         }
     }
 
