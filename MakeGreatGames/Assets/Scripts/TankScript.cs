@@ -119,6 +119,7 @@ public class TankScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        print("AJSOMFAN");
         if (!alive || shielded)
             return;
         health -= damage;
