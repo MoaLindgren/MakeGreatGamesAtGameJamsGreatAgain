@@ -49,7 +49,7 @@ public class TankScript : MonoBehaviour
         health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
-        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine };
+        specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
         currentSpecialAttack = Nothing;
         canvasTF = healthSlider.gameObject.GetComponentInParent<Transform>();
         healthSlider.maxValue = maxHealth;
