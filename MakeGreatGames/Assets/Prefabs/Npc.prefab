@@ -698,6 +698,9 @@ MonoBehaviour:
   projectileSpeed: 0.3
   spinTime: 3
   attackCooldown: 1
+  cameraShakeTakeDamage: 0
+  cameraShakeShoot: 0
+  cameraSuperShake: 0
   maxHealth: 100
   shotDamage: 5
   specialAttackDamage: 0
@@ -716,7 +719,7 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   missileLaunchSound: {fileID: 0}
   healthSlider: {fileID: 268323281711780873}
-  maxDistance: 1
+  maxDistance: 20
   minDistance: 100
   points: 10
 --- !u!208 &4963627858830813335
