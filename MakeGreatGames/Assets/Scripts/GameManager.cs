@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
+        Cursor.visible = true;
         scoreText.text = score.ToString();
         gameOverScreen.SetActive(true);
         Cursor.visible = true;
@@ -146,7 +147,6 @@ public class GameManager : MonoBehaviour
         int index = 0;
         foreach (XmlNode node in highScoreXml.SelectNodes("//Player"))
         {
-            print("?");
             highScores[index] = new PlayerInfo(int.Parse(node.Attributes[1].Value), node.Attributes[0].Value);
             index++;
         }
@@ -156,12 +156,9 @@ public class GameManager : MonoBehaviour
             {
                 for(int j = highScores.Length - 2; j > i; j--)
                 {
-                    print("Before " + highScores[j].Score);
                     highScores[j] = highScores[j + 1];
-                    print("After " + highScores[j].Score);
                 }
                 highScores[i] = new PlayerInfo(score, playerName);
-                print("Player position: " + i);
                 break;
             }
         }
@@ -174,6 +171,5 @@ public class GameManager : MonoBehaviour
         }
         highScoreXml.Save(Application.streamingAssetsPath + "/HighScoreXML.xml");
         print(Application.streamingAssetsPath + "/HighScoreXML.xml");
-        print(highScoreXml.InnerXml);
     }
 }

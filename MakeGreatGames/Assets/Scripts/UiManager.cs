@@ -52,7 +52,7 @@ public class UiManager : MonoBehaviour
             {
                 coinProgressSlider.value = coinProgressSlider.minValue;
             }
-            if(coins >= 3)
+            if (coins >= 3)
             {
                 CoinsCollected(true);
             }
