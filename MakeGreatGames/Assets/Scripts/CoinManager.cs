@@ -22,7 +22,7 @@ public class CoinManager : MonoBehaviour
     {
         get { return coins; }
     }
-
+    [SerializeField]
     AudioSource aS;
 
     int activeCoins = 0;
