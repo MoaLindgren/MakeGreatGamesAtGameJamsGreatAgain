@@ -6,16 +6,36 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [SerializeField]
-    Text countCoinsText, specialAttackTimer;
+    Text countCoinsText, specialAttackTimer, scoreText;
     [SerializeField]
     Slider coinProgressSlider;
     [SerializeField]
     GameObject specialAttackActiveImage;
     [SerializeField]
     int maxNumberOfCoins;
-    int coins;
+    int coins, score;
     float counter;
     bool specialAttack;
+
+    static UiManager instance;
+
+    public static UiManager Instance
+    {
+        get { return instance; }
+    }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+            Destroy(this);
+        instance = this;
+    }
+
+    public void AddScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        scoreText.text = "Score: " + score;
+    }
 
     public int Coins
     {

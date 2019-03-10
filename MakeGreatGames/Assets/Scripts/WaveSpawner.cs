@@ -77,6 +77,7 @@ public class WaveSpawner : MonoBehaviour
         tank.transform.position = new Vector3(10000, 10000, 10000);
         if (currentWave.Count < 1 && waveSpawned)
         {
+            UiManager.Instance.AddScore(500 * wave);
             StartCoroutine("NextWave");
         }
     }
