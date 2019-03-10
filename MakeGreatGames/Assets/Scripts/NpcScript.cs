@@ -46,16 +46,14 @@ public class NpcScript : TankScript
     {
         float distance = Vector3.Distance(transform.position, target.Position);
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, (target.Position - transform.position), out hit, Mathf.Infinity))
+        if (Physics.SphereCast(shotStart.transform.position, 0.1f, (target.Position - shotStart.transform.position), out hit))
         {
-            Debug.DrawRay(transform.position, (target.Position - transform.position));
+            Debug.DrawRay(shotStart.transform.position, (target.Position - shotStart.transform.position));
+            print(hit.transform.gameObject);
             if (hit.transform.tag == "Player")
             {
-                if (distance > maxDistance)
-                {
-                    agent.destination = target.Position;
-                }
-                else
+                agent.destination = target.Position;
+                if (distance < maxDistance)
                 {
                     canShoot = true;
                 }
@@ -77,8 +75,10 @@ public class NpcScript : TankScript
         }
         if (coins >= 3)
         {
+            coins -= 3;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
+            currentSpecialAttack = Nothing;
         }
     }
     void MoveToRandomVIP()
@@ -90,7 +90,7 @@ public class NpcScript : TankScript
         }
 
         agent.destination = vips[rnd].transform.position;
-        print(Vector3.Distance(transform.position, vips[rnd].transform.position));
+
         if (Vector3.Distance(transform.position, vips[rnd].transform.position) < agent.stoppingDistance)
         {
             generateNewValue = true;

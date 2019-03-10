@@ -289,10 +289,12 @@ MonoBehaviour:
   maxHealth: 0
   shotDamage: 0
   specialAttackDamage: 0
+  specialAttackTimer: 0
   tankBase: {fileID: 0}
   tower: {fileID: 0}
   projectile: {fileID: 0}
   trackingMissile: {fileID: 0}
+  mine: {fileID: 0}
   shotStart: {fileID: 0}
   missileStart: {fileID: 0}
   shotSound: {fileID: 0}
