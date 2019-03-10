@@ -64,6 +64,7 @@ public class UiManager : MonoBehaviour
         else
         {
             print("Hey");
+
             specialAttackTimer.gameObject.SetActive(false);
             specialAttackImage.GetComponent<Image>().sprite = specialAttackDefaultSprite;
         }
