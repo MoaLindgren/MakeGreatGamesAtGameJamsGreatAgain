@@ -93,8 +93,9 @@ public class PlayerScript : TankScript
             currentRotationMethod(towerTurnSpeed);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
+            CameraShaker.Instance.ShakeCamera(5f, 0.5f);
             Shoot();
         }
 

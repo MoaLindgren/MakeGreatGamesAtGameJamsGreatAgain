@@ -129,6 +129,8 @@ public class TankScript : MonoBehaviour
             GameManager.Instance.TankDestroyed(this);
         }
         healthSlider.value = health;
+        if(this is PlayerScript)
+            CameraShaker.Instance.ShakeCamera(damage / 2, 1f);
     }
 
     #region SpecialAttacks
