@@ -31,6 +31,7 @@ public class MenuManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         highscoreDoc.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
+        Time.timeScale = 1;
     }
 
     public void ShowHighScores(bool show)
