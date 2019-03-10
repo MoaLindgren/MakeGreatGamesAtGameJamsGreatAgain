@@ -52,6 +52,14 @@ public class UiManager : MonoBehaviour
             {
                 coinProgressSlider.value = coinProgressSlider.minValue;
             }
+            if(coins >= 3)
+            {
+                CoinsCollected(true);
+            }
+            else
+            {
+                CoinsCollected(false);
+            }
             countCoinsText.text = coins.ToString();
         }
     }
@@ -85,10 +93,12 @@ public class UiManager : MonoBehaviour
         }
         if (GameManager.Instance.Paused)
         {
+            Cursor.visible = true;
             pauseMenu.SetActive(true);
         }
         else
         {
+            Cursor.visible = false;
             pauseMenu.SetActive(false);
         }
     }
