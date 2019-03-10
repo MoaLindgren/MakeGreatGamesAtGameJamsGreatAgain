@@ -135,7 +135,7 @@ public class TankScript : MonoBehaviour
         }
         healthSlider.value = health;
         if(this is PlayerScript)
-            CameraShaker.Instance.ShakeCamera(damage / 2, 1f);
+            CameraShaker.Instance.ShakeCamera(damage / 2, 2f);
     }
 
     #region SpecialAttacks

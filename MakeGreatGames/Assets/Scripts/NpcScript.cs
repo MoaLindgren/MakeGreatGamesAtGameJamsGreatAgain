@@ -68,7 +68,7 @@ public class NpcScript : TankScript
             }
         }
         
-        if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 5f && Vector3.Distance(tower.transform.position, target.transform.position) < maxDistance)
+        if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 10f)
         {
             Shoot();
         }

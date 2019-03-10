@@ -54,6 +54,7 @@ public class UiManager : MonoBehaviour
             countCoinsText.text = coins.ToString();
         }
     }
+
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
     {
         if(specialAttack)
@@ -63,8 +64,6 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            print("Hey");
-
             specialAttackTimer.gameObject.SetActive(false);
             specialAttackImage.GetComponent<Image>().sprite = specialAttackDefaultSprite;
         }
