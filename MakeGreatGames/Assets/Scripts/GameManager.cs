@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public bool Paused
     {
         get { return paused; }
+        set { paused = value; }
     }
 
     public static GameManager Instance
@@ -86,7 +87,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseAndUnpause(!paused);
+            paused = !paused;
+            PauseAndUnpause(paused);
         }
     }
 
@@ -114,7 +116,6 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-        pauseMenu.SetActive(pause);
     }
 
     void GameOver()
