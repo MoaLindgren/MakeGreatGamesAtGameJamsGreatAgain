@@ -116,6 +116,7 @@ public class UiManager : MonoBehaviour
     }
     public void Restart()
     {
+        GameManager.Instance.RestartGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void MainMenu()
