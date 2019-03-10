@@ -9,9 +9,16 @@ public class CoinScript : MonoBehaviour
     [SerializeField]
     float spinAmount;
 
+    ParticleSystem[] spawnParticles;
+
     private void Awake()
     {
-        //spawnpartiklar o skit
+        if (spawnParticles == null || spawnParticles.Length < 1)
+            spawnParticles = GetComponentsInChildren<ParticleSystem>();
+        foreach(ParticleSystem p in spawnParticles)
+        {
+            p.Play();
+        }
     }
 
     void Update()

@@ -15,6 +15,7 @@ public class NpcScript : TankScript
     PlayerScript target;
     GameObject[] vips; //very important places, ye
     Vector3 npcGoTo;
+    Vector3 lastPos;
 
     public int Points
     {
@@ -29,6 +30,7 @@ public class NpcScript : TankScript
     protected override void Awake()
     {
         base.Awake();
+        lastPos = frontSmoke[0].transform.position;
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
         generateNewValue = true;
@@ -38,12 +40,44 @@ public class NpcScript : TankScript
     private void Start()
     {
         vips = CoinManager.Instance.Coins;
-
         agent.isStopped = false;
     }
 
     void Update()
     {
+        if (Vector3.Distance(lastPos, transform.position) < Vector3.Distance(frontSmoke[0].transform.position, transform.position))
+        {
+            foreach(ParticleSystem p in backSmoke)
+            {
+                p.Play();
+            }
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.Stop();
+            }
+        }
+        else if (Vector3.Distance(lastPos, transform.position) > Vector3.Distance(frontSmoke[0].transform.position, transform.position))
+        {
+            foreach (ParticleSystem p in backSmoke)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.Play();
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem p in backSmoke)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.Stop();
+            }
+        }
         bool withinDistance = false;
         float distance = Vector3.Distance(transform.position, target.Position);
         RaycastHit hit;
@@ -61,11 +95,11 @@ public class NpcScript : TankScript
                 }
             }
             else
-            {                
+            {
                 MoveToRandomVIP();
             }
         }
-        
+
         if (canShoot && withinDistance && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 10f)
         {
             Shoot();
@@ -81,6 +115,7 @@ public class NpcScript : TankScript
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
+        lastPos = frontSmoke[0].transform.position;
     }
 
     void MoveToRandomVIP()
