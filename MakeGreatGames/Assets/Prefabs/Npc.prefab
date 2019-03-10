@@ -570,7 +570,7 @@ MonoBehaviour:
   projectileSpeed: 0
   spinTime: 0
   attackCooldown: 0
-  maxHealth: 0
+  maxHealth: 10
   shotDamage: 0
   specialAttackDamage: 0
   tankBase: {fileID: 0}

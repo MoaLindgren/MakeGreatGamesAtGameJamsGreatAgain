@@ -31,9 +31,13 @@ public class NpcScript : TankScript
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
-        vips = CoinManager.Instance.Coins;
         generateNewValue = false;
         nearNpc = false;
+    }
+
+    private void Start()
+    {
+        vips = CoinManager.Instance.Coins;
     }
 
     void Update()
@@ -86,7 +90,7 @@ public class NpcScript : TankScript
         }
 
         agent.destination = vips[rnd].transform.position;
-        print(Vector3.Distance(transform.position, vips[rnd].transform.position));
+        //print(Vector3.Distance(transform.position, vips[rnd].transform.position));
         if (Vector3.Distance(transform.position, vips[rnd].transform.position) < 1)
         {
             generateNewValue = true;
