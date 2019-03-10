@@ -116,6 +116,11 @@ public class TankScript : MonoBehaviour
         yield return new WaitForSeconds(spinTime);
         specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
+        if(this is PlayerScript)
+        {
+
+            UiManager.Instance.SpecialAttack(true, specialAttackTimer, specialAttackIndex);
+        }
     }
 
     public void TakeDamage(int damage)

@@ -10,9 +10,11 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     Slider coinProgressSlider;
     [SerializeField]
-    GameObject specialAttackActiveImage;
+    GameObject specialAttackImage;
     [SerializeField]
     Sprite[] specialAttacksSprites;
+    [SerializeField]
+    Sprite specialAttackDefaultSprite;
     [SerializeField]
     int maxNumberOfCoins;
     int coins, score;
@@ -54,16 +56,26 @@ public class UiManager : MonoBehaviour
     }
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
     {
-        this.specialAttack = specialAttack;
-        specialAttackActiveImage.GetComponent<Image>().sprite = specialAttacksSprites[specialAttackIndex];
-        specialAttackActiveImage.SetActive(specialAttack);
-        counter = timer;
+        if(specialAttack)
+        {
+            counter = timer;
+            specialAttackImage.GetComponent<Image>().sprite = specialAttacksSprites[specialAttackIndex];
+        }
+        else
+        {
+            print("Hey");
+            specialAttackTimer.gameObject.SetActive(false);
+            specialAttackImage.GetComponent<Image>().sprite = specialAttackDefaultSprite;
+        }
+
+
     }
     void Update()
     {
         if(specialAttack)
         {
             counter -= Time.deltaTime;
+            specialAttackTimer.gameObject.SetActive(true);
             specialAttackTimer.text = counter.ToString("0");
             if(counter <= 0)
             {
