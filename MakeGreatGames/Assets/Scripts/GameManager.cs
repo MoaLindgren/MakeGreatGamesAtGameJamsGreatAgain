@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Xml;
-using System.Xml.XPath;
+using System.IO;
 
 struct PlayerInfo
 {
@@ -30,12 +30,7 @@ struct PlayerInfo
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject pauseMenu;
-
     XmlDocument highScoreXml = new XmlDocument();
-
-    XPathNavigator xNav;
 
     int score = 0;
 
@@ -55,13 +50,6 @@ public class GameManager : MonoBehaviour
         get { return cam; }
     }
 
-    bool paused = false;
-
-    public bool Paused
-    {
-        get { return paused; }
-    }
-
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -69,8 +57,14 @@ public class GameManager : MonoBehaviour
         instance = this;
         Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
-        xNav = highScoreXml.CreateNavigator();
         cam = FindObjectOfType<Camera>();
+        if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
+        {
+            using(StreamReader reader = File.OpenText(Application.persistentDataPath + "/PlayerName.dat"))
+            {
+                playerName = reader.ReadLine();
+            }
+        }
     }
 
     public void TankDestroyed(TankScript tank)
@@ -85,25 +79,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PauseAnUnpause(bool pause)
-    {
-        if (pause)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
-        pauseMenu.SetActive(pause);
-    }
-
     void GameOver()
     {
         Time.timeScale = 0f;
         PlayerInfo[] highScores = new PlayerInfo[5];
         int index = 0;
-        foreach (XmlNode node in xNav.Select("//Player"))
+        foreach (XmlNode node in highScoreXml.SelectNodes("//Player"))
         {
             highScores[index] = new PlayerInfo(int.Parse(node.Attributes[1].Value), node.Attributes[0].Value);
             index++;
