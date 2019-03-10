@@ -30,7 +30,7 @@ struct PlayerInfo
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject pauseMenu;
+    GameObject pauseMenu, gameOverScreen;
 
     XmlDocument highScoreXml = new XmlDocument();
 

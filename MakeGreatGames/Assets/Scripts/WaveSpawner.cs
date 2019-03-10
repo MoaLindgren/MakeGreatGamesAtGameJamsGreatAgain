@@ -22,9 +22,7 @@ public class WaveSpawner : MonoBehaviour
 
     int wave = 0, poolIndex = 0, spawnPointIndex = 0;
 
-    List<GameObject> currentWave = new List<GameObject>();
-
-    List<GameObject> enemyPool = new List<GameObject>();
+    List<GameObject> currentWave = new List<GameObject>(), enemyPool = new List<GameObject>();
 
     private void Awake()
     {
