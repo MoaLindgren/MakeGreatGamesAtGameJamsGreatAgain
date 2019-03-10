@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    public bool debugMode = false;//Test-run/Call ShakeCamera() on start
-
     public float shakeAmount;//The amount to shake this frame.
     public float shakeDuration;//The duration this frame.
 
@@ -31,20 +29,6 @@ public class CameraShaker : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
-    }
-
-    void Start()
-    {
-        if (debugMode) ShakeCamera();
-    }
-
-    void ShakeCamera()
-    {
-
-        startAmount = shakeAmount;//Set default (start) values
-        startDuration = shakeDuration;//Set default (start) values
-
-        if (!isRunning) StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
     }
 
     public void ShakeCamera(float amount, float duration)
