@@ -102,6 +102,7 @@ public class PlayerScript : TankScript
         {
             coins -= 3;
             uiManager.Coins = coins;
+            uiManager.SpecialAttack(true, specialAttackTimer);
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
@@ -110,6 +111,7 @@ public class PlayerScript : TankScript
         {
             currentSpecialAttack();
             StopCoroutine("SpecialAttackTimer");
+            uiManager.SpecialAttack(false, specialAttackTimer);
             currentSpecialAttack = Nothing;
         }
     }

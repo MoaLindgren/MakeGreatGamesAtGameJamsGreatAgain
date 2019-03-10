@@ -10,7 +10,7 @@ public class TankScript : MonoBehaviour
     protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown;
 
     [SerializeField]
-    protected int maxHealth, shotDamage, specialAttackDamage;
+    protected int maxHealth, shotDamage, specialAttackDamage, specialAttackTimer;
 
     [SerializeField]
     protected GameObject tankBase, tower, projectile, trackingMissile, mine;
@@ -135,7 +135,7 @@ public class TankScript : MonoBehaviour
 
     protected IEnumerator SpecialAttackTimer()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(specialAttackTimer);
         currentSpecialAttack = Nothing;
     }
 

@@ -1962,6 +1962,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 4, z: 8}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!1 &2118558883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9184353474328573430, guid: 8158f7de3ec2b1b408041d688ea1364c,
+    type: 3}
+  m_PrefabInstance: {fileID: 9184353472411865429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &151544142720354239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2074,6 +2080,12 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 788249966}
+    - target: {fileID: 151544142720354241, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: tank
+      value: 
+      objectReference: {fileID: 2399431382699693703, guid: 501a4ac274844bb47bf4a17fe69a90bc,
+        type: 3}
     - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
       propertyPath: countCoinsText
@@ -2084,6 +2096,11 @@ PrefabInstance:
       propertyPath: coinProgressSlider
       value: 
       objectReference: {fileID: 1716112500}
+    - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: specialAttackActiveImage
+      value: 
+      objectReference: {fileID: 2118558883}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dfb805a7fda1024fa9404ea381cf5a2, type: 3}
 --- !u!1001 &7262810399170711709
@@ -2106,7 +2123,7 @@ PrefabInstance:
     - target: {fileID: 7262810398082525379, guid: ab5354807127fda4a9381a7b7e23c60d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7262810398082525379, guid: ab5354807127fda4a9381a7b7e23c60d,
         type: 3}
@@ -2207,6 +2224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxNumberOfCoins
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262810398082525376, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
@@ -2426,6 +2448,26 @@ PrefabInstance:
     - target: {fileID: 9184353473931713752, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353474121399633, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_Name
+      value: SpecialAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473938669596, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_Name
+      value: Image_SpecialAttackInactive
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353474328573430, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_Name
+      value: Image_SpecialAttackActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184353473842344825, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_Text
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9184353472684428620, guid: 8158f7de3ec2b1b408041d688ea1364c,
