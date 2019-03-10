@@ -81,6 +81,7 @@ public class NpcScript : TankScript
             currentSpecialAttack = Nothing;
         }
     }
+
     void MoveToRandomVIP()
     {
         if (generateNewValue)
