@@ -110,6 +110,17 @@ public class UiManager : MonoBehaviour
             GameManager.Instance.PauseAndUnpause(false);
         }
     }
+    public void CoinsCollected(bool fullyCollected)
+    {
+        if(fullyCollected)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

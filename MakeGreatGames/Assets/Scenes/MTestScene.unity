@@ -7572,13 +7572,13 @@ PrefabInstance:
         type: 3}
       propertyPath: specialAttacksSprites.Array.data[3]
       value: 
-      objectReference: {fileID: 21300000, guid: 94dab3d7b1788764990f96d3de87e7cd,
+      objectReference: {fileID: 21300000, guid: 73e28e9934f682343a536eecf0bc24a3,
         type: 3}
     - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
       propertyPath: specialAttacksSprites.Array.data[4]
       value: 
-      objectReference: {fileID: 21300000, guid: 3cb26e68617d3f6498528fb9e60dd0cf,
+      objectReference: {fileID: 21300000, guid: 9e72ae4c0ce7aa746882a67c438bc95c,
         type: 3}
     - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
@@ -7606,7 +7606,7 @@ PrefabInstance:
         type: 3}
       propertyPath: specialAttackDefaultSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4c3c92876cabc1a4e97291a3c5030888,
+      objectReference: {fileID: 21300000, guid: 1f8b8586f0a9d124991f78d3e3d818df,
         type: 3}
     - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
@@ -8080,6 +8080,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9184353474328573424, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f8b8586f0a9d124991f78d3e3d818df,
+        type: 3}
     - target: {fileID: 9184353473842344831, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_IsActive
