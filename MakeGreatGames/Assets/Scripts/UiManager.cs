@@ -11,13 +11,11 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     Slider coinProgressSlider;
     [SerializeField]
-    GameObject specialAttackImage;
+    GameObject specialAttackImage, pauseMenu, pauseMainMenu, gameOverMenu;
     [SerializeField]
     Sprite[] specialAttacksSprites;
     [SerializeField]
     Sprite specialAttackDefaultSprite;
-    [SerializeField]
-    GameObject pauseMenu, pauseMainMenu;
     [SerializeField]
     int maxNumberOfCoins;
     int coins, score;
@@ -98,11 +96,13 @@ public class UiManager : MonoBehaviour
     public void OpenCofirmMenu(GameObject confirm)
     {
         pauseMainMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         confirm.SetActive(true);
     }
     public void Back(GameObject closeThis)
     {
         pauseMainMenu.SetActive(true);
+        gameOverMenu.SetActive(true);
         closeThis.SetActive(false);
         if (closeThis.name == "PauseMenu")
         {

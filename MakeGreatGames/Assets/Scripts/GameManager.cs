@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 using System.IO;
+using UnityEngine.UI;
 
 struct PlayerInfo
 {
@@ -30,7 +31,9 @@ struct PlayerInfo
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject pauseMenu, gameOverScreen;
+    GameObject gameOverScreen;
+    [SerializeField]
+    Text scoreText;
 
     XmlDocument highScoreXml = new XmlDocument();
 
@@ -120,8 +123,9 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        print("Game Over");
-        print("Score: " + score);
+        scoreText.text = score.ToString();
+        gameOverScreen.SetActive(true);
+        Cursor.visible = true;
         Time.timeScale = 0f;
         PlayerInfo[] highScores = new PlayerInfo[5];
         int index = 0;
