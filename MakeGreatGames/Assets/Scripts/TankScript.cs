@@ -70,7 +70,8 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        tower.transform.Rotate(0f, amount, 0f);
+        print("amount: " + amount);
+        tower.transform.Rotate(0f, amount, 0f) ;
     }
 
     protected void RotateTank(float amount)

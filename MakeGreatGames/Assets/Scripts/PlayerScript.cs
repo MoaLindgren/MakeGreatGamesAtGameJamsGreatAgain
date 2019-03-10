@@ -9,9 +9,12 @@ public class PlayerScript : TankScript
     Vector3 position;
 
     Rigidbody rB;
+    [SerializeField]
+    LineRenderer line;
 
     [SerializeField]
     //Image 
+
 
     protected override void Awake()
     {
@@ -40,23 +43,35 @@ public class PlayerScript : TankScript
 
     private void FixedUpdate()
     {
+
+
         if (!alive)
         {
             return;
         }
 
         position = transform.position;
-        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ; // Ska det inte va & ?
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentRotationMethod = RotateTower;
             currentMovement = DontMoveTank;
+            RaycastHit hit;
+            if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            {
+                Debug.DrawRay(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
+                line.SetPosition(0, shotStart.transform.position);
+                line.SetPosition(1, hit.point);
+                line.enabled = true;
+            }
         }
+
         else
         {
             currentRotationMethod = RotateTank;
             currentMovement = MoveTank;
+            line.enabled = false;
         }
 
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
@@ -75,11 +90,12 @@ public class PlayerScript : TankScript
 
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            currentRotationMethod(-turnSpeed);
+            currentRotationMethod(-towerTurnSpeed);
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            currentRotationMethod(turnSpeed);
+            
+            currentRotationMethod(towerTurnSpeed);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
