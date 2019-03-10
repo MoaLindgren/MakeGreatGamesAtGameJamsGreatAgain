@@ -44,12 +44,12 @@ public class NpcScript : TankScript
 
     void Update()
     {
+        bool withinDistance = false;
         float distance = Vector3.Distance(transform.position, target.Position);
         RaycastHit hit;
         if (Physics.SphereCast(shotStart.transform.position, 0.1f, (target.Position - shotStart.transform.position), out hit))
         {
             Debug.DrawRay(shotStart.transform.position, (target.Position - shotStart.transform.position));
-            print(hit.transform.gameObject);
             if (hit.transform.tag == "Player")
             {
                 agent.stoppingDistance = 4f;
@@ -57,18 +57,16 @@ public class NpcScript : TankScript
                 if (distance < maxDistance)
                 {
                     tower.transform.rotation = Quaternion.Lerp(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position), towerTurnSpeed * Time.deltaTime);
-                    canShoot = true;
+                    withinDistance = true;
                 }
             }
             else
-            {
-                canShoot = false;
-                
+            {                
                 MoveToRandomVIP();
             }
         }
         
-        if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 10f)
+        if (canShoot && withinDistance && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 10f)
         {
             Shoot();
         }
