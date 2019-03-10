@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Xml;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 struct PlayerInfo
 {
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance != null && instance != this)
             Destroy(this);
+        SceneManager.sceneLoaded += ResetTimescale;
         instance = this;
         Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
@@ -84,6 +86,11 @@ public class GameManager : MonoBehaviour
             }
             File.Delete(Application.persistentDataPath + "/PlayerName.dat");
         }
+    }
+
+    public void ResetTimescale(Scene scene, LoadSceneMode lsm)
+    {
+        Time.timeScale = 1;
     }
 
     private void Update()

@@ -25,7 +25,10 @@ public class TankScript : MonoBehaviour
     protected Slider healthSlider;
 
     [SerializeField]
-    AudioSource shotSound;
+    protected AudioSource shotSound;
+
+    [SerializeField]
+    protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles;
 
     protected bool alive = true, shielded = false, canShoot = true;
 
@@ -47,8 +50,27 @@ public class TankScript : MonoBehaviour
 
     protected Transform canvasTF;
 
+    protected Vector3 lastPos;
+
     protected virtual void Awake()
     {
+        foreach(ParticleSystem p in frontSmoke)
+        {
+            p.Stop();
+        }
+        foreach (ParticleSystem p in backSmoke)
+        {
+            p.Stop();
+        }
+        foreach (ParticleSystem p in cannonParticles)
+        {
+            p.Stop();
+        }
+        foreach (ParticleSystem p in healingParticles)
+        {
+            p.Stop();
+        }
+        lastPos = transform.position;
         health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
@@ -98,6 +120,10 @@ public class TankScript : MonoBehaviour
     {
         if (!alive || !canShoot)
             return;
+        foreach (ParticleSystem p in cannonParticles)
+        {
+            p.Play();
+        }
         ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
         shotSound.Play();
@@ -218,6 +244,10 @@ public class TankScript : MonoBehaviour
 
     protected void Heal()
     {
+        foreach (ParticleSystem p in healingParticles)
+        {
+            p.Play();
+        }
         print("healing");
         health += 30;
         if (health > maxHealth)
@@ -227,6 +257,10 @@ public class TankScript : MonoBehaviour
 
     protected void SuperHeal()
     {
+        foreach (ParticleSystem p in healingParticles)
+        {
+            p.Play();
+        }
         print("SUPERHEEEEEAL");
         health = maxHealth;
         healthSlider.value = health;
