@@ -38,7 +38,7 @@ public class NpcScript : TankScript
     private void Start()
     {
         vips = CoinManager.Instance.Coins;
-        agent.stoppingDistance = 1f;
+
         agent.isStopped = false;
     }
 
@@ -52,19 +52,22 @@ public class NpcScript : TankScript
             print(hit.transform.gameObject);
             if (hit.transform.tag == "Player")
             {
+                agent.stoppingDistance = 4f;
                 agent.destination = target.Position;
                 if (distance < maxDistance)
                 {
+                    tower.transform.rotation = Quaternion.Lerp(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position), towerTurnSpeed * Time.deltaTime);
                     canShoot = true;
                 }
             }
             else
             {
                 canShoot = false;
+                
                 MoveToRandomVIP();
             }
         }
-        tower.transform.rotation = Quaternion.Lerp(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position), towerTurnSpeed * Time.deltaTime);
+        
         if (canShoot && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 5f && Vector3.Distance(tower.transform.position, target.transform.position) < maxDistance)
         {
             Shoot();
@@ -84,6 +87,7 @@ public class NpcScript : TankScript
 
     void MoveToRandomVIP()
     {
+        agent.stoppingDistance = 1f;
         if (generateNewValue)
         {
             rnd = Random.Range(0, vips.Length);
