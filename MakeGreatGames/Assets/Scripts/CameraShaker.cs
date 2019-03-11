@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    public float shakeAmount;//The amount to shake this frame.
-    public float shakeDuration;//The duration this frame.
+    [SerializeField]
+    float shakeAmount;//The amount to shake this frame.
 
-    //Readonly values...
+    [SerializeField]
+    float shakeDuration;//The duration this frame.
+
+    [SerializeField]
+    bool smooth;//Smooth rotation?
+
+    [SerializeField]
+    float smoothAmount = 5f;//Amount to smooth
+    
     float shakePercentage;//A percentage (0-1) representing the amount of shake to be applied when setting rotation.
     float startAmount;//The initial shake amount (to determine percentage), set when ShakeCamera is called.
     float startDuration;//The initial shake duration, set when ShakeCamera is called.
 
     bool isRunning = false; //Is the coroutine running right now?
-
-    public bool smooth;//Smooth rotation?
-    public float smoothAmount = 5f;//Amount to smooth
 
     static CameraShaker instance;
 
@@ -65,6 +70,13 @@ public class CameraShaker : MonoBehaviour
 
             yield return null;
         }
+        transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
+        isRunning = false;
+    }
+
+    public void StopShaking()
+    {
+        StopCoroutine("Shake");
         transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
         isRunning = false;
     }

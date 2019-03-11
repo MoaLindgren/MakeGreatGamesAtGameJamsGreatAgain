@@ -6,29 +6,21 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerScript : TankScript
 {
-    Vector3 position;
-
-    Rigidbody rB;
     [SerializeField]
     LineRenderer line;
-    UiManager uiManager;
+
+    Rigidbody rB;
 
     protected override void Awake()
     {
         base.Awake();
         rB = GetComponent<Rigidbody>();
-        uiManager = FindObjectOfType<UiManager>();
-    }
-
-    public Vector3 Position
-    {
-        get { return position; }
     }
 
     public override void AddCoin()
     {
         base.AddCoin();
-        uiManager.Coins = coins;
+        UiManager.Instance.Coins = coins;
     }
 
     protected override void MoveTank(float amount)
@@ -45,7 +37,6 @@ public class PlayerScript : TankScript
             return;
         }
 
-        position = transform.position;
         rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -126,7 +117,7 @@ public class PlayerScript : TankScript
         if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
         {
             coins -= 3;
-            uiManager.Coins = coins;
+            UiManager.Instance.Coins = coins;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
@@ -135,7 +126,7 @@ public class PlayerScript : TankScript
         {
             currentSpecialAttack();
             StopCoroutine("SpecialAttackTimer");
-            uiManager.SpecialAttack(false, 0, 0);
+            UiManager.Instance.SpecialAttack(false, 0, 0);
             currentSpecialAttack = Nothing;
         }
     }

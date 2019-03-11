@@ -8,18 +8,29 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField]
     Text countCoinsText, specialAttackTimer, scoreText;
+
     [SerializeField]
     Slider coinProgressSlider;
+
     [SerializeField]
     GameObject specialAttackImage, pauseMenu, pauseMainMenu, gameOverMenu, readyText;
+
     [SerializeField]
     Sprite[] specialAttacksSprites;
+
     [SerializeField]
     Sprite specialAttackDefaultSprite;
+
     [SerializeField]
     int maxNumberOfCoins;
+
+    [SerializeField]
+    AudioSource spinningSound;
+
     int coins, score;
+
     float counter;
+
     bool specialAttack;
 
     static UiManager instance;
@@ -40,6 +51,11 @@ public class UiManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void SpinWheel()
+    {
+        spinningSound.Play();
     }
 
     public int Coins
@@ -79,6 +95,7 @@ public class UiManager : MonoBehaviour
 
 
     }
+
     void Update()
     {
         if (specialAttack)
@@ -99,6 +116,7 @@ public class UiManager : MonoBehaviour
         gameOverMenu.SetActive(false);
         confirm.SetActive(true);
     }
+
     public void Back(GameObject closeThis)
     {
         pauseMainMenu.SetActive(true);
@@ -110,19 +128,23 @@ public class UiManager : MonoBehaviour
             GameManager.Instance.PauseAndUnpause(false);
         }
     }
+
     public void CoinsCollected(bool fullyCollected)
     {
         readyText.SetActive(fullyCollected);
     }
+
     public void Restart()
     {
         GameManager.Instance.RestartGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void MainMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+
     public void QuitGame()
     {
         Application.Quit();

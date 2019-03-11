@@ -59,6 +59,11 @@ public class MenuManager : MonoBehaviour
         if (!show)
             playerNameInput.text = "";
         newGameMenu.SetActive(show);
+        if(show)
+        {
+            playerNameInput.Select();
+            playerNameInput.ActivateInputField();
+        }
     }
 
     public void QuitGame()

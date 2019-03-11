@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         scoreText.text = score.ToString();
         gameOverScreen.SetActive(true);
+        CameraShaker.Instance.StopShaking();
         Cursor.visible = true;
         Time.timeScale = 0f;
         PlayerInfo[] highScores = new PlayerInfo[5];

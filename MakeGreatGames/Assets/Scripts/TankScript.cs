@@ -139,7 +139,10 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             StopCoroutine("SpinWheel");
-        //spela spinnljud && snurra hjulen
+        if (this is PlayerScript)
+        {
+            UiManager.Instance.SpinWheel();
+        }
         yield return new WaitForSeconds(spinTime);
         specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];

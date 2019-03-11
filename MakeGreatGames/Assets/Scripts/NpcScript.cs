@@ -79,15 +79,15 @@ public class NpcScript : TankScript
             }
         }
         bool withinDistance = false;
-        float distance = Vector3.Distance(transform.position, target.Position);
+        float distance = Vector3.Distance(transform.position, target.transform.position);
         RaycastHit hit;
-        if (Physics.SphereCast(shotStart.transform.position, 0.1f, (target.Position - shotStart.transform.position), out hit))
+        if (Physics.SphereCast(shotStart.transform.position, 0.1f, (target.transform.position - shotStart.transform.position), out hit))
         {
-            Debug.DrawRay(shotStart.transform.position, (target.Position - shotStart.transform.position));
+            Debug.DrawRay(shotStart.transform.position, (target.transform.position - shotStart.transform.position));
             if (hit.transform.tag == "Player")
             {
                 agent.stoppingDistance = 4f;
-                agent.destination = target.Position;
+                agent.destination = target.transform.position;
                 if (distance < maxDistance)
                 {
                     tower.transform.rotation = Quaternion.Lerp(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position), towerTurnSpeed * Time.deltaTime);
