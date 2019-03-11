@@ -6,13 +6,13 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] coins;
+    GameObject[] coins;     //Coin locations
 
     [SerializeField]
-    float minCoinTime, maxCoinTime;
+    float minCoinTime, maxCoinTime;     //Min and max time between coin spawns
 
     [SerializeField]
-    AudioSource aS;
+    AudioSource aS;     //Sound playing when a coin is picked up
 
     static CoinManager instance;
 

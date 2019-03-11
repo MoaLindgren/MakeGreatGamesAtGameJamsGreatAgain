@@ -20,6 +20,8 @@ public class ProjectileScript : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.Paused)
+            return;
         transform.Translate(direction * speed);
     }
 

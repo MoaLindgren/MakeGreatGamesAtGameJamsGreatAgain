@@ -23,6 +23,8 @@ public class CoinScript : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.Paused)
+            return;
         transform.Rotate(0f, spinAmount, 0f);
     }
 
