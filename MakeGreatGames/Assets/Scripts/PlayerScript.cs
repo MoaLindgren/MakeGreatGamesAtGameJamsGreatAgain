@@ -59,18 +59,15 @@ public class PlayerScript : TankScript
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("space");
             if (canShoot)
             {
                 CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
                 Shoot();
-                print("FIRE");
             }
         }
 
         if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
         {
-            print("E");
             coins -= 3;
             UiManager.Instance.Coins = coins;
             StopCoroutine("SpecialAttackTimer");
@@ -79,7 +76,6 @@ public class PlayerScript : TankScript
 
         if (Input.GetKeyDown(KeyCode.Q) && currentSpecialAttack != Nothing)
         {
-            print("ult");
             currentSpecialAttack();
             StopCoroutine("SpecialAttackTimer");
             UiManager.Instance.SpecialAttack(false, 0, 0);
