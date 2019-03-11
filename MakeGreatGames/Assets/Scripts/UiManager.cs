@@ -91,16 +91,6 @@ public class UiManager : MonoBehaviour
                 SpecialAttack(false, 0, 0);
             }
         }
-        if (GameManager.Instance.Paused)
-        {
-            Cursor.visible = true;
-            pauseMenu.SetActive(true);
-        }
-        else
-        {
-            Cursor.visible = false;
-            pauseMenu.SetActive(false);
-        }
     }
 
     public void OpenCofirmMenu(GameObject confirm)

@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseAndUnpause(bool pause)
     {
+        Cursor.visible = pause;
         if (pause)
         {
             Time.timeScale = 0f;
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
             {
                 for(int j = highScores.Length - 2; j > i; j--)
                 {
-                    highScores[j] = highScores[j + 1];
+                    highScores[j] = highScores[j - 1];
                 }
                 highScores[i] = new PlayerInfo(score, playerName);
                 break;
