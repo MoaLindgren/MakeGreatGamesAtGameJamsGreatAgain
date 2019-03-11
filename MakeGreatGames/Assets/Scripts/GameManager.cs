@@ -172,6 +172,5 @@ public class GameManager : MonoBehaviour
             index++;
         }
         highScoreXml.Save(Application.streamingAssetsPath + "/HighScoreXML.xml");
-        print(Application.streamingAssetsPath + "/HighScoreXML.xml");
     }
 }

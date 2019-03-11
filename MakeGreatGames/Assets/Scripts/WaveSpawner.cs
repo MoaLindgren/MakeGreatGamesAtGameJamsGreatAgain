@@ -45,7 +45,6 @@ public class WaveSpawner : MonoBehaviour
     {
         waveSpawned = false;
         wave++;
-        print("WAVE " + wave);
         for (int i = 0; i < wave && i < 100; i++)
         {
             SpawnTank();

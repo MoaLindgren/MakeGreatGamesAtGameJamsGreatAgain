@@ -205,7 +205,6 @@ public class TankScript : MonoBehaviour
 
     protected void FireMissile()
     {
-        print("NUKEM");
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
         missileStart.GetComponent<AudioSource>().Play();
         GameObject missileGO = Instantiate(trackingMissile, missileStart.position, Quaternion.identity);
@@ -227,7 +226,6 @@ public class TankScript : MonoBehaviour
     protected void SpawnShield()
     {
         //shieldparticles wooooooo
-        print("sköld yao");
         StartCoroutine("Shield");
     }
 
@@ -238,7 +236,6 @@ public class TankScript : MonoBehaviour
 
     protected void SpeedBoost()
     {
-        print("VROOOOOOM");
         StartCoroutine("SpeedBoosted");
     }
 
@@ -248,7 +245,6 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        print("healing");
         health += 30;
         if (health > maxHealth)
             health = maxHealth;
@@ -261,14 +257,12 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        print("SUPERHEEEEEAL");
         health = maxHealth;
         healthSlider.value = health;
     }
 
     protected void SuperShots()
     {
-        print("i kill you");
         StartCoroutine("SuperShotTimer");
     }
 

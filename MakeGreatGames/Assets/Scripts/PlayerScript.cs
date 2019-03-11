@@ -30,14 +30,12 @@ public class PlayerScript : TankScript
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!alive)
         {
             return;
         }
-
-        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -52,13 +50,51 @@ public class PlayerScript : TankScript
                 line.enabled = true;
             }
         }
-
         else
         {
             currentRotationMethod = RotateTank;
             currentMovement = MoveTank;
             line.enabled = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print("space");
+            if (canShoot)
+            {
+                CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
+                Shoot();
+                print("FIRE");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
+        {
+            print("E");
+            coins -= 3;
+            UiManager.Instance.Coins = coins;
+            StopCoroutine("SpecialAttackTimer");
+            StartCoroutine("SpinWheel");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && currentSpecialAttack != Nothing)
+        {
+            print("ult");
+            currentSpecialAttack();
+            StopCoroutine("SpecialAttackTimer");
+            UiManager.Instance.SpecialAttack(false, 0, 0);
+            currentSpecialAttack = Nothing;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!alive)
+        {
+            return;
+        }
+
+        rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
@@ -104,30 +140,8 @@ public class PlayerScript : TankScript
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            
+
             currentRotationMethod(towerTurnSpeed);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
-        {
-            CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
-            Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
-        {
-            coins -= 3;
-            UiManager.Instance.Coins = coins;
-            StopCoroutine("SpecialAttackTimer");
-            StartCoroutine("SpinWheel");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q) && currentSpecialAttack != Nothing)
-        {
-            currentSpecialAttack();
-            StopCoroutine("SpecialAttackTimer");
-            UiManager.Instance.SpecialAttack(false, 0, 0);
-            currentSpecialAttack = Nothing;
         }
     }
 }
