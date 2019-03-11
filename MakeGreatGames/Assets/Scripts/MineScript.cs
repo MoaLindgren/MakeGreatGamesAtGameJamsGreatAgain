@@ -24,6 +24,8 @@ public class MineScript : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.Paused)
+            return;
         sinPos += Time.deltaTime;
         colorAmount = 0.5f + (Mathf.Lerp(-1, 1, Mathf.Sin(sinPos)) / 2);
         mat.SetColor("_EmissionColor", new Color(colorAmount, colorAmount, colorAmount));
@@ -40,6 +42,7 @@ public class MineScript : MonoBehaviour
         TankScript tank = other.GetComponent<TankScript>();
         if (tank != null)
         {
+            tank.TakeDamage(damage);
             Instantiate(explosion);
             Destroy(gameObject);
         }

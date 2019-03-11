@@ -91,8 +91,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 8
+  m_Speed: 0.5
+  m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -125,8 +125,7 @@ MonoBehaviour:
   cameraShakeShoot: 0
   cameraSuperShake: 0
   maxHealth: 100
-  shotDamage: 5
-  specialAttackDamage: 0
+  shotDamage: 15
   specialAttackTimer: 0
   tankBase: {fileID: 3901924190049921228}
   tower: {fileID: 318269524745228778}
@@ -137,9 +136,6 @@ MonoBehaviour:
   mine: {fileID: 709937350, guid: 14c3c297c7774ea4887c74b8165be2c6, type: 3}
   shotStart: {fileID: 1442859577158599075}
   missileStart: {fileID: 9135259457944779861}
-  movementSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  missileLaunchSound: {fileID: 0}
   healthSlider: {fileID: 3211034684301429336}
   shotSound: {fileID: 485391823672664126}
   frontSmoke:

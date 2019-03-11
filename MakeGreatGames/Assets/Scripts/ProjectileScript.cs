@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileScript : MonoBehaviour
+public interface IProjectile
+{
+    void ShootMe();
+}
+
+public class ProjectileScript : MonoBehaviour, IProjectile
 {
     Vector3 direction = Vector3.zero;
     float speed = 0.0f;
@@ -37,5 +42,10 @@ public class ProjectileScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ShootMe()
+    {
+        return;
     }
 }

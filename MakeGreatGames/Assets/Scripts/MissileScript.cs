@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class MissileScript : MonoBehaviour
+public class MissileScript : MonoBehaviour, IProjectile
 {
     [SerializeField]
     int damage;
@@ -62,14 +62,24 @@ public class MissileScript : MonoBehaviour
         }
     }
 
+    public void ShootMe()
+    {
+        Destroy(this);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         TankScript hitTank = other.GetComponent<TankScript>();
+        IProjectile hitProjectile = other.GetComponent<IProjectile>();
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
             Instantiate(blast, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
+        else if (hitProjectile != null)
+        {
+            hitProjectile.ShootMe();
         }
     }
 }
