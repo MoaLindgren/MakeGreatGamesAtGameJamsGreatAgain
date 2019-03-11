@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d471f5895a456848b7f3b6536a90826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 100
   blast: {fileID: 6315565652153443790, guid: fd2ddc61677f23b4e853fe280600bfe8, type: 3}
 --- !u!136 &4090490161382657587
 CapsuleCollider:
@@ -111,8 +111,7 @@ AudioSource:
   m_GameObject: {fileID: 4541278210141351676}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243778557886981776, guid: 1fd4aba0f511b784f8032ee3110cca7d,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5d18ce90d5eb4454da82eb0e2e6ada63, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.8

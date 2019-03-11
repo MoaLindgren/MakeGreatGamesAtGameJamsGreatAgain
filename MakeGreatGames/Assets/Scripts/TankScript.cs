@@ -10,17 +10,14 @@ public class TankScript : MonoBehaviour
     protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake;
 
     [SerializeField]
-    protected int maxHealth, shotDamage, specialAttackDamage, specialAttackTimer;
+    protected int maxHealth, shotDamage, specialAttackTimer;
 
     [SerializeField]
     protected GameObject tankBase, tower, projectile, trackingMissile, mine;
 
     [SerializeField]
     protected Transform shotStart, missileStart;
-
-    [SerializeField]
-    protected AudioClip movementSound, deathSound, missileLaunchSound;
-
+    
     [SerializeField]
     protected Slider healthSlider;
 
