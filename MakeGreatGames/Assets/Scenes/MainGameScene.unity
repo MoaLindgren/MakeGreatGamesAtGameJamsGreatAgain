@@ -3479,6 +3479,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &706874492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706874490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55e6d4186bf27340ac360fbe2303f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2406992890102627937, guid: bf77fd5792fffaa41ad3a11c4b1ae26e,
+    type: 3}
+  poolSize: 100
 --- !u!114 &706874497 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
@@ -4882,7 +4897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199e300ebde931e49839bac7b23771dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shake: 0
 --- !u!1 &1010392856
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,7 +6080,7 @@ GameObject:
   - component: {fileID: 1270168191}
   - component: {fileID: 1270168190}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CameraShaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10430,6 +10444,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1043387825684629718, guid: 53da027c054f5e44fb9ed318dac92eb8,
         type: 3}
+    - target: {fileID: 151544142720354241, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: poolSize
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dfb805a7fda1024fa9404ea381cf5a2, type: 3}
 --- !u!1001 &6906208642750364503
