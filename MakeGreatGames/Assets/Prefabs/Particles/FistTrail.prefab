@@ -1371,16 +1371,16 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 14321
-        ctime3: 23544
-        ctime4: 37137
+        ctime2: 4037
+        ctime3: 5580
+        ctime4: 28968
         ctime5: 65535
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 8010
-        atime2: 47133
-        atime3: 65535
+        atime1: 3206
+        atime2: 48320
+        atime3: 63398
         atime4: 65535
         atime5: 0
         atime6: 0
@@ -6064,15 +6064,15 @@ ParticleSystem:
         key1: {r: 0.9034486, g: 0, b: 1, a: 1}
         key2: {r: 0.928, g: 0.309, b: 0.042724937, a: 1}
         key3: {r: 0.39705884, g: 0.19087732, b: 0.102184266, a: 0}
-        key4: {r: 0.2794118, g: 0.269356, b: 0.2650303, a: 0}
+        key4: {r: 0.1102941, g: 0.1102941, b: 0.1102941, a: 0}
         key5: {r: 0.1102941, g: 0.1102941, b: 0.1102941, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 14321
-        ctime3: 23544
-        ctime4: 37137
+        ctime2: 38229
+        ctime3: 59005
+        ctime4: 65535
         ctime5: 65535
         ctime6: 0
         ctime7: 0
