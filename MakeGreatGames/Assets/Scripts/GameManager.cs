@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     GameObject gameOverScreen, playerPrefab;
 
     [SerializeField]
+    Transform playerSpawn;
+
+    [SerializeField]
     Text scoreText;
 
     XmlDocument highScoreXml = new XmlDocument();
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
+        Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
         cam = FindObjectOfType<Camera>();
         if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
         {

@@ -31,13 +31,15 @@ public class WaveSpawner : MonoBehaviour
         get { return currentWave; }
     }
 
-
-
     private void Awake()
     {
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
+    }
+
+    private void Start()
+    {
         for (int i = 0; i < 100; i++)
         {
             GameObject spawnedTank = Instantiate(tank, new Vector3(10000, 10000, 10000), Quaternion.identity);
