@@ -27,6 +27,12 @@ public class TankScript : MonoBehaviour
     [SerializeField]
     protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles;
 
+    [SerializeField]
+    bool forceSpecialAttack;    //Debugging purposes
+
+    [SerializeField]
+    int forcedSpecialIndex;    //Debugging purposes
+
     protected bool alive = true, shielded = false, canShoot = true;
 
     protected int health, coins = 0, maxCoins = 10, specialAttackIndex;
@@ -129,7 +135,7 @@ public class TankScript : MonoBehaviour
             UiManager.Instance.SpinWheel();
         }
         yield return new WaitForSeconds(spinTime);
-        specialAttackIndex = Random.Range(0, specialAttackMethods.Length);
+        specialAttackIndex = forceSpecialAttack ? forcedSpecialIndex : Random.Range(0, specialAttackMethods.Length);
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
         if (this is PlayerScript)
         {

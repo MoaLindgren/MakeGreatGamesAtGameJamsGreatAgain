@@ -8,7 +8,7 @@ public class PlayerScript : TankScript
 {
     [SerializeField]
     LineRenderer line;
-
+    
     Rigidbody rB;
 
     protected override void Awake()
