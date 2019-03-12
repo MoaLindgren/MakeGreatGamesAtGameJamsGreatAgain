@@ -200,7 +200,7 @@ public class TankScript : MonoBehaviour
     {
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
         missileStart.GetComponent<AudioSource>().Play();
-        GameObject missileGO = Instantiate(trackingMissile, missileStart.position, Quaternion.identity);
+        GameObject missileGO = Instantiate(trackingMissile, missileStart.position, tower.transform.rotation);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
         {
@@ -218,7 +218,6 @@ public class TankScript : MonoBehaviour
 
     protected void SpawnShield()
     {
-        //shieldparticles wooooooo
         StartCoroutine("Shield");
     }
 
