@@ -9,9 +9,15 @@ public interface IProjectile
 
 public class ProjectileScript : MonoBehaviour, IProjectile
 {
+    [SerializeField]
+    MeshRenderer projectileMesh;
+
     Vector3 direction = Vector3.zero;
-    float speed = 0.0f;
+
     TankScript shooter;
+
+    float speed = 0.0f;
+
     int damage;
 
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
@@ -42,6 +48,11 @@ public class ProjectileScript : MonoBehaviour, IProjectile
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Render(bool render)
+    {
+        //projectileMesh.
     }
 
     public void ShootMe()

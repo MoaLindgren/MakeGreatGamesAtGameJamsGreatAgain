@@ -31,6 +31,7 @@ public class TankScript : MonoBehaviour
     bool forceSpecialAttack;    //Debugging purposes
 
     [SerializeField]
+    [Tooltip("0 = Missile, 1 = Shield, 2 = SpeedBoost, 3 = Heal, 4 = SuperHeal, 5 = Mine, 6 = SuperShots")]
     int forcedSpecialIndex;    //Debugging purposes
 
     protected bool alive = true, shielded = false, canShoot = true;
