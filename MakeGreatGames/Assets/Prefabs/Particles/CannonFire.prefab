@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4698971816128216120}
   - component: {fileID: 1454274697389934620}
   m_Layer: 0
-  m_Name: Particle System (3)
+  m_Name: barrel afterfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4826,7 +4826,7 @@ GameObject:
   - component: {fileID: 7047388601598945063}
   - component: {fileID: 7047388601598945062}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: fire ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9582,7 +9582,7 @@ GameObject:
   - component: {fileID: 7047388601786144545}
   - component: {fileID: 7047388601786144544}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: fire spit with smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9738,7 +9738,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 80
+      scalar: 50
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9855,7 +9855,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.5
-      minScalar: 0.5
+      minScalar: 0.8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10545,7 +10545,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 100
+        scalar: 50
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -12144,7 +12144,7 @@ ParticleSystem:
     dampen: 0
     drag:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 1
       minScalar: 0.3
       maxCurve:
@@ -19094,7 +19094,7 @@ GameObject:
   - component: {fileID: 7047388602337110467}
   - component: {fileID: 7047388602337110466}
   m_Layer: 0
-  m_Name: Particle System (2)
+  m_Name: fire spit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19367,7 +19367,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1
-      minScalar: 0.3
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -20057,7 +20057,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 100
+        scalar: 50
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -21651,14 +21651,14 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxis: 0
     inWorldSpace: 0
-    multiplyDragByParticleSize: 0
+    multiplyDragByParticleSize: 1
     multiplyDragByParticleVelocity: 1
     dampen: 0
     drag:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.01
-      minScalar: 0.5
+      minMaxState: 0
+      scalar: 2.5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:

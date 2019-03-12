@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  turnSpeed: 2
-  towerTurnSpeed: 2
+  turnSpeed: 2.5
+  towerTurnSpeed: 1.8
   projectileSpeed: 0.1
   spinTime: 2
   attackCooldown: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   cameraShakeShoot: 0.01
   cameraSuperShake: 0.1
   maxHealth: 100
-  shotDamage: 30
+  shotDamage: 34
   specialAttackTimer: 30
   tankBase: {fileID: 4989613927695015045}
   tower: {fileID: 4989613927695015047}
@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 567371233314783487}
   - {fileID: 3085382481955018209}
   forceSpecialAttack: 1
-  forcedSpecialIndex: 0
+  forcedSpecialIndex: 4
   line: {fileID: 8429361019541647097}
 --- !u!54 &1166912500125730362
 Rigidbody:
