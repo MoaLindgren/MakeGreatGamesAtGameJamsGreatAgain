@@ -49,33 +49,33 @@ public class NpcScript : TankScript
         {
             foreach(ParticleSystem p in backSmoke)
             {
-                p.Play();
+                p.emissionRate = 20;
             }
             foreach (ParticleSystem p in frontSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
         }
         else if (Vector3.Distance(lastPos, transform.position) > Vector3.Distance(frontSmoke[0].transform.position, transform.position))
         {
             foreach (ParticleSystem p in backSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
             foreach (ParticleSystem p in frontSmoke)
             {
-                p.Play();
+                p.emissionRate = 20;
             }
         }
         else
         {
             foreach (ParticleSystem p in backSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
             foreach (ParticleSystem p in frontSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
         }
         bool withinDistance = false;

@@ -96,11 +96,11 @@ public class PlayerScript : TankScript
         {
             foreach (ParticleSystem p in backSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
             foreach (ParticleSystem p in frontSmoke)
             {
-                p.Play();
+                p.emissionRate = 20;
             }
             currentMovement(speed);
         }
@@ -108,11 +108,11 @@ public class PlayerScript : TankScript
         {
             foreach (ParticleSystem p in backSmoke)
             {
-                p.Play();
+                p.emissionRate = 20;
             }
             foreach (ParticleSystem p in frontSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
             currentMovement(-speed);
         }
@@ -120,11 +120,11 @@ public class PlayerScript : TankScript
         {
             foreach (ParticleSystem p in backSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
             foreach (ParticleSystem p in frontSmoke)
             {
-                p.Stop();
+                p.emissionRate = 0;
             }
             rB.velocity = Vector3.zero;
             rB.constraints = RigidbodyConstraints.FreezeAll;
