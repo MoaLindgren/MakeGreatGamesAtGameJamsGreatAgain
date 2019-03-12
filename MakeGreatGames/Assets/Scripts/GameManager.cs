@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+        UiManager.Instance.Pause(pause);
     }
 
     void GameOver()

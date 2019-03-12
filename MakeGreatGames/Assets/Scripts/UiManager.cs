@@ -138,6 +138,10 @@ public class UiManager : MonoBehaviour
     {
         readyText.SetActive(fullyCollected);
     }
+    public void Pause(bool pause)
+    {
+        pauseMenu.SetActive(pause);
+    }
 
     public void Restart()
     {
