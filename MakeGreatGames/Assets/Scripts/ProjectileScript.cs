@@ -12,6 +12,9 @@ public class ProjectileScript : MonoBehaviour, IProjectile
     [SerializeField]
     MeshRenderer projectileMesh;
 
+    [SerializeField]
+    ParticleSystem[] projectileParticles;
+
     Vector3 direction = Vector3.zero;
 
     TankScript shooter;
@@ -30,6 +33,10 @@ public class ProjectileScript : MonoBehaviour, IProjectile
 
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
     {
+        foreach (ParticleSystem p in projectileParticles)
+        {
+            p.emissionRate = 200;
+        }
         this.direction = direction;
         this.speed = speed;
         this.shooter = parent;
@@ -52,11 +59,19 @@ public class ProjectileScript : MonoBehaviour, IProjectile
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
+            foreach (ParticleSystem p in projectileParticles)
+            {
+                p.emissionRate = 0;
+            }
             StopCoroutine("DestroyTimer");
             ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
         }
         if (hitTank == null || hitTank != shooter)
         {
+            foreach (ParticleSystem p in projectileParticles)
+            {
+                p.emissionRate = 0;
+            }
             StopCoroutine("DestroyTimer");
             ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
         }
@@ -75,6 +90,10 @@ public class ProjectileScript : MonoBehaviour, IProjectile
     IEnumerator DestroyTimer()
     {
         yield return new WaitForSeconds(15);
+        foreach (ParticleSystem p in projectileParticles)
+        {
+            p.emissionRate = 0;
+        }
         ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
     }
 }

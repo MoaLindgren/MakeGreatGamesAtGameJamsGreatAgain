@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileMesh: {fileID: 3994022932493253191}
+  projectileParticles:
+  - {fileID: 2172518639933086629}
 --- !u!135 &6145153018402790497
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -253,3 +255,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75853f3e748f0204cac8c3e7282cd863, type: 3}
+--- !u!198 &2172518639933086629 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7589321300206090860, guid: 75853f3e748f0204cac8c3e7282cd863,
+    type: 3}
+  m_PrefabInstance: {fileID: 8607779332593983945}
+  m_PrefabAsset: {fileID: 0}
