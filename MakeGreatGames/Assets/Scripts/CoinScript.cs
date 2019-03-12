@@ -6,8 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class CoinScript : MonoBehaviour
 {
-    [SerializeField]
-    float spinAmount;
+ 
 
     ParticleSystem[] spawnParticles;
 
@@ -21,12 +20,7 @@ public class CoinScript : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (GameManager.Instance.Paused)
-            return;
-        transform.Rotate(0f, spinAmount, 0f);
-    }
+  
 
     private void OnTriggerEnter(Collider other)
     {
