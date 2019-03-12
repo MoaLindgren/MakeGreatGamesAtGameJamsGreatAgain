@@ -178,8 +178,11 @@ public class TankScript : MonoBehaviour
     protected virtual IEnumerator SpeedBoosted()
     {
         float originalSpeed = speed;
+        float originalTurnSpeed = turnSpeed;
+        turnSpeed *= 2;
         speed *= 2;
         yield return new WaitForSeconds(10);
+        turnSpeed = originalTurnSpeed;
         speed = originalSpeed;
     }
 
