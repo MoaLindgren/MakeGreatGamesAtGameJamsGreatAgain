@@ -22,14 +22,16 @@ public class WaveSpawner : MonoBehaviour
 
     int currentWave = 0, poolIndex = 0, spawnPointIndex = 0;
 
+    List<GameObject> currentWaveTanks = new List<GameObject>(), enemyPool = new List<GameObject>();
+
+    bool waveSpawned = false;
+
     public int CurrentWave
     {
         get { return currentWave; }
     }
 
-    List<GameObject> currentWaveTanks = new List<GameObject>(), enemyPool = new List<GameObject>();
 
-    bool waveSpawned = false;
 
     private void Awake()
     {

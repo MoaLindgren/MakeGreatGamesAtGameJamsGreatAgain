@@ -129,15 +129,15 @@ public class PlayerScript : TankScript
             rB.velocity = Vector3.zero;
             rB.constraints = RigidbodyConstraints.FreezeAll;
         }
-
+        float turnAmount = currentRotationMethod == RotateTank ? turnSpeed : towerTurnSpeed;
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            currentRotationMethod(-towerTurnSpeed);
+            currentRotationMethod(-turnAmount);
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
 
-            currentRotationMethod(towerTurnSpeed);
+            currentRotationMethod(turnAmount);
         }
     }
 }
