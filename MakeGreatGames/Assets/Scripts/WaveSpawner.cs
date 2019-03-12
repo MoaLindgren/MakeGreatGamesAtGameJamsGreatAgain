@@ -20,9 +20,14 @@ public class WaveSpawner : MonoBehaviour
         get { return instance; }
     }
 
-    int wave = 0, poolIndex = 0, spawnPointIndex = 0;
+    int currentWave = 0, poolIndex = 0, spawnPointIndex = 0;
 
-    List<GameObject> currentWave = new List<GameObject>(), enemyPool = new List<GameObject>();
+    public int CurrentWave
+    {
+        get { return currentWave; }
+    }
+
+    List<GameObject> currentWaveTanks = new List<GameObject>(), enemyPool = new List<GameObject>();
 
     bool waveSpawned = false;
 
@@ -44,8 +49,8 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWave()
     {
         waveSpawned = false;
-        wave++;
-        for (int i = 0; i < wave && i < 100; i++)
+        currentWave++;
+        for (int i = 0; i < currentWave && i < 100; i++)
         {
             SpawnTank();
             yield return new WaitForSeconds(timeBetweenSpawns);
@@ -61,7 +66,7 @@ public class WaveSpawner : MonoBehaviour
         }
         enemyPool[poolIndex].transform.position = spawnPoints[spawnPointIndex].position;
         enemyPool[poolIndex].SetActive(true);
-        currentWave.Add(enemyPool[poolIndex]);
+        currentWaveTanks.Add(enemyPool[poolIndex]);
         enemyPool[poolIndex].GetComponent<NpcScript>().SetAlive(true);
         poolIndex = (poolIndex + 1) % enemyPool.Count;
         spawnPointIndex = (spawnPointIndex + 1) % spawnPoints.Length;
@@ -69,15 +74,15 @@ public class WaveSpawner : MonoBehaviour
 
     public void TankDestroyed(GameObject tank)
     {
-        if (currentWave.Contains(tank))
-            currentWave.Remove(tank);
+        if (currentWaveTanks.Contains(tank))
+            currentWaveTanks.Remove(tank);
         tank.GetComponent<NpcScript>().SetAlive(false);
         tank.SetActive(false);
         tank.transform.position = new Vector3(10000, 10000, 10000);
-        if (currentWave.Count < 1 && waveSpawned)
+        if (currentWaveTanks.Count < 1 && waveSpawned)
         {
-            UiManager.Instance.AddScore(50 * wave);
-            GameManager.Instance.Score = 50 * wave;
+            UiManager.Instance.AddScore(50 * currentWave);
+            GameManager.Instance.Score = 50 * currentWave;
             StartCoroutine("NextWave");
         }
     }
