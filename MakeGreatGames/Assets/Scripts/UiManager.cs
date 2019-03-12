@@ -13,7 +13,7 @@ public class UiManager : MonoBehaviour
     Slider coinProgressSlider;
 
     [SerializeField]
-    GameObject specialAttackImage, pauseMenu, pauseMainMenu, gameOverMenu, readyText;
+    GameObject pauseMenu, pauseMainMenu, gameOverMenu, readyText;
 
     [SerializeField]
     Sprite[] specialAttacksSprites;
@@ -23,6 +23,9 @@ public class UiManager : MonoBehaviour
 
     [SerializeField]
     AudioSource spinningSound;
+
+    [SerializeField]
+    Image specialAttackImage;
 
     int coins, score, maxNumberOfCoins;
 
@@ -85,18 +88,18 @@ public class UiManager : MonoBehaviour
 
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
     {
+        this.specialAttack = specialAttack;
         if (specialAttack)
         {
             counter = timer;
-            specialAttackImage.GetComponent<Image>().sprite = specialAttacksSprites[specialAttackIndex];
+            specialAttackTimer.gameObject.SetActive(true);
+            specialAttackImage.sprite = specialAttacksSprites[specialAttackIndex];
         }
         else
         {
             specialAttackTimer.gameObject.SetActive(false);
-            specialAttackImage.GetComponent<Image>().sprite = specialAttackDefaultSprite;
+            specialAttackImage.sprite = specialAttackDefaultSprite;
         }
-
-
     }
 
     void Update()
@@ -104,7 +107,6 @@ public class UiManager : MonoBehaviour
         if (specialAttack)
         {
             counter -= Time.deltaTime;
-            specialAttackTimer.gameObject.SetActive(true);
             specialAttackTimer.text = counter.ToString("0");
             if (counter <= 0)
             {

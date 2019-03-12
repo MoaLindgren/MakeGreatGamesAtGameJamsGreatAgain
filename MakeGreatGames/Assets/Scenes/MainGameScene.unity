@@ -7027,6 +7027,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65d529556b4bcde46a14b16cc42d2bb7, type: 3}
+--- !u!1 &1479141845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1479141846}
+  m_Layer: 0
+  m_Name: PlayerSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1479141846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479141845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.107, z: -8.88}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1510016281
 GameObject:
   m_ObjectHideFlags: 0
@@ -10065,6 +10095,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9184353472411865429}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2118558884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9184353474328573424, guid: 8158f7de3ec2b1b408041d688ea1364c,
+    type: 3}
+  m_PrefabInstance: {fileID: 9184353472411865429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118558883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2119684352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2655468575769225198, guid: 65d529556b4bcde46a14b16cc42d2bb7,
@@ -10165,7 +10207,7 @@ PrefabInstance:
         type: 3}
       propertyPath: specialAttackImage
       value: 
-      objectReference: {fileID: 2118558883}
+      objectReference: {fileID: 2118558884}
     - target: {fileID: 151544142720354246, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
       propertyPath: specialAttackDefaultSprite
@@ -10317,6 +10359,16 @@ PrefabInstance:
       propertyPath: aS
       value: 
       objectReference: {fileID: 1360124158}
+    - target: {fileID: 151544142004321168, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: coinsToUlt
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 151544142004321168, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: maxCoinTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
       propertyPath: m_audioClip
@@ -10348,6 +10400,12 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 835997013}
+    - target: {fileID: 151544142004321170, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+        type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 1166912500125730367, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
     - target: {fileID: 151544142720354241, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
         type: 3}
       propertyPath: spawnPoints.Array.data[0]
@@ -10535,11 +10593,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 243778557886981776, guid: 1fd4aba0f511b784f8032ee3110cca7d,
         type: 2}
-    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
-        type: 3}
-      propertyPath: spinTime
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
 --- !u!1001 &9184353472411865429
@@ -10576,6 +10629,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: ffb43905f5e7a7042bcdeeeebd9a3348,
         type: 3}
+    - target: {fileID: 9184353473842344825, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9184353473925602593, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_Colors.m_NormalColor.r
