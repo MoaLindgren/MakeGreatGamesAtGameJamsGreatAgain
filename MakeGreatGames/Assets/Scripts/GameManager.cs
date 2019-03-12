@@ -32,7 +32,8 @@ struct PlayerInfo
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject gameOverScreen;
+    GameObject gameOverScreen, playerPrefab;
+
     [SerializeField]
     Text scoreText;
 
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     static GameManager instance;
 
-    string playerName = "TestPerson";
+    string playerName = "Air Guitar Elemental";
 
     bool paused = false;
 

@@ -25,7 +25,7 @@ public class TankScript : MonoBehaviour
     protected AudioSource shotSound;
 
     [SerializeField]
-    protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles;
+    protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles;
 
     protected bool alive = true, shielded = false, canShoot = true;
 
@@ -49,21 +49,9 @@ public class TankScript : MonoBehaviour
 
     protected virtual void Awake()
     {
-        foreach(ParticleSystem p in frontSmoke)
+        foreach (ParticleSystem p in shieldParticles)
         {
-            p.Stop();
-        }
-        foreach (ParticleSystem p in backSmoke)
-        {
-            p.Stop();
-        }
-        foreach (ParticleSystem p in cannonParticles)
-        {
-            p.Stop();
-        }
-        foreach (ParticleSystem p in healingParticles)
-        {
-            p.Stop();
+            //ställ in particleduration
         }
         health = maxHealth;
         currentMovement = MoveTank;
@@ -174,9 +162,17 @@ public class TankScript : MonoBehaviour
 
     protected IEnumerator Shield()
     {
+        foreach (ParticleSystem p in shieldParticles)
+        {
+            p.Play();
+        }
         shielded = true;
         yield return new WaitForSeconds(3);
         shielded = false;
+        foreach (ParticleSystem p in shieldParticles)
+        {
+            p.Stop();
+        }
     }
 
     protected virtual IEnumerator SpeedBoosted()
