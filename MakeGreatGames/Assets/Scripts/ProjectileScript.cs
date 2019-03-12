@@ -31,6 +31,15 @@ public class ProjectileScript : MonoBehaviour, IProjectile
         set { active = value; }
     }
 
+    void Awake()
+    {
+        foreach (ParticleSystem p in projectileParticles)
+        {
+            p.emissionRate = 0;
+        }
+        //Render(false);
+    }
+
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
     {
         foreach (ParticleSystem p in projectileParticles)
