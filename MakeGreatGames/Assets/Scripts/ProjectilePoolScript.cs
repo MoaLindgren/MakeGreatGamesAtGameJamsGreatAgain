@@ -34,8 +34,7 @@ public class ProjectilePoolScript : MonoBehaviour
     {
         for(int i = 0; i < poolSize; i++)
         {
-            GameObject spawnedProjectile = Instantiate(projectilePrefab, new Vector3(-10000, -10000, -10000), Quaternion.identity);
-            projectilePool[i] = spawnedProjectile;
+            projectilePool[i] = Instantiate(projectilePrefab, new Vector3(-10000, -10000, -10000), Quaternion.identity);
         }
     }
 
