@@ -113,7 +113,7 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        ProjectileScript shot = ProjectilePoolScript.Instance.NewProjectile().GetComponent<ProjectileScript>(); //Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
+        ProjectileScript shot = ProjectilePoolScript.Instance.NewProjectile().GetComponent<ProjectileScript>();
         shot.gameObject.transform.position = shotStart.position;
         shot.gameObject.transform.rotation = Quaternion.identity;
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
