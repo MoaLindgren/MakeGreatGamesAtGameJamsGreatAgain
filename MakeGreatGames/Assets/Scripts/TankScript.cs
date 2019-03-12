@@ -154,6 +154,7 @@ public class TankScript : MonoBehaviour
         if (health <= 0)
         {
             alive = false;
+            this.health = maxHealth;
             GameManager.Instance.TankDestroyed(this);
         }
         healthSlider.value = health;
