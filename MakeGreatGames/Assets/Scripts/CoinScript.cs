@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class CoinScript : MonoBehaviour
 {
- 
-
     ParticleSystem[] spawnParticles;
 
     private void Awake()
@@ -19,8 +17,6 @@ public class CoinScript : MonoBehaviour
             p.Play();
         }
     }
-
-  
 
     private void OnTriggerEnter(Collider other)
     {

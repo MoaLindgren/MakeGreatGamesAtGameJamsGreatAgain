@@ -6,7 +6,7 @@ public class SpinningScript : MonoBehaviour
 {
     [SerializeField]
     float amount;
-    // Update is called once per frame
+
     void Update()
     {
         if (GameManager.Instance.Paused)
