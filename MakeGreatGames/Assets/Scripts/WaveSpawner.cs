@@ -20,7 +20,7 @@ public class WaveSpawner : MonoBehaviour
         get { return instance; }
     }
 
-    int currentWave = 0, poolIndex = 0, spawnPointIndex = 0;
+    int currentWave = 0, poolIndex = 0, spawnPointIndex = 0, remainingEnemies;
 
     List<GameObject> currentWaveTanks = new List<GameObject>(), enemyPool = new List<GameObject>();
 
@@ -54,6 +54,7 @@ public class WaveSpawner : MonoBehaviour
     {
         waveSpawned = false;
         currentWave++;
+        remainingEnemies = currentWave;
         for (int i = 0; i < currentWave && i < 100; i++)
         {
             SpawnTank();
@@ -83,6 +84,7 @@ public class WaveSpawner : MonoBehaviour
         tank.GetComponent<NpcScript>().SetAlive(false);
         tank.SetActive(false);
         tank.transform.position = new Vector3(10000, 10000, 10000);
+        remainingEnemies--;
         if (currentWaveTanks.Count < 1 && waveSpawned)
         {
             UiManager.Instance.AddScore(50 * currentWave);

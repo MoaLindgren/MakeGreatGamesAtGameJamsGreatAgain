@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    [SerializeField]
-    bool shake;
-
     GameObject player;
 
     private void Start()
