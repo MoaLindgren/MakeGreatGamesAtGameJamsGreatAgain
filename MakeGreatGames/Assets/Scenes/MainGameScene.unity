@@ -10535,6 +10535,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 243778557886981776, guid: 1fd4aba0f511b784f8032ee3110cca7d,
         type: 2}
+    - target: {fileID: 1166912500125730363, guid: ab5354807127fda4a9381a7b7e23c60d,
+        type: 3}
+      propertyPath: spinTime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5354807127fda4a9381a7b7e23c60d, type: 3}
 --- !u!1001 &9184353472411865429

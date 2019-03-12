@@ -14,11 +14,19 @@ public class CoinManager : MonoBehaviour
     [SerializeField]
     AudioSource aS;     //Sound playing when a coin is picked up
 
+    [SerializeField]
+    int coinsToUlt;
+
     static CoinManager instance;
 
     public static CoinManager Instance
     {
         get { return instance; }
+    }
+
+    public int CoinsToUlt
+    {
+        get { return coinsToUlt; }
     }
 
     public GameObject[] Coins

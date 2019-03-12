@@ -126,7 +126,7 @@ MonoBehaviour:
   turnSpeed: 5
   towerTurnSpeed: 2
   projectileSpeed: 0.5
-  spinTime: 0
+  spinTime: 2
   attackCooldown: 1
   cameraShakeTakeDamage: 0.05
   cameraShakeShoot: 0.01

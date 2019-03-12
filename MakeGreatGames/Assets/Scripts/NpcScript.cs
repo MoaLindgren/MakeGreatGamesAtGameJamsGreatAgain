@@ -109,9 +109,9 @@ public class NpcScript : TankScript
             currentSpecialAttack();
             currentSpecialAttack = Nothing;
         }
-        if (coins >= 3)
+        if (coins >= CoinManager.Instance.CoinsToUlt)
         {
-            coins -= 3;
+            coins -= CoinManager.Instance.CoinsToUlt;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }

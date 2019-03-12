@@ -66,9 +66,9 @@ public class PlayerScript : TankScript
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && coins >= 3)
+        if (Input.GetKeyDown(KeyCode.E) && coins >= CoinManager.Instance.CoinsToUlt)
         {
-            coins -= 3;
+            coins -= CoinManager.Instance.CoinsToUlt;
             UiManager.Instance.Coins = coins;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");

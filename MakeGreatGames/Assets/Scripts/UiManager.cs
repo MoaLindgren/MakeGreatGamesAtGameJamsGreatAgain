@@ -22,12 +22,9 @@ public class UiManager : MonoBehaviour
     Sprite specialAttackDefaultSprite;
 
     [SerializeField]
-    int maxNumberOfCoins;
-
-    [SerializeField]
     AudioSource spinningSound;
 
-    int coins, score;
+    int coins, score, maxNumberOfCoins;
 
     float counter;
 
@@ -45,6 +42,12 @@ public class UiManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
+    }
+
+    private void Start()
+    {
+        maxNumberOfCoins = CoinManager.Instance.CoinsToUlt;
+        coinProgressSlider.maxValue = maxNumberOfCoins;
     }
 
     public void AddScore(int scoreToAdd)
