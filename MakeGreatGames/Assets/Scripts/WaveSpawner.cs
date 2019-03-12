@@ -13,6 +13,9 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     Transform[] spawnPoints;
 
+    [SerializeField]
+    int poolSize;
+
     static WaveSpawner instance;
 
     public static WaveSpawner Instance
@@ -40,7 +43,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < poolSize; i++)
         {
             GameObject spawnedTank = Instantiate(tank, new Vector3(10000, 10000, 10000), Quaternion.identity);
             enemyPool.Add(spawnedTank);

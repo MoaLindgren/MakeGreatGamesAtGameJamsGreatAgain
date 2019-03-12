@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8de714704425244c83fae5a2a1039a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileMesh: {fileID: 3994022932493253191}
 --- !u!135 &6145153018402790497
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -159,6 +160,12 @@ PrefabInstance:
 --- !u!4 &3994022932495153319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 03a3f97d92c0bd0439b82774f6213d60,
+    type: 3}
+  m_PrefabInstance: {fileID: 3994022932495278631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3994022932493253191 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 03a3f97d92c0bd0439b82774f6213d60,
     type: 3}
   m_PrefabInstance: {fileID: 3994022932495278631}
   m_PrefabAsset: {fileID: 0}

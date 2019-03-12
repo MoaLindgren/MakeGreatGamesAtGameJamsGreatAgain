@@ -13,7 +13,7 @@ public class TankScript : MonoBehaviour
     protected int maxHealth, shotDamage, specialAttackTimer;
 
     [SerializeField]
-    protected GameObject tankBase, tower, projectile, trackingMissile, mine;
+    protected GameObject tankBase, tower, trackingMissile, mine;
 
     [SerializeField]
     protected Transform shotStart, missileStart;
@@ -113,7 +113,9 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        ProjectileScript shot = Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
+        ProjectileScript shot = ProjectilePoolScript.Instance.NewProjectile().GetComponent<ProjectileScript>(); //Instantiate(projectile, shotStart.position, Quaternion.identity).GetComponent<ProjectileScript>();
+        shot.gameObject.transform.position = shotStart.position;
+        shot.gameObject.transform.rotation = Quaternion.identity;
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
         shotSound.Play();
         StopCoroutine("AttackCooldownTimer");

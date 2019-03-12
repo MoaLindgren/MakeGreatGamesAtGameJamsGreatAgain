@@ -20,43 +20,61 @@ public class ProjectileScript : MonoBehaviour, IProjectile
 
     int damage;
 
+    bool active;
+
+    public bool Active
+    {
+        get { return active; }
+        set { active = value; }
+    }
+
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
     {
         this.direction = direction;
         this.speed = speed;
         this.shooter = parent;
         this.damage = damage;
-        Destroy(gameObject, 15);
+        StartCoroutine("DestroyTimer");
     }
 
     void Update()
     {
-        if (GameManager.Instance.Paused)
+        if (!Active || GameManager.Instance.Paused)
             return;
         transform.Translate(direction * speed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!Active)
+            return;
         TankScript hitTank = other.gameObject.GetComponent<TankScript>();
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
-            Destroy(gameObject);
+            StopCoroutine("DestroyTimer");
+            ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
         }
         if (hitTank == null || hitTank != shooter)
         {
-            Destroy(gameObject);
+            StopCoroutine("DestroyTimer");
+            ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
         }
     }
 
     public void Render(bool render)
     {
-        //projectileMesh.
+        projectileMesh.enabled = render;
     }
 
     public void ShootMe()
     {
         return;
+    }
+
+    IEnumerator DestroyTimer()
+    {
+        yield return new WaitForSeconds(15);
+        ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
     }
 }
