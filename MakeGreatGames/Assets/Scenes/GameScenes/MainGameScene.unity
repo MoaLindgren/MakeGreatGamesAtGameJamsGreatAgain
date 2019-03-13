@@ -10689,6 +10689,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9184353474328573424, guid: 8158f7de3ec2b1b408041d688ea1364c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f8b8586f0a9d124991f78d3e3d818df,
+        type: 3}
     - target: {fileID: 9184353472684428620, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10739,12 +10745,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9184353474328573424, guid: 8158f7de3ec2b1b408041d688ea1364c,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1f8b8586f0a9d124991f78d3e3d818df,
-        type: 3}
     - target: {fileID: 9184353472766287552, guid: 8158f7de3ec2b1b408041d688ea1364c,
         type: 3}
       propertyPath: m_FontData.m_Font

@@ -29,7 +29,7 @@ public class CoinScript : MonoBehaviour
             tank.AddCoin();
             CoinManager.Instance.CoinPickedUp(gameObject);
 
-            Instantiate(coinPickupParticles, transform.position, new Quaternion(-90f, 0f, 0f, 0f));
+            Instantiate(coinPickupParticles, transform.position, Quaternion.identity);
         }
     }
 }

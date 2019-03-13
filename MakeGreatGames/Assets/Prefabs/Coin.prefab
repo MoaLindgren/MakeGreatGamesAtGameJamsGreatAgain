@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a024a74021428a4dab50e865d1dd016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPickupParticles: {fileID: 943943199113469055, guid: c12d43b7b3e27b2499fd8d52b3f34483,
+  coinPickupParticles: {fileID: 8584451031256171514, guid: abad53ba781981d4da7f862fccef70ab,
     type: 3}
 --- !u!54 &905645951495147102
 Rigidbody:
