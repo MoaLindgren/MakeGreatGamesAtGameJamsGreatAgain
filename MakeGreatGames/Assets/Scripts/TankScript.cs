@@ -22,7 +22,7 @@ public class TankScript : MonoBehaviour
     protected Slider healthSlider;
 
     [SerializeField]
-    protected AudioSource shotSound;
+    protected AudioSource shotSound, healingSound;
 
     [SerializeField]
     protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles;
@@ -246,6 +246,7 @@ public class TankScript : MonoBehaviour
 
     protected void Heal()
     {
+        healingSound.Play();
         foreach (ParticleSystem p in healingParticles)
         {
             p.Play();
@@ -258,6 +259,7 @@ public class TankScript : MonoBehaviour
 
     protected void SuperHeal()
     {
+        healingSound.Play();
         foreach (ParticleSystem p in healingParticles)
         {
             p.Play();
