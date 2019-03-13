@@ -56,10 +56,6 @@ public class TankScript : MonoBehaviour
 
     protected virtual void Awake()
     {
-        foreach (ParticleSystem p in shieldParticles)
-        {
-            //ställ in particleduration
-        }
         health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
