@@ -10,6 +10,9 @@ public interface IProjectile
 public class ProjectileScript : MonoBehaviour, IProjectile
 {
     [SerializeField]
+    GameObject impactParticles;
+
+    [SerializeField]
     MeshRenderer projectileMesh;
 
     [SerializeField]
@@ -57,7 +60,7 @@ public class ProjectileScript : MonoBehaviour, IProjectile
     {
         if (!Active || GameManager.Instance.Paused)
             return;
-        transform.Translate(direction * speed);
+        transform.Translate(direction * Time.deltaTime * speed, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,6 +70,7 @@ public class ProjectileScript : MonoBehaviour, IProjectile
         TankScript hitTank = other.gameObject.GetComponent<TankScript>();
         if (hitTank != null && hitTank != shooter)
         {
+            Instantiate(impactParticles, transform.position, transform.rotation);
             hitTank.TakeDamage(damage);
             foreach (ParticleSystem p in projectileParticles)
             {
@@ -75,8 +79,9 @@ public class ProjectileScript : MonoBehaviour, IProjectile
             StopCoroutine("DestroyTimer");
             ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
         }
-        if (hitTank == null || hitTank != shooter)
+        else if (hitTank == null)
         {
+            Instantiate(impactParticles, transform.position, transform.rotation);
             foreach (ParticleSystem p in projectileParticles)
             {
                 p.emissionRate = 0;

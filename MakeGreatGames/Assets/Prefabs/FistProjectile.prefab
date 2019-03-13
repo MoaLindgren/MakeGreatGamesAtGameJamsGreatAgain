@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8de714704425244c83fae5a2a1039a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactParticles: {fileID: 3586455950125243878, guid: 5eaec3dd3106ed94fbfd4b66a0fd0733,
+    type: 3}
   projectileMesh: {fileID: 3994022932493253191}
   projectileParticles:
   - {fileID: 2172518639933086629}
@@ -92,6 +94,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36c5a21b54e20a346966e27c3ecd306a, type: 2}
+    - target: {fileID: 2300000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -148,14 +158,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
       propertyPath: m_LocalScale.z
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 36c5a21b54e20a346966e27c3ecd306a, type: 2}
-    - target: {fileID: 2300000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03a3f97d92c0bd0439b82774f6213d60, type: 3}
