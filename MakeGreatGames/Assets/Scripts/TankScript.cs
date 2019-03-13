@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake;
+    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime;
 
     [SerializeField]
     protected int maxHealth, shotDamage, specialAttackTimer;
@@ -22,7 +22,7 @@ public class TankScript : MonoBehaviour
     protected Slider healthSlider;
 
     [SerializeField]
-    protected AudioSource shotSound, healingSound;
+    protected AudioSource shotSound, healingSound, shieldSound;
 
     [SerializeField]
     protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles;
@@ -176,13 +176,15 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
+        shieldSound.Play();
         shielded = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(shieldTime);
         shielded = false;
         foreach (ParticleSystem p in shieldParticles)
         {
             p.Stop();
         }
+        shieldSound.Stop();
     }
 
     protected virtual IEnumerator SpeedBoosted()
