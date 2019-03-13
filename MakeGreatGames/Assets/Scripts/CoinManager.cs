@@ -10,10 +10,7 @@ public class CoinManager : MonoBehaviour
 
     [SerializeField]
     float minCoinTime, maxCoinTime;     //Min and max time between coin spawns
-
-    [SerializeField]
-    AudioSource aS;     //Sound playing when a coin is picked up
-
+    
     [SerializeField]
     int coinsToUlt;
 
@@ -47,7 +44,6 @@ public class CoinManager : MonoBehaviour
     public void CoinPickedUp(GameObject coin)
     {
         coin.SetActive(false);
-        aS.Play();
         activeCoins--;
     }
 

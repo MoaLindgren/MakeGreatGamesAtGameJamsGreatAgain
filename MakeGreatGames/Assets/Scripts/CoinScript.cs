@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SphereCollider))]
 public class CoinScript : MonoBehaviour
 {
     [SerializeField]
