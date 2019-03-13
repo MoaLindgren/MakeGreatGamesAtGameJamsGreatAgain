@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class CoinScript : MonoBehaviour
 {
+    [SerializeField]
+    GameObject coinPickupParticles;
+
     ParticleSystem[] spawnParticles;
 
     private void Awake()
@@ -25,6 +28,8 @@ public class CoinScript : MonoBehaviour
         {
             tank.AddCoin();
             CoinManager.Instance.CoinPickedUp(gameObject);
+
+            Instantiate(coinPickupParticles, transform.position, new Quaternion(-90f, 0f, 0f, 0f));
         }
     }
 }
