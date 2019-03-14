@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public interface IPoolable
 {
@@ -22,7 +23,7 @@ public class PoolScript : MonoBehaviour
 
     int poolIndex = 0;
 
-    void Start()
+    void Awake()
     {
         objectPool = new GameObject[poolSize];
         for (int i = 0; i < poolSize; i++)

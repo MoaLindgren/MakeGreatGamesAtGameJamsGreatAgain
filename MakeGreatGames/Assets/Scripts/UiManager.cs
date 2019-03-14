@@ -40,6 +40,28 @@ public class UiManager : MonoBehaviour
         get { return instance; }
     }
 
+    public int Coins
+    {
+        set
+        {
+            coins = value;
+            coinProgressSlider.value = coins * coinProgressSlider.maxValue / maxNumberOfCoins;
+            if (coins == 0)
+            {
+                coinProgressSlider.value = coinProgressSlider.minValue;
+            }
+            if (coins >= 3)
+            {
+                CoinsCollected(true);
+            }
+            else
+            {
+                CoinsCollected(false);
+            }
+            countCoinsText.text = coins.ToString();
+        }
+    }
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -62,28 +84,6 @@ public class UiManager : MonoBehaviour
     public void SpinWheel()
     {
         spinningSound.Play();
-    }
-
-    public int Coins
-    {
-        set
-        {
-            coins = value;
-            coinProgressSlider.value = coins * coinProgressSlider.maxValue / maxNumberOfCoins;
-            if (coins == 0)
-            {
-                coinProgressSlider.value = coinProgressSlider.minValue;
-            }
-            if (coins >= 3)
-            {
-                CoinsCollected(true);
-            }
-            else
-            {
-                CoinsCollected(false);
-            }
-            countCoinsText.text = coins.ToString();
-        }
     }
 
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
@@ -146,7 +146,8 @@ public class UiManager : MonoBehaviour
     public void Restart()
     {
         GameManager.Instance.RestartGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 
     public void MainMenu()
