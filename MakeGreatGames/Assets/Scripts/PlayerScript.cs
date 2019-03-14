@@ -92,7 +92,7 @@ public class PlayerScript : TankScript
 
         rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        if (Input.GetAxisRaw("Vertical") > 0f)
         {
             foreach (ParticleSystem p in backSmoke)
             {
@@ -104,7 +104,7 @@ public class PlayerScript : TankScript
             }
             currentMovement(speed);
         }
-        else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+        else if (Input.GetAxisRaw("Vertical") < 0f)
         {
             foreach (ParticleSystem p in backSmoke)
             {
@@ -130,11 +130,11 @@ public class PlayerScript : TankScript
             rB.constraints = RigidbodyConstraints.FreezeAll;
         }
         float turnAmount = currentRotationMethod == RotateTank ? turnSpeed : towerTurnSpeed;
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if (Input.GetAxisRaw("Horizontal") < 0f)
         {
             currentRotationMethod(-turnAmount);
         }
-        else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        else if (Input.GetAxisRaw("Horizontal") > 0f)
         {
             currentRotationMethod(turnAmount);
         }
