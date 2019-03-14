@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class MissileScript : MonoBehaviour
+public class MissileScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
     int damage;
@@ -18,6 +18,8 @@ public class MissileScript : MonoBehaviour
     NavMeshAgent agent;
 
     Material mat;
+
+    bool active;
 
     float sinPos = 0f, colorAmount = 127.5f;
 
@@ -40,7 +42,7 @@ public class MissileScript : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.Paused)
+        if (!active || GameManager.Instance.Paused)
             return;
         sinPos += Time.deltaTime;
         colorAmount = 0.5f + (Mathf.Lerp(-1, 1, Mathf.Sin(sinPos)) / 2);
@@ -65,18 +67,31 @@ public class MissileScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         TankScript hitTank = other.GetComponent<TankScript>();
-        //IProjectile hitProjectile = other.GetComponent<IProjectile>();        //replace med ipoolable
+        IPoolable hitPoolable = other.GetComponent<IPoolable>();
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
             Instantiate(blast, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            GameManager.Instance.MissilePool.RePoolObject(gameObject);
         }
-        /*
-        else if (hitProjectile != null)
+        else if (hitPoolable != null)
         {
-            hitProjectile.ShootMe();
+            GameManager.Instance.MissilePool.RePoolObject(gameObject);
         }
-        */
+    }
+
+    public bool IsActive()
+    {
+        return active;
+    }
+
+    public void Init()
+    {
+        active = true;
+    }
+
+    public void ReturnToPool()
+    {
+        active = false;
     }
 }

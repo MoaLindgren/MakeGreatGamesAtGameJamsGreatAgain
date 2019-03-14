@@ -17,7 +17,7 @@ public class TankScript : MonoBehaviour
 
     [SerializeField]
     protected Transform shotStart, missileStart;
-    
+
     [SerializeField]
     protected Slider healthSlider;
 
@@ -108,7 +108,7 @@ public class TankScript : MonoBehaviour
         foreach (ParticleSystem p in cannonParticles)
         {
             p.Play();
-        }        
+        }
         ProjectileScript shot = GameManager.Instance.ProjectilePool.GetObject(shotStart.position, shotStart.rotation).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
 
@@ -203,14 +203,14 @@ public class TankScript : MonoBehaviour
 
     protected void DeployMine()
     {
-        Instantiate(mine, transform.position, Quaternion.identity);
+        GameManager.Instance.MinePool.GetObject(transform.position, Quaternion.identity);
     }
 
     protected void FireMissile()
     {
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
         missileStart.GetComponent<AudioSource>().Play();
-        GameObject missileGO = Instantiate(trackingMissile, missileStart.position, tower.transform.rotation);
+        GameObject missileGO = GameManager.Instance.MissilePool.GetObject(missileStart.position, tower.transform.rotation);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
         {

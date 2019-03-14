@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class MineScript : MonoBehaviour
+public class MineScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
     int damage;
@@ -15,7 +15,7 @@ public class MineScript : MonoBehaviour
 
     float sinPos = 0f, colorAmount = 127.5f;
 
-    bool active = false;
+    bool mineActivated = false, active = false;
 
     private void Awake()
     {
@@ -37,23 +37,39 @@ public class MineScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!active)
+        if (!mineActivated || !active)
             return;
         TankScript tank = other.GetComponent<TankScript>();
         if (tank != null)
         {
             tank.TakeDamage(damage);
             Instantiate(explosion);
-            Destroy(gameObject);
+            GameManager.Instance.MinePool.RePoolObject(gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         TankScript tank = other.GetComponent<TankScript>();
-        if(!active && tank != null)
+        if(!mineActivated && tank != null)
         {
-            active = true;
+            mineActivated = true;
         }
+    }
+
+    public void Init()
+    {
+        active = true;
+    }
+
+    public bool IsActive()
+    {
+        return active;
+    }
+
+    public void ReturnToPool()
+    {
+        active = false;
+        mineActivated = false;
     }
 }
