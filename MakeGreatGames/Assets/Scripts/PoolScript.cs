@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public interface IPoolable
 {
-    void ReturnToPool();
-    void Init();
+    void DeActivate();
+    void Activate();
     bool IsActive();
 }
 
@@ -53,7 +53,7 @@ public class PoolScript : MonoBehaviour
             returnGO.transform.rotation = rotation;
         }
         returnGO.SetActive(true);
-        returnGO.GetComponent<IPoolable>().Init();
+        returnGO.GetComponent<IPoolable>().Activate();
         poolIndex = (poolIndex + 1) % objectPool.Length;
         return returnGO;
     }
@@ -63,7 +63,7 @@ public class PoolScript : MonoBehaviour
         if (Array.IndexOf(objectPool, GO) > -1)
         {
             GO.transform.position = transform.position;
-            GO.GetComponent<IPoolable>().ReturnToPool();
+            GO.GetComponent<IPoolable>().DeActivate();
             GO.SetActive(false);
         }
         else

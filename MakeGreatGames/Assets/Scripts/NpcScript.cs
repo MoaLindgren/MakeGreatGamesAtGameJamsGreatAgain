@@ -146,7 +146,7 @@ public class NpcScript : TankScript, IPoolable
         agent.speed = originalSpeed;
     }
 
-    public void ReturnToPool()
+    public void DeActivate()
     {
         agent.isStopped = true;
         foreach (Renderer r in renderers)
@@ -159,7 +159,7 @@ public class NpcScript : TankScript, IPoolable
         isActive = false;
     }
 
-    public void Init()
+    public void Activate()
     {
         foreach (Renderer r in renderers)
         {

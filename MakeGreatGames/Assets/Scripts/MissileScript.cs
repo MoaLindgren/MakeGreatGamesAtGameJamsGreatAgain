@@ -85,12 +85,12 @@ public class MissileScript : MonoBehaviour, IPoolable
         return active;
     }
 
-    public void Init()
+    public void Activate()
     {
         active = true;
     }
 
-    public void ReturnToPool()
+    public void DeActivate()
     {
         active = false;
     }

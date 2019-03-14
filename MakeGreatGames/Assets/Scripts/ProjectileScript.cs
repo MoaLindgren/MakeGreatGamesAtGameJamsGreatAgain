@@ -86,7 +86,7 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         GameManager.Instance.ProjectilePool.RePoolObject(gameObject);
     }
 
-    public void ReturnToPool()
+    public void DeActivate()
     {
         StopCoroutine("DestroyTimer");
         Render(false);
@@ -97,7 +97,7 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         }
     }
 
-    public void Init()
+    public void Activate()
     {
         return;
     }

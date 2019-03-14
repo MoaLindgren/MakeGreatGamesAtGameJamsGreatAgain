@@ -57,7 +57,7 @@ public class MineScript : MonoBehaviour, IPoolable
         }
     }
 
-    public void Init()
+    public void Activate()
     {
         active = true;
     }
@@ -67,7 +67,7 @@ public class MineScript : MonoBehaviour, IPoolable
         return active;
     }
 
-    public void ReturnToPool()
+    public void DeActivate()
     {
         active = false;
         mineActivated = false;
