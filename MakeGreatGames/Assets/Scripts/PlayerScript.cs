@@ -136,7 +136,6 @@ public class PlayerScript : TankScript
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-
             currentRotationMethod(turnAmount);
         }
     }
