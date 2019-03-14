@@ -21,8 +21,6 @@ public class NpcScript : TankScript, IPoolable
 
     NavMeshAgent agent;
 
-    Renderer[] renderers;
-
     public int Points
     {
         get { return points; }
@@ -31,7 +29,6 @@ public class NpcScript : TankScript, IPoolable
     protected override void Awake()
     {
         base.Awake();
-        renderers = GetComponentsInChildren<Renderer>();
         lastPos = frontSmoke[0].transform.position;
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
@@ -47,7 +44,17 @@ public class NpcScript : TankScript, IPoolable
     void Update()
     {
         if (!isActive)
+        {
+            foreach (ParticleSystem p in frontSmoke)
+            {
+                p.emissionRate = 0;
+            }
+            foreach (ParticleSystem p in backSmoke)
+            {
+                p.emissionRate = 0;
+            }
             return;
+        }
         if (Vector3.Distance(lastPos, transform.position) < Vector3.Distance(frontSmoke[0].transform.position, transform.position))
         {
             foreach (ParticleSystem p in backSmoke)
@@ -148,25 +155,22 @@ public class NpcScript : TankScript, IPoolable
 
     public void DeActivate()
     {
-        agent.isStopped = true;
-        foreach (Renderer r in renderers)
+        if (agent != null && agent.isOnNavMesh)
         {
-            r.enabled = false;
+            agent.isStopped = true;
         }
+        agent.enabled = false;
         health = maxHealth;
         coins = 0;
-        agent.enabled = false;
         isActive = false;
     }
 
     public void Activate()
     {
-        foreach (Renderer r in renderers)
-        {
-            r.enabled = true;
-        }
-        agent.enabled = true;
+        healthSlider.value = healthSlider.maxValue;
         isActive = true;
+        agent.enabled = true;
+        agent.isStopped = false;
     }
 
     public bool IsActive()

@@ -24,7 +24,7 @@ public class MineScript : MonoBehaviour, IPoolable
 
     void Update()
     {
-        if (GameManager.Instance.Paused)
+        if (!active || GameManager.Instance.Paused)
             return;
         sinPos += Time.deltaTime;
         colorAmount = 0.5f + (Mathf.Lerp(-1, 1, Mathf.Sin(sinPos)) / 2);

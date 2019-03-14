@@ -6,10 +6,7 @@ public class ProjectileScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
     GameObject impactParticles;
-
-    [SerializeField]
-    MeshRenderer projectileMesh;
-
+    
     [SerializeField]
     ParticleSystem[] projectileParticles;
 
@@ -34,7 +31,6 @@ public class ProjectileScript : MonoBehaviour, IPoolable
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
     {
         active = true;
-        Render(true);
         foreach (ParticleSystem p in projectileParticles)
         {
             p.emissionRate = 200;
@@ -69,12 +65,7 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         Instantiate(impactParticles, transform.position, transform.rotation);
         GameManager.Instance.ProjectilePool.RePoolObject(gameObject);
     }
-
-    public void Render(bool render)
-    {
-        projectileMesh.enabled = render;
-    }
-
+    
     public void ShootMe()
     {
         return;
@@ -89,7 +80,6 @@ public class ProjectileScript : MonoBehaviour, IPoolable
     public void DeActivate()
     {
         StopCoroutine("DestroyTimer");
-        Render(false);
         active = false;
         foreach (ParticleSystem p in projectileParticles)
         {

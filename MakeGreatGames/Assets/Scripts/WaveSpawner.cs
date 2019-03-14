@@ -23,6 +23,11 @@ public class WaveSpawner : MonoBehaviour
 
     bool waveSpawned = false;
 
+    public List<GameObject> CurrentWaveTanks
+    {
+        get { return currentWaveTanks; }
+    }
+
     public int CurrentWave
     {
         get { return currentWave; }

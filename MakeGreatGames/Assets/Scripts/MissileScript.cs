@@ -23,8 +23,18 @@ public class MissileScript : MonoBehaviour, IPoolable
 
     float sinPos = 0f, colorAmount = 127.5f;
 
+    float[] emissionRates;
+
+    ParticleSystem[] particles;
+
     private void Awake()
     {
+        particles = GetComponentsInChildren<ParticleSystem>();
+        emissionRates = new float[particles.Length];
+        for(int i = 0; i < particles.Length; i++)
+        {
+            emissionRates[i] = particles[i].emissionRate;
+        }
         agent = GetComponent<NavMeshAgent>();
         if (agent.destination == null)
         {
@@ -87,11 +97,21 @@ public class MissileScript : MonoBehaviour, IPoolable
 
     public void Activate()
     {
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i].emissionRate = emissionRates[i];
+        }
+        agent.enabled = true;
         active = true;
     }
 
     public void DeActivate()
     {
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i].emissionRate = 0f;
+        }
+        agent.enabled = false;
         active = false;
     }
 }

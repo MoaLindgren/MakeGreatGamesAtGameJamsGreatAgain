@@ -214,10 +214,9 @@ public class TankScript : MonoBehaviour
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
         {
-            NpcScript[] enemies = FindObjectsOfType<NpcScript>();
-            if (enemies.Length > 0)
+            if (WaveSpawner.Instance.CurrentWaveTanks.Count > 0)
             {
-                missile.Init(enemies[Random.Range(0, enemies.Length)], this);
+                missile.Init(WaveSpawner.Instance.CurrentWaveTanks[Random.Range(0, WaveSpawner.Instance.CurrentWaveTanks.Count)].GetComponent<TankScript>(), this);
             }
         }
         else
