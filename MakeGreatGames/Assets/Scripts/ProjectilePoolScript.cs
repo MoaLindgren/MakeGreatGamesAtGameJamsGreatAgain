@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectilePoolScript : MonoBehaviour
 {
+    /*
     [SerializeField]
     GameObject projectilePrefab;
 
@@ -56,4 +57,5 @@ public class ProjectilePoolScript : MonoBehaviour
         projectile.Active = false;
         projectile.Render(false);
     }
+    */
 }

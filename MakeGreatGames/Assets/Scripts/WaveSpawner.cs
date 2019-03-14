@@ -5,16 +5,10 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject tank;
-
-    [SerializeField]
     float timeBetweenSpawns, timeBetweenWaves;
 
     [SerializeField]
     Transform[] spawnPoints;
-
-    [SerializeField]
-    int poolSize;
 
     static WaveSpawner instance;
 
@@ -23,9 +17,9 @@ public class WaveSpawner : MonoBehaviour
         get { return instance; }
     }
 
-    int currentWave = 0, poolIndex = 0, spawnPointIndex = 0, remainingEnemies;
+    int currentWave = 0, spawnPointIndex = 0, remainingEnemies;
 
-    List<GameObject> currentWaveTanks = new List<GameObject>(), enemyPool = new List<GameObject>();
+    List<GameObject> currentWaveTanks = new List<GameObject>();
 
     bool waveSpawned = false;
 
@@ -43,13 +37,6 @@ public class WaveSpawner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject spawnedTank = Instantiate(tank, new Vector3(10000, 10000, 10000), Quaternion.identity);
-            enemyPool.Add(spawnedTank);
-            spawnedTank.GetComponent<NpcScript>().SetAlive(false);
-            spawnedTank.SetActive(false);
-        }
         StartCoroutine("SpawnWave");
     }
 
@@ -60,33 +47,18 @@ public class WaveSpawner : MonoBehaviour
         remainingEnemies = currentWave;
         for (int i = 0; i < currentWave && i < 100; i++)
         {
-            SpawnTank();
+            currentWaveTanks.Add(GameManager.Instance.EnemyPool.GetObject(spawnPoints[spawnPointIndex].transform.position, spawnPoints[spawnPointIndex].transform.rotation));
+            spawnPointIndex = (spawnPointIndex + 1) % spawnPoints.Length;
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
         waveSpawned = true;
     }
-
-    void SpawnTank()
-    {
-        while (enemyPool[poolIndex].activeSelf)
-        {
-            poolIndex = (poolIndex + 1) % enemyPool.Count;
-        }
-        enemyPool[poolIndex].transform.position = spawnPoints[spawnPointIndex].position;
-        enemyPool[poolIndex].SetActive(true);
-        currentWaveTanks.Add(enemyPool[poolIndex]);
-        enemyPool[poolIndex].GetComponent<NpcScript>().SetAlive(true);
-        poolIndex = (poolIndex + 1) % enemyPool.Count;
-        spawnPointIndex = (spawnPointIndex + 1) % spawnPoints.Length;
-    }
-
+    
     public void TankDestroyed(GameObject tank)
     {
         if (currentWaveTanks.Contains(tank))
             currentWaveTanks.Remove(tank);
-        tank.GetComponent<NpcScript>().SetAlive(false);
-        tank.SetActive(false);
-        tank.transform.position = new Vector3(10000, 10000, 10000);
+        GameManager.Instance.EnemyPool.RePoolObject(tank);
         remainingEnemies--;
         if (currentWaveTanks.Count < 1 && waveSpawned)
         {

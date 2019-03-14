@@ -31,6 +31,10 @@ struct PlayerInfo
 [RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
+    #region Field
+
+    #region SerializedVariables
+
     [SerializeField]
     GameObject gameOverScreen, playerPrefab;
 
@@ -40,14 +44,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Text scoreText;
 
+    [SerializeField]
+    PoolScript enemyPool, projectilePool, missilePool, minePool;
+
+    #endregion
+
+    #region PrivateVariables
+
     XmlDocument highScoreXml = new XmlDocument();
 
     int score = 0;
-
-    public int Score
-    {
-        set { score += value; }
-    }
 
     Camera cam;
 
@@ -56,6 +62,15 @@ public class GameManager : MonoBehaviour
     string playerName = "Air Guitar Elemental";
 
     bool paused = false;
+
+    #endregion
+
+    #region Properties
+
+    public int Score
+    {
+        set { score += value; }
+    }
 
     public bool Paused
     {
@@ -73,12 +88,36 @@ public class GameManager : MonoBehaviour
         get { return cam; }
     }
 
+    public PoolScript EnemyPool
+    {
+        get { return enemyPool; }
+    }
+
+    public PoolScript ProjectilePool
+    {
+        get { return projectilePool; }
+    }
+
+    public PoolScript MissilePool
+    {
+        get { return missilePool; }
+    }
+
+    public PoolScript MinePool
+    {
+        get { return minePool; }
+    }
+
+    #endregion
+
+    #endregion
+
     private void Awake()
     {
         if (instance != null && instance != this)
             Destroy(this);
-        SceneManager.sceneLoaded += ResetTimescale;
         instance = this;
+        SceneManager.sceneLoaded += ResetTimescale;
         Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
@@ -93,9 +132,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            paused = !paused;
+            PauseAndUnpause(paused);
+        }
+    }
+
     public void RestartGame()
     {
-        using(StreamWriter writer = File.CreateText(Application.persistentDataPath + "/PlayerName.dat"))
+        using (StreamWriter writer = File.CreateText(Application.persistentDataPath + "/PlayerName.dat"))
         {
             writer.WriteLine(playerName);
         }
@@ -104,15 +152,6 @@ public class GameManager : MonoBehaviour
     public void ResetTimescale(Scene scene, LoadSceneMode lsm)
     {
         Time.timeScale = 1;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            paused = !paused;
-            PauseAndUnpause(paused);
-        }
     }
 
     public void TankDestroyed(TankScript tank)
@@ -162,7 +201,7 @@ public class GameManager : MonoBehaviour
         {
             if (score > highScores[i].Score)
             {
-                for(int j = highScores.Length - 2; j > i; j--)
+                for (int j = highScores.Length - 2; j > i; j--)
                 {
                     highScores[j] = highScores[j - 1];
                 }

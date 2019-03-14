@@ -108,11 +108,10 @@ public class TankScript : MonoBehaviour
         foreach (ParticleSystem p in cannonParticles)
         {
             p.Play();
-        }
-        ProjectileScript shot = ProjectilePoolScript.Instance.NewProjectile().GetComponent<ProjectileScript>();
-        shot.gameObject.transform.position = shotStart.position;
-        shot.gameObject.transform.rotation = shotStart.rotation;
+        }        
+        ProjectileScript shot = GameManager.Instance.ProjectilePool.GetObject(shotStart.position, shotStart.rotation).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
+
         shotSound.Play();
         StopCoroutine("AttackCooldownTimer");
         StartCoroutine("AttackCooldownTimer");

@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IProjectile
-{
-    void ShootMe();
-}
-
-public class ProjectileScript : MonoBehaviour, IProjectile
+public class ProjectileScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
     GameObject impactParticles;
@@ -28,23 +23,18 @@ public class ProjectileScript : MonoBehaviour, IProjectile
 
     bool active;
 
-    public bool Active
-    {
-        get { return active; }
-        set { active = value; }
-    }
-
     void Awake()
     {
         foreach (ParticleSystem p in projectileParticles)
         {
             p.emissionRate = 0;
         }
-        //Render(false);
     }
 
     public void Init(Vector3 direction, float speed, TankScript parent, int damage)
     {
+        active = true;
+        Render(true);
         foreach (ParticleSystem p in projectileParticles)
         {
             p.emissionRate = 200;
@@ -58,37 +48,26 @@ public class ProjectileScript : MonoBehaviour, IProjectile
 
     void Update()
     {
-        if (!Active || GameManager.Instance.Paused)
+        if (!active || GameManager.Instance.Paused)
             return;
         transform.Translate(direction * Time.deltaTime * speed, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!Active)
+        if (!active)
             return;
         TankScript hitTank = other.gameObject.GetComponent<TankScript>();
-        if (hitTank != null && hitTank != shooter)
+        if (hitTank != null && hitTank == shooter)
         {
-            Instantiate(impactParticles, transform.position, transform.rotation);
+            return;
+        }
+        else if (hitTank != null)
+        {
             hitTank.TakeDamage(damage);
-            foreach (ParticleSystem p in projectileParticles)
-            {
-                p.emissionRate = 0;
-            }
-            StopCoroutine("DestroyTimer");
-            ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
         }
-        else if (hitTank == null)
-        {
-            Instantiate(impactParticles, transform.position, transform.rotation);
-            foreach (ParticleSystem p in projectileParticles)
-            {
-                p.emissionRate = 0;
-            }
-            StopCoroutine("DestroyTimer");
-            ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
-        }
+        Instantiate(impactParticles, transform.position, transform.rotation);
+        GameManager.Instance.ProjectilePool.RePoolObject(gameObject);
     }
 
     public void Render(bool render)
@@ -104,10 +83,27 @@ public class ProjectileScript : MonoBehaviour, IProjectile
     IEnumerator DestroyTimer()
     {
         yield return new WaitForSeconds(15);
+        GameManager.Instance.ProjectilePool.RePoolObject(gameObject);
+    }
+
+    public void ReturnToPool()
+    {
+        StopCoroutine("DestroyTimer");
+        Render(false);
+        active = false;
         foreach (ParticleSystem p in projectileParticles)
         {
             p.emissionRate = 0;
         }
-        ProjectilePoolScript.Instance.ProjectileDestroyed(gameObject);
+    }
+
+    public void Init()
+    {
+        return;
+    }
+
+    public bool IsActive()
+    {
+        return active;
     }
 }

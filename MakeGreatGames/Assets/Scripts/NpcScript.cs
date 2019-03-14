@@ -3,33 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NpcScript : TankScript
+public class NpcScript : TankScript, IPoolable
 {
-    NavMeshAgent agent;
     [SerializeField]
     float maxDistance, minDistance;
+
     [SerializeField]
-    int points;
-    int rnd;
-    bool move, nearNpc, generateNewValue;
+    int points, rnd;
+
+    bool move, nearNpc, generateNewValue, isActive = false;
+
     PlayerScript target;
+
     GameObject[] vips; //very important places, ye
-    Vector3 npcGoTo;
-    Vector3 lastPos;
+
+    Vector3 npcGoTo, lastPos;
+
+    NavMeshAgent agent;
+
+    Renderer[] renderers;
 
     public int Points
     {
         get { return points; }
     }
 
-    public void SetAlive(bool alive)
-    {
-        this.alive = alive;
-    }
-
     protected override void Awake()
     {
         base.Awake();
+        renderers = GetComponentsInChildren<Renderer>();
         lastPos = frontSmoke[0].transform.position;
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
@@ -40,14 +42,15 @@ public class NpcScript : TankScript
     private void Start()
     {
         vips = CoinManager.Instance.Coins;
-        agent.isStopped = false;
     }
 
     void Update()
     {
+        if (!isActive)
+            return;
         if (Vector3.Distance(lastPos, transform.position) < Vector3.Distance(frontSmoke[0].transform.position, transform.position))
         {
-            foreach(ParticleSystem p in backSmoke)
+            foreach (ParticleSystem p in backSmoke)
             {
                 p.emissionRate = 20;
             }
@@ -139,7 +142,35 @@ public class NpcScript : TankScript
     {
         float originalSpeed = agent.speed;
         agent.speed *= 2;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(10);        //uppdatera med variabel
         agent.speed = originalSpeed;
+    }
+
+    public void ReturnToPool()
+    {
+        agent.isStopped = true;
+        foreach (Renderer r in renderers)
+        {
+            r.enabled = false;
+        }
+        health = maxHealth;
+        coins = 0;
+        agent.enabled = false;
+        isActive = false;
+    }
+
+    public void Init()
+    {
+        foreach (Renderer r in renderers)
+        {
+            r.enabled = true;
+        }
+        agent.enabled = true;
+        isActive = true;
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
     }
 }
