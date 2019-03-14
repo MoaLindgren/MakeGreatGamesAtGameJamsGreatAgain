@@ -86,7 +86,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6301560996685631929}
   - component: {fileID: 5382176882614096538}
-  - component: {fileID: 6222467263214800699}
   - component: {fileID: 2788051513655862894}
   - component: {fileID: 520050314072574506}
   - component: {fileID: 8852784659870907965}
@@ -130,19 +129,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &6222467263214800699
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6898199268881721910}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2788051513655862894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +154,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8852784659870907965
 AudioSource:
@@ -287,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 5687366079234247253, guid: 75b98df5551e8534ca508b03752608fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6700001
+      value: -9.12
       objectReference: {fileID: 0}
     - target: {fileID: 5687366079234247253, guid: 75b98df5551e8534ca508b03752608fb,
         type: 3}
@@ -462,7 +448,7 @@ PrefabInstance:
     - target: {fileID: 5837838617306052030, guid: c4d99cbfdd2289742a3a36439ec0f8f9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0288
+      value: -0.371
       objectReference: {fileID: 0}
     - target: {fileID: 5837838617306052030, guid: c4d99cbfdd2289742a3a36439ec0f8f9,
         type: 3}
@@ -492,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 5837838617894143043, guid: c4d99cbfdd2289742a3a36439ec0f8f9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.571
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: 5837838617894143043, guid: c4d99cbfdd2289742a3a36439ec0f8f9,
         type: 3}

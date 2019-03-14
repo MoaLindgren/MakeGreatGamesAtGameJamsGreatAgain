@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
+    [SerializeField]
+    float offsetY, offsetZ;
+
     GameObject player;
 
     private void Start()
@@ -13,6 +16,6 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 10, player.transform.position.z - 5);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + offsetY, player.transform.position.z + offsetZ);
     }
 }
