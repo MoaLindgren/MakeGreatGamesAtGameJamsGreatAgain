@@ -166,7 +166,7 @@ MonoBehaviour:
   - {fileID: 7663346648399989621}
   - {fileID: 567371233314783487}
   - {fileID: 3085382481955018209}
-  forceSpecialAttack: 1
+  forceSpecialAttack: 0
   forcedSpecialIndex: 0
   line: {fileID: 8429361019541647097}
 --- !u!54 &1166912500125730362
