@@ -9,13 +9,13 @@ public class NpcScript : TankScript, IPoolable
     float maxDistance, minDistance;
 
     [SerializeField]
-    int points, rnd;
+    int points;
 
-    bool move, nearNpc, generateNewValue, isActive = false;
+    bool move, isActive = false;
+
+    float distance;
 
     PlayerScript target;
-
-    GameObject[] vips; //very important places, ye
 
     Vector3 npcGoTo, lastPos;
 
@@ -32,92 +32,49 @@ public class NpcScript : TankScript, IPoolable
         lastPos = frontSmoke[0].transform.position;
         agent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerScript>();
-        generateNewValue = true;
-        nearNpc = false;
     }
 
-    private void Start()
+    void Start()
     {
-        vips = CoinManager.Instance.Coins;
+        CoinManager.Instance.CoinSpawned.AddListener(GenerateNewDestination);
     }
 
     void Update()
     {
         if (!isActive)
         {
-            foreach (ParticleSystem p in frontSmoke)
-            {
-                p.emissionRate = 0;
-            }
-            foreach (ParticleSystem p in backSmoke)
-            {
-                p.emissionRate = 0;
-            }
+            ActivateParticles(backSmoke, false);
+            ActivateParticles(frontSmoke, false);
             return;
         }
-        if (Vector3.Distance(lastPos, transform.position) < Vector3.Distance(frontSmoke[0].transform.position, transform.position))
-        {
-            foreach (ParticleSystem p in backSmoke)
-            {
-                p.emissionRate = 20;
-            }
-            foreach (ParticleSystem p in frontSmoke)
-            {
-                p.emissionRate = 0;
-            }
-        }
-        else if (Vector3.Distance(lastPos, transform.position) > Vector3.Distance(frontSmoke[0].transform.position, transform.position))
-        {
-            foreach (ParticleSystem p in backSmoke)
-            {
-                p.emissionRate = 0;
-            }
-            foreach (ParticleSystem p in frontSmoke)
-            {
-                p.emissionRate = 20;
-            }
-        }
-        else
-        {
-            foreach (ParticleSystem p in backSmoke)
-            {
-                p.emissionRate = 0;
-            }
-            foreach (ParticleSystem p in frontSmoke)
-            {
-                p.emissionRate = 0;
-            }
-        }
-        bool withinDistance = false;
-        float distance = Vector3.Distance(transform.position, target.transform.position);
+        ActivateCorrectSmokes();
+        distance = Vector3.Distance(transform.position, target.transform.position);
         RaycastHit hit;
-        if (Physics.SphereCast(shotStart.transform.position, 0.1f, (target.transform.position - shotStart.transform.position), out hit))
+        if (Physics.Raycast(shotStart.transform.position, (target.transform.position - shotStart.transform.position), out hit))
         {
             Debug.DrawRay(shotStart.transform.position, (target.transform.position - shotStart.transform.position));
-            if (hit.transform.tag == "Player")
+            if (hit.transform.GetComponent<PlayerScript>() != null)
             {
-                agent.stoppingDistance = 4f;
+                agent.stoppingDistance = 20f;
                 agent.destination = target.transform.position;
-                if (distance < maxDistance)
+                if (distance <= maxDistance)
                 {
                     tower.transform.rotation = Quaternion.Lerp(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position), towerTurnSpeed * Time.deltaTime);
-                    withinDistance = true;
+                    if (canShoot && distance <= maxDistance && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 10f)
+                    {
+                        Shoot();
+                    }
+                    if (currentSpecialAttack != Nothing)
+                    {
+                        currentSpecialAttack();
+                        currentSpecialAttack = Nothing;
+                    }
                 }
             }
-            else
+            else if (Vector3.Distance(transform.position - new Vector3(0f, transform.position.y, 0f), agent.destination - new Vector3(0f, agent.destination.y, 0f)) <= agent.stoppingDistance + 1f)
             {
-                MoveToRandomVIP();
+                GenerateNewDestination();
             }
-        }
-
-        if (canShoot && withinDistance && Quaternion.Angle(tower.transform.rotation, Quaternion.LookRotation(target.transform.position - tower.transform.position)) < 10f)
-        {
-            Shoot();
-        }
-        if (currentSpecialAttack != Nothing)
-        {
-            currentSpecialAttack();
-            currentSpecialAttack = Nothing;
         }
         if (coins >= CoinManager.Instance.CoinsToUlt)
         {
@@ -128,29 +85,60 @@ public class NpcScript : TankScript, IPoolable
         lastPos = frontSmoke[0].transform.position;
     }
 
-    void MoveToRandomVIP()
+    void ActivateCorrectSmokes()
     {
-        agent.stoppingDistance = 1f;
-        if (generateNewValue)
+        if (Vector3.Distance(lastPos, transform.position) < Vector3.Distance(frontSmoke[0].transform.position, transform.position))
         {
-            rnd = Random.Range(0, vips.Length);
-            generateNewValue = false;
+            ActivateParticles(backSmoke, true);
+            ActivateParticles(frontSmoke, false);
         }
-
-        agent.destination = vips[rnd].transform.position;
-
-        if (Vector3.Distance(transform.position, vips[rnd].transform.position) < agent.stoppingDistance)
+        else if (Vector3.Distance(lastPos, transform.position) > Vector3.Distance(frontSmoke[0].transform.position, transform.position))
         {
-            generateNewValue = true;
+            ActivateParticles(backSmoke, false);
+            ActivateParticles(frontSmoke, true);
         }
+        else
+        {
+            ActivateParticles(backSmoke, false);
+            ActivateParticles(frontSmoke, false);
+        }
+    }
+
+    void ActivateParticles(ParticleSystem[] particles, bool activate)
+    {
+        foreach (ParticleSystem p in particles)
+            p.emissionRate = activate ? 20f : 0f;
+    }
+
+    public void GenerateNewDestination()
+    {
+        RaycastHit hit;
+        Physics.Raycast(shotStart.position, target.transform.position, out hit);
+        if (!isActive || GameManager.Instance.Paused || hit.transform.CompareTag("Player"))
+            return;
+        agent.stoppingDistance = 0f;
+        int coinIndex = Random.Range(0, CoinManager.Instance.Coins.Length);
+        float coinDistance = Mathf.Infinity;
+        for (int i = 0; i < CoinManager.Instance.Coins.Length; i++)
+        {
+            if(CoinManager.Instance.Coins[i].activeSelf && Vector3.Distance(transform.position, CoinManager.Instance.Coins[i].transform.position) < coinDistance)
+            {
+                coinDistance = Vector3.Distance(transform.position, CoinManager.Instance.Coins[i].transform.position);
+                coinIndex = i;
+            }
+        }
+        agent.destination = CoinManager.Instance.Coins[coinIndex].transform.position;
     }
 
     protected override IEnumerator SpeedBoosted()
     {
         float originalSpeed = agent.speed;
         agent.speed *= 2;
+        float originalAngular = agent.angularSpeed;
+        agent.angularSpeed *= 2;
         yield return new WaitForSeconds(10);        //uppdatera med variabel
         agent.speed = originalSpeed;
+        agent.angularSpeed = originalAngular;
     }
 
     public void DeActivate()

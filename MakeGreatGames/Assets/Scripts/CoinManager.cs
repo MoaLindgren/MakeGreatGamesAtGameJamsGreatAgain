@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
 public class CoinManager : MonoBehaviour
@@ -33,6 +34,8 @@ public class CoinManager : MonoBehaviour
 
     int activeCoins = 0;
 
+    public UnityEvent CoinSpawned = new UnityEvent();
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -50,6 +53,7 @@ public class CoinManager : MonoBehaviour
     IEnumerator SpawnCoin()
     {
         yield return new WaitForSeconds(Random.Range(minCoinTime, maxCoinTime));
+        CoinSpawned.Invoke();
         if (activeCoins < coins.Length)
         {
             bool spawnChosen = false;
