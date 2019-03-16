@@ -41,7 +41,7 @@ public class NpcScript : TankScript, IPoolable
 
     void Update()
     {
-        if (!isActive)
+        if (!isActive || !alive)
         {
             ActivateParticles(backSmoke, false);
             ActivateParticles(frontSmoke, false);
@@ -121,7 +121,7 @@ public class NpcScript : TankScript, IPoolable
         float coinDistance = Mathf.Infinity;
         for (int i = 0; i < CoinManager.Instance.Coins.Length; i++)
         {
-            if(CoinManager.Instance.Coins[i].activeSelf && Vector3.Distance(transform.position, CoinManager.Instance.Coins[i].transform.position) < coinDistance)
+            if (CoinManager.Instance.Coins[i].activeSelf && Vector3.Distance(transform.position, CoinManager.Instance.Coins[i].transform.position) < coinDistance)
             {
                 coinDistance = Vector3.Distance(transform.position, CoinManager.Instance.Coins[i].transform.position);
                 coinIndex = i;
@@ -139,6 +139,15 @@ public class NpcScript : TankScript, IPoolable
         yield return new WaitForSeconds(10);        //uppdatera med variabel
         agent.speed = originalSpeed;
         agent.angularSpeed = originalAngular;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if (!alive)
+        {
+            agent.isStopped = true;
+        }
     }
 
     public void DeActivate()

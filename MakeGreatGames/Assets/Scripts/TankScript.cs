@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime;
+    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime, destroyTimer;
 
     [SerializeField]
     protected int maxHealth, shotDamage, specialAttackTimer;
@@ -141,20 +141,29 @@ public class TankScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (!alive || shielded)
             return;
         health -= damage;
+        healthSlider.value = health;
         if (health <= 0)
         {
+            health = 0;
             alive = false;
-            this.health = maxHealth;
-            GameManager.Instance.TankDestroyed(this);
+            print("eyy");
+            StartCoroutine("DestroyTimer");
         }
-        healthSlider.value = health;
         if (this is PlayerScript)
             CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
+    }
+
+    protected IEnumerator DestroyTimer()
+    {
+        //deathsound, sfx & animation here
+        yield return new WaitForSeconds(destroyTimer);
+        this.health = maxHealth;
+        GameManager.Instance.TankDestroyed(this);
     }
 
     #region SpecialAttacks

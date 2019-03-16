@@ -222,6 +222,7 @@ MonoBehaviour:
   cameraShakeShoot: 0
   cameraSuperShake: 0
   shieldTime: 5
+  destroyTimer: 3
   maxHealth: 100
   shotDamage: 15
   specialAttackTimer: 0

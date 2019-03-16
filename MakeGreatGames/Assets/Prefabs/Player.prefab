@@ -133,6 +133,7 @@ MonoBehaviour:
   cameraShakeShoot: 0.01
   cameraSuperShake: 0.1
   shieldTime: 5
+  destroyTimer: 3
   maxHealth: 100
   shotDamage: 34
   specialAttackTimer: 30
