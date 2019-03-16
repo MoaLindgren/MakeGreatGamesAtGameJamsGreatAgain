@@ -151,7 +151,6 @@ public class TankScript : MonoBehaviour
         {
             health = 0;
             alive = false;
-            print("eyy");
             StartCoroutine("DestroyTimer");
         }
         if (this is PlayerScript)

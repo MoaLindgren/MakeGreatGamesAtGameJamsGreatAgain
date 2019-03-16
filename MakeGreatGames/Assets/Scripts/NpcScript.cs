@@ -114,7 +114,7 @@ public class NpcScript : TankScript, IPoolable
     {
         RaycastHit hit;
         Physics.Raycast(shotStart.position, target.transform.position, out hit);
-        if (!isActive || GameManager.Instance.Paused || hit.transform.CompareTag("Player"))
+        if (!isActive || GameManager.Instance.Paused || (hit.collider != null && hit.transform.CompareTag("Player")))
             return;
         agent.stoppingDistance = 0f;
         int coinIndex = Random.Range(0, CoinManager.Instance.Coins.Length);
