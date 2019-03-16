@@ -218,6 +218,8 @@ public class TankScript : MonoBehaviour
             {
                 missile.Init(WaveSpawner.Instance.CurrentWaveTanks[Random.Range(0, WaveSpawner.Instance.CurrentWaveTanks.Count)].GetComponent<TankScript>(), this);
             }
+            else
+                missile.Init(null, this);
         }
         else
         {

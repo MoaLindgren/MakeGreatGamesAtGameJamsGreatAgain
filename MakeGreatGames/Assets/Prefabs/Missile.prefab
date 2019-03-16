@@ -124,9 +124,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30000
+  MaxDistance: 475
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -174,7 +174,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.14166667
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -206,6 +206,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4715698635727974223}
     m_Modifications:
+    - target: {fileID: 923465079618853361, guid: 30352b3e93d2c3d46890b32f968df649,
+        type: 3}
+      propertyPath: m_Name
+      value: Fire
+      objectReference: {fileID: 0}
     - target: {fileID: 923465079618853360, guid: 30352b3e93d2c3d46890b32f968df649,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -276,11 +281,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 923465079618853361, guid: 30352b3e93d2c3d46890b32f968df649,
-        type: 3}
-      propertyPath: m_Name
-      value: Fire
-      objectReference: {fileID: 0}
     - target: {fileID: 923465079314892790, guid: 30352b3e93d2c3d46890b32f968df649,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -305,6 +305,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5016270962585324151}
     m_Modifications:
+    - target: {fileID: 100000, guid: 091a8c044bd19a947be2dacbfa8f6b7b, type: 3}
+      propertyPath: m_Name
+      value: missile 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 091a8c044bd19a947be2dacbfa8f6b7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -360,10 +364,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 091a8c044bd19a947be2dacbfa8f6b7b, type: 3}
       propertyPath: m_LocalScale.z
       value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 091a8c044bd19a947be2dacbfa8f6b7b, type: 3}
-      propertyPath: m_Name
-      value: missile 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 091a8c044bd19a947be2dacbfa8f6b7b, type: 3}
       propertyPath: m_Materials.Array.data[0]

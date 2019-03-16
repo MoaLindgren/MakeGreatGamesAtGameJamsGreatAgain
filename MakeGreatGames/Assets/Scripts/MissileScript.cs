@@ -9,7 +9,7 @@ public class MissileScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
     int damage;
-    
+
     [SerializeField]
     GameObject blast;
 
@@ -31,7 +31,7 @@ public class MissileScript : MonoBehaviour, IPoolable
     {
         particles = GetComponentsInChildren<ParticleSystem>();
         emissionRates = new float[particles.Length];
-        for(int i = 0; i < particles.Length; i++)
+        for (int i = 0; i < particles.Length; i++)
         {
             emissionRates[i] = particles[i].emissionRate;
         }
@@ -47,7 +47,8 @@ public class MissileScript : MonoBehaviour, IPoolable
     {
         this.target = target;
         this.shooter = shooter;
-        agent.destination = target.transform.position;
+        if (target != null)
+            agent.destination = target.transform.position;
     }
 
     void Update()
@@ -61,16 +62,26 @@ public class MissileScript : MonoBehaviour, IPoolable
         {
             sinPos = 0f;
         }
-        TankScript[] enemies = FindObjectsOfType<NpcScript>();
-        if (target == null && enemies.Length > 0)
+        if (target == null || (target is NpcScript && !(target as NpcScript).IsActive()))
         {
-            target = enemies[Random.Range(0, enemies.Length)];
+            if (WaveSpawner.Instance.CurrentWaveTanks.Count > 0)
+            {
+                target = WaveSpawner.Instance.CurrentWaveTanks[Random.Range(0, WaveSpawner.Instance.CurrentWaveTanks.Count)].GetComponent<TankScript>();
+            }
+            else
+            {
+                target = null;
+                Vector3 newTarget = CoinManager.Instance.Coins[Random.Range(0, CoinManager.Instance.Coins.Length)].transform.position;
+                newTarget.y = transform.position.y;
+                agent.destination = newTarget;
+            }
         }
         if (target != null)
             agent.destination = target.transform.position;
         else if (Vector3.Distance(transform.position, agent.destination) < 0.1f)
         {
             Instantiate(blast, transform.position, Quaternion.identity);
+            GameManager.Instance.MissilePool.RePoolObject(gameObject);
         }
     }
 
