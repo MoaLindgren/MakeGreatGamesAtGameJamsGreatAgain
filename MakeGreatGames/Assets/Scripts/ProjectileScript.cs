@@ -35,6 +35,7 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         {
             p.emissionRate = 200;
         }
+        direction.y = 0f;
         this.direction = direction;
         this.speed = speed;
         this.shooter = parent;
