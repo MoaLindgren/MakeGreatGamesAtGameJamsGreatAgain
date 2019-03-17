@@ -30,10 +30,7 @@ public class AudioManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
-    }
 
-    void Start()
-    {
         Object[] loadedClips = Resources.LoadAll("AudioClips", typeof(AudioClip));
         foreach (Object o in loadedClips)
         {
@@ -51,10 +48,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        
+    }
+
     public AudioSource SpawnSound(string clip, Transform t, bool stationarySound, bool looping, bool isMusic, float volume)       //Determines which AudioSource to use and returns that AudioSource to the caller
     {
         AudioSource[] arrToUse = isMusic ? musicSources : sfxSources;
         int index = isMusic ? currentMusicIndex : currentSFXIndex, sourcesTried = 0;
+        print(arrToUse);
         AudioSource sourceToUse = arrToUse[index];
         while (soundsInUse.ContainsKey(sourceToUse))
         {
