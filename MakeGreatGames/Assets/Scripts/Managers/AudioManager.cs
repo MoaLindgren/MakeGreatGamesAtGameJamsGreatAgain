@@ -51,7 +51,6 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource[] arrToUse = isMusic ? musicSources : sfxSources;
         int index = isMusic ? currentMusicIndex : currentSFXIndex, sourcesTried = 0;
-        print(arrToUse);
         AudioSource sourceToUse = arrToUse[index];
         while (soundsInUse.ContainsKey(sourceToUse))
         {
