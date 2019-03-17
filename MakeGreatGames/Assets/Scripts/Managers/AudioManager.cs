@@ -30,7 +30,6 @@ public class AudioManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
-
         Object[] loadedClips = Resources.LoadAll("AudioClips", typeof(AudioClip));
         foreach (Object o in loadedClips)
         {
@@ -46,11 +45,6 @@ public class AudioManager : MonoBehaviour
         {
             musicSources[i] = Instantiate(musicAudioPrefab, transform).GetComponent<AudioSource>();
         }
-    }
-
-    void Start()
-    {
-        
     }
 
     public AudioSource SpawnSound(string clip, Transform t, bool stationarySound, bool looping, bool isMusic, float volume)       //Determines which AudioSource to use and returns that AudioSource to the caller
