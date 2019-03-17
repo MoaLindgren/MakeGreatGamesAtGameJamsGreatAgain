@@ -127,14 +127,14 @@ public class TankScript : MonoBehaviour
             StopCoroutine("SpinWheel");
         if (this is PlayerScript)
         {
-            UiManager.Instance.SpinWheel();
+            UIManager.Instance.SpinWheel();
         }
         yield return new WaitForSeconds(spinTime);
         specialAttackIndex = forceSpecialAttack ? forcedSpecialIndex : Random.Range(0, specialAttackMethods.Length);
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
         if (this is PlayerScript)
         {
-            UiManager.Instance.SpecialAttack(true, specialAttackTimer, specialAttackIndex);
+            UIManager.Instance.SpecialAttack(true, specialAttackTimer, specialAttackIndex);
         }
     }
 

@@ -25,7 +25,7 @@ public class PlayerScript : TankScript
     public override void AddCoin()
     {
         base.AddCoin();
-        UiManager.Instance.Coins = coins;
+        UIManager.Instance.Coins = coins;
     }
 
     protected override void MoveTank(float amount)
@@ -74,7 +74,7 @@ public class PlayerScript : TankScript
         if (Input.GetKeyDown(KeyCode.E) && coins >= CoinManager.Instance.CoinsToUlt)
         {
             coins -= CoinManager.Instance.CoinsToUlt;
-            UiManager.Instance.Coins = coins;
+            UIManager.Instance.Coins = coins;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
@@ -83,7 +83,7 @@ public class PlayerScript : TankScript
         {
             currentSpecialAttack();
             StopCoroutine("SpecialAttackTimer");
-            UiManager.Instance.SpecialAttack(false, 0, 0);
+            UIManager.Instance.SpecialAttack(false, 0, 0);
             currentSpecialAttack = Nothing;
         }
     }

@@ -67,7 +67,7 @@ public class WaveSpawner : MonoBehaviour
         remainingEnemies--;
         if (currentWaveTanks.Count < 1 && waveSpawned)
         {
-            UiManager.Instance.AddScore(50 * currentWave);
+            UIManager.Instance.AddScore(50 * currentWave);
             GameManager.Instance.Score = 50 * currentWave;
             StartCoroutine("NextWave");
         }

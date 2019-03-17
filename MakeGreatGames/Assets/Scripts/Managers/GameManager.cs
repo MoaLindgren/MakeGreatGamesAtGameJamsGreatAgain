@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
         else
         {
             score += ((NpcScript)tank).Points;
-            UiManager.Instance.AddScore(((NpcScript)tank).Points);
+            UIManager.Instance.AddScore(((NpcScript)tank).Points);
             WaveSpawner.Instance.TankDestroyed(tank.gameObject);
         }
     }
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-        UiManager.Instance.Pause(pause);
+        UIManager.Instance.Pause(pause);
     }
 
     void GameOver()

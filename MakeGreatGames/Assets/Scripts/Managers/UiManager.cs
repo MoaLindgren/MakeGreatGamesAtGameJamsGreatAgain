@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UiManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField]
     Text countCoinsText, specialAttackTimer, scoreText;
@@ -30,9 +30,9 @@ public class UiManager : MonoBehaviour
 
     bool specialAttack;
 
-    static UiManager instance;
+    static UIManager instance;
 
-    public static UiManager Instance
+    public static UIManager Instance
     {
         get { return instance; }
     }
