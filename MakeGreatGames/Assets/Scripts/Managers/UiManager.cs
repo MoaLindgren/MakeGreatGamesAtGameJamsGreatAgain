@@ -22,9 +22,6 @@ public class UiManager : MonoBehaviour
     Sprite specialAttackDefaultSprite;
 
     [SerializeField]
-    AudioSource spinningSound;
-
-    [SerializeField]
     Image specialAttackImage;
 
     int coins, score, maxNumberOfCoins;
@@ -83,7 +80,7 @@ public class UiManager : MonoBehaviour
 
     public void SpinWheel()
     {
-        spinningSound.Play();
+        AudioSource spinSound = AudioManager.Instance.SpawnSound("SpinSound", transform, true, false, true, 1f);
     }
 
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
@@ -138,6 +135,7 @@ public class UiManager : MonoBehaviour
     {
         readyText.SetActive(fullyCollected);
     }
+
     public void Pause(bool pause)
     {
         pauseMenu.SetActive(pause);

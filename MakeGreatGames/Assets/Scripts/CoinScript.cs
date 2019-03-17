@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SphereCollider))]
 public class CoinScript : MonoBehaviour
 {
@@ -29,7 +28,8 @@ public class CoinScript : MonoBehaviour
             tank.AddCoin();
             CoinManager.Instance.CoinPickedUp(gameObject);
 
-            Instantiate(coinPickupParticles, transform.position, Quaternion.identity);
+            GameObject particles = Instantiate(coinPickupParticles, transform.position, Quaternion.identity);
+            AudioManager.Instance.SpawnSound("CoinPickupSound", particles.transform, true, false, false, 1f);
         }
     }
 }

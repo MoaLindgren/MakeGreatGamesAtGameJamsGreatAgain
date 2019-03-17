@@ -156,6 +156,7 @@ public class NpcScript : TankScript, IPoolable
         {
             agent.isStopped = true;
         }
+        AudioManager.Instance.ReturnSource(engineSound);
         agent.enabled = false;
         health = maxHealth;
         coins = 0;
@@ -168,6 +169,7 @@ public class NpcScript : TankScript, IPoolable
         isActive = true;
         agent.enabled = true;
         agent.isStopped = false;
+        engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 0.275f);
     }
 
     public bool IsActive()

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class MissileScript : MonoBehaviour, IPoolable
 {
@@ -45,6 +44,7 @@ public class MissileScript : MonoBehaviour, IPoolable
 
     public void Init(TankScript target, TankScript shooter)
     {
+        AudioManager.Instance.SpawnSound("MissileTravelSound", transform, false, false, false, 0.8f);
         this.target = target;
         this.shooter = shooter;
         if (target != null)
@@ -92,7 +92,8 @@ public class MissileScript : MonoBehaviour, IPoolable
         if (hitTank != null && hitTank != shooter)
         {
             hitTank.TakeDamage(damage);
-            Instantiate(blast, transform.position, Quaternion.identity);
+            GameObject exp = Instantiate(blast, transform.position, Quaternion.identity);
+            AudioManager.Instance.SpawnSound("ExplosionSound", exp.transform, true, false, false, 0.658f);
             GameManager.Instance.MissilePool.RePoolObject(gameObject);
         }
         else if (hitPoolable != null)

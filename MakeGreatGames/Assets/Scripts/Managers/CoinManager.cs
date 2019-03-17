@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
 public class CoinManager : MonoBehaviour
 {
     [SerializeField]
@@ -56,13 +55,20 @@ public class CoinManager : MonoBehaviour
         CoinSpawned.Invoke();
         if (activeCoins < coins.Length)
         {
-            bool spawnChosen = false;
+            bool spawnChosen = true;
+            foreach(GameObject GO in coins)     //Avoid inf loops
+                if(!GO.activeSelf)
+                {
+                    spawnChosen = false;
+                    break;
+                }
             while (!spawnChosen)
             {
                 int index = Random.Range(0, coins.Length);
                 if (!coins[index].activeSelf)
                 {
                     coins[index].SetActive(true);
+                    AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
                     activeCoins++;
                     spawnChosen = true;
                 }

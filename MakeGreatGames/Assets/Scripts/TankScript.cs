@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioSource))]
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
@@ -20,19 +19,16 @@ public class TankScript : MonoBehaviour
 
     [SerializeField]
     protected Slider healthSlider;
-
-    [SerializeField]
-    protected AudioSource shotSound, healingSound, shieldSound;
-
+    
     [SerializeField]
     protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles;
 
     [SerializeField]
-    bool forceSpecialAttack;    //Debugging purposes
+    protected bool forceSpecialAttack;    //Debugging purposes
 
     [SerializeField]
     [Tooltip("0 = Missile, 1 = Shield, 2 = SpeedBoost, 3 = Heal, 4 = SuperHeal, 5 = Mine, 6 = SuperShots")]
-    int forcedSpecialIndex;    //Debugging purposes
+    protected int forcedSpecialIndex;    //Debugging purposes
 
     protected bool alive = true, shielded = false, canShoot = true;
 
@@ -54,6 +50,8 @@ public class TankScript : MonoBehaviour
 
     protected Transform canvasTF;
 
+    protected AudioSource engineSound;
+
     protected virtual void Awake()
     {
         health = maxHealth;
@@ -66,7 +64,7 @@ public class TankScript : MonoBehaviour
         healthSlider.value = health;
     }
 
-    private void LateUpdate()
+    protected void LateUpdate()
     {
         canvasTF.LookAt(canvasTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
     }
@@ -111,8 +109,7 @@ public class TankScript : MonoBehaviour
         }
         ProjectileScript shot = GameManager.Instance.ProjectilePool.GetObject(shotStart.position, shotStart.rotation).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
-
-        shotSound.Play();
+        AudioSource shotSound = AudioManager.Instance.SpawnSound("ShotSound", shotStart, false, false, false, this is PlayerScript ? 0.85f : 0.4f);
         StopCoroutine("AttackCooldownTimer");
         StartCoroutine("AttackCooldownTimer");
     }
@@ -179,7 +176,7 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        shieldSound.Play();
+        AudioSource shieldSound = AudioManager.Instance.SpawnSound("ShieldSound", transform, false, true, false, 1f);
         shielded = true;
         yield return new WaitForSeconds(shieldTime);
         shielded = false;
@@ -187,7 +184,7 @@ public class TankScript : MonoBehaviour
         {
             p.Stop();
         }
-        shieldSound.Stop();
+        AudioManager.Instance.ReturnSource(shieldSound);
     }
 
     protected virtual IEnumerator SpeedBoosted()
@@ -217,7 +214,7 @@ public class TankScript : MonoBehaviour
     protected void FireMissile()
     {
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
-        missileStart.GetComponent<AudioSource>().Play();
+        AudioManager.Instance.SpawnSound("MissileLaunchSound", missileStart.transform, false, false, false, this is PlayerScript ? 0.8f : 0.6f);
         GameObject missileGO = GameManager.Instance.MissilePool.GetObject(missileStart.position, tower.transform.rotation);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)
@@ -252,7 +249,7 @@ public class TankScript : MonoBehaviour
 
     protected void Heal()
     {
-        healingSound.Play();
+        AudioSource healingSound = AudioManager.Instance.SpawnSound("HealingSound", transform, false, false, false, 1f);
         foreach (ParticleSystem p in healingParticles)
         {
             p.Play();
@@ -265,7 +262,7 @@ public class TankScript : MonoBehaviour
 
     protected void SuperHeal()
     {
-        healingSound.Play();
+        AudioSource healingSound = AudioManager.Instance.SpawnSound("HealingSound", transform, false, false, false, 1f);
         foreach (ParticleSystem p in healingParticles)
         {
             p.Play();

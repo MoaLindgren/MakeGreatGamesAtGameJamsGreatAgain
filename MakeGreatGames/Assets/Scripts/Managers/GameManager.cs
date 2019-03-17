@@ -28,7 +28,6 @@ struct PlayerInfo
     }
 }
 
-[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     #region Field
@@ -130,6 +129,11 @@ public class GameManager : MonoBehaviour
             }
             File.Delete(Application.persistentDataPath + "/PlayerName.dat");
         }
+    }
+
+    private void Start()
+    {
+        AudioSource mainThemeAudio = AudioManager.Instance.SpawnSound("MainTheme", transform, true, true, true, 0.7f);
     }
 
     private void Update()

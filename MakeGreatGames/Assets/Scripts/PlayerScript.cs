@@ -17,6 +17,11 @@ public class PlayerScript : TankScript
         rB = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 0.612f);
+    }
+
     public override void AddCoin()
     {
         base.AddCoin();

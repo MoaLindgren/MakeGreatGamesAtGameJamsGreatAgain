@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class MineScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
@@ -43,7 +42,8 @@ public class MineScript : MonoBehaviour, IPoolable
         if (tank != null)
         {
             tank.TakeDamage(damage);
-            Instantiate(explosion);
+            GameObject exp = Instantiate(explosion);
+            AudioManager.Instance.SpawnSound("ExplosionSound", exp.transform, true, false, false, 0.658f);
             GameManager.Instance.MinePool.RePoolObject(gameObject);
         }
     }
