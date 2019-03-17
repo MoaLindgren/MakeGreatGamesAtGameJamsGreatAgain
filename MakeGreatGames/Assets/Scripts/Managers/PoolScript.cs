@@ -39,7 +39,6 @@ public class PoolScript : MonoBehaviour
         bool instantiate = false;
         while (objectPool[poolIndex].GetComponent<IPoolable>().IsActive())
         {
-            print(poolIndex);
             poolIndex = (poolIndex + 1) % objectPool.Count;
             if (poolIndex == startIndex)     //Avoids inf loops
             {

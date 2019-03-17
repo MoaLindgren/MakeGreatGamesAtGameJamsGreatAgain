@@ -11,7 +11,7 @@ public class NpcScript : TankScript, IPoolable
     [SerializeField]
     int points;
 
-    bool move, isActive = false;
+    bool isActive = false;
 
     float distance;
 
@@ -161,10 +161,13 @@ public class NpcScript : TankScript, IPoolable
         health = maxHealth;
         coins = 0;
         isActive = false;
+        alive = false;
     }
 
     public void Activate()
     {
+        health = maxHealth;
+        alive = true;
         healthSlider.value = healthSlider.maxValue;
         isActive = true;
         agent.enabled = true;
