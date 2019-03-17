@@ -109,7 +109,7 @@ public class TankScript : MonoBehaviour
         }
         ProjectileScript shot = GameManager.Instance.ProjectilePool.GetObject(shotStart.position, shotStart.rotation).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
-        AudioSource shotSound = AudioManager.Instance.SpawnSound("ShotSound", shotStart, false, false, false, this is PlayerScript ? 0.85f : 0.4f);
+        AudioSource shotSound = AudioManager.Instance.SpawnSound("ShotSound", shotStart, false, false, false, this is PlayerScript ? 1f : 0.8f);
         StopCoroutine("AttackCooldownTimer");
         StartCoroutine("AttackCooldownTimer");
     }
@@ -214,7 +214,7 @@ public class TankScript : MonoBehaviour
     protected void FireMissile()
     {
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
-        AudioManager.Instance.SpawnSound("MissileLaunchSound", missileStart.transform, false, false, false, this is PlayerScript ? 0.8f : 0.6f);
+        AudioManager.Instance.SpawnSound("MissileLaunchSound", missileStart.transform, false, false, false, this is PlayerScript ? 0.7f : 0.6f);
         GameObject missileGO = GameManager.Instance.MissilePool.GetObject(missileStart.position, tower.transform.rotation);
         MissileScript missile = missileGO.GetComponent<MissileScript>();
         if (this is PlayerScript)

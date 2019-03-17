@@ -80,7 +80,7 @@ public class UiManager : MonoBehaviour
 
     public void SpinWheel()
     {
-        AudioSource spinSound = AudioManager.Instance.SpawnSound("SpinSound", transform, true, false, true, 1f);
+        AudioSource spinSound = AudioManager.Instance.SpawnSound("SpinSound", transform, true, false, true, 0.65f);
     }
 
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)

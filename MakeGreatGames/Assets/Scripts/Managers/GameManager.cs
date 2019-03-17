@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        AudioSource mainThemeAudio = AudioManager.Instance.SpawnSound("MainTheme", transform, true, true, true, 0.7f);
+        AudioSource mainThemeAudio = AudioManager.Instance.SpawnSound("BANDITANKSThemeMaybe", transform, true, true, true, 1f);
     }
 
     private void Update()
