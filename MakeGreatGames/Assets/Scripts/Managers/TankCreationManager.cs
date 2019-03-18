@@ -17,8 +17,6 @@ public class TankCreationManager : MonoBehaviour
     {
         Object[] loadedBaseMeshes = Resources.LoadAll("Meshes/Bases");
         Object[] loadedTowerMeshes = Resources.LoadAll("Meshes/Towers");
-        
-        print(loadedBaseMeshes.Length);
 
         testObject = Resources.Load("Meshes/Bases/Test") as GameObject;
 
@@ -31,10 +29,10 @@ public class TankCreationManager : MonoBehaviour
         for (int i = 0; i < loadedTowerMeshes.Length; i++)
             allMeshes[1][i] = (loadedTowerMeshes[i] as GameObject).GetComponent<MeshFilter>().sharedMesh;
 
-        for (int i = 0; i < allMeshes.Length; i++)
-            print(allMeshes[i].Length);
-
         testObject.GetComponent<MeshFilter>().mesh = allMeshes[0][0];
+
+        GameObject instanceObject = Instantiate(testObject);
+        
     }
 
     public void ViewNext(int next)
