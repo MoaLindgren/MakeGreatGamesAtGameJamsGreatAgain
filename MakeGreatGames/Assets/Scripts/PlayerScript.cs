@@ -8,7 +8,7 @@ public class PlayerScript : TankScript
 {
     [SerializeField]
     LineRenderer line;
-    
+
     Rigidbody rB;
 
     protected override void Awake()
@@ -30,6 +30,7 @@ public class PlayerScript : TankScript
 
     protected override void MoveTank(float amount)
     {
+        base.MoveTank(amount);
         if (!alive)
             return;
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
@@ -133,6 +134,7 @@ public class PlayerScript : TankScript
             }
             rB.velocity = Vector3.zero;
             rB.constraints = RigidbodyConstraints.FreezeAll;
+            currentMovement(0f);
         }
         float turnAmount = currentRotationMethod == RotateTank ? turnSpeed : towerTurnSpeed;
         if (Input.GetAxisRaw("Horizontal") < 0f)

@@ -92,6 +92,8 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
+        float targetPitch = amount == 0f ? 1f : 1.1f;
+        engineSound.pitch = Mathf.Lerp(engineSound.pitch, targetPitch, amount == 0f ? 0.1f: 0.05f);
     }
 
     protected void DontMoveTank(float amount)
@@ -146,6 +148,7 @@ public class TankScript : MonoBehaviour
         healthSlider.value = health;
         if (health <= 0)
         {
+            engineSound.pitch = 1f;
             health = 0;
             alive = false;
             StartCoroutine("DestroyTimer");
