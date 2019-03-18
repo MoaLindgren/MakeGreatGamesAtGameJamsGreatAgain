@@ -59,6 +59,7 @@ public class AudioManager : MonoBehaviour
             sourcesTried++;
             if (sourcesTried >= arrToUse.Length)
             {
+                print("too many sounds");
                 return null;        //No free AudioSources for that soundtype, sorry
             }
         }
@@ -101,4 +102,11 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(playTime);
         ReturnSource(source);
     }
+
+    /*
+    IEnumerator DuckSounds(string soundsToDuck)     //Ducks sounds when several AudioSources play the same clip to keep the audio clean
+    {
+
+    }
+    */
 }

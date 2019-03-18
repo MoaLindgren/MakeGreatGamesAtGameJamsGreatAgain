@@ -266,7 +266,7 @@ public class TankScript : MonoBehaviour
 
     protected void SuperHeal()
     {
-        AudioSource healingSound = AudioManager.Instance.SpawnSound("HealingSound", transform, false, false, false, 1f);
+        AudioSource healingSound = AudioManager.Instance.SpawnSound("SuperHealingSound", transform, false, false, false, 1f);
         foreach (ParticleSystem p in healingParticles)
         {
             p.Play();
