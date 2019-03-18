@@ -49,6 +49,7 @@ public class WaveSpawner : MonoBehaviour
     {
         waveSpawned = false;
         currentWave++;
+        print("WAVE: " + currentWave);
         remainingEnemies = currentWave;
         for (int i = 0; i < currentWave && i < 100; i++)
         {
