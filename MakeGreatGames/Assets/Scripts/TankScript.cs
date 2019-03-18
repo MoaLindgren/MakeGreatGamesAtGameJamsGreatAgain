@@ -194,6 +194,7 @@ public class TankScript : MonoBehaviour
     {
         float originalSpeed = speed;
         float originalTurnSpeed = turnSpeed;
+        AudioManager.Instance.SpawnSound("SpeedBoostSound", transform, false, false, false, 1f);
         turnSpeed *= 2;
         speed *= 2;
         yield return new WaitForSeconds(10);
