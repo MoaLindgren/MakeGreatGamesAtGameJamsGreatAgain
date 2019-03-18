@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1499404995798441274
 MonoBehaviour:
@@ -66,11 +66,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6217814932251165525}
     m_Modifications:
-    - target: {fileID: 1368588728187902563, guid: f8bed5f4aa3a4e74ca94164d644cde45,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion
-      objectReference: {fileID: 0}
     - target: {fileID: 1368588728187902566, guid: f8bed5f4aa3a4e74ca94164d644cde45,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -135,6 +130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368588728187902563, guid: f8bed5f4aa3a4e74ca94164d644cde45,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion
       objectReference: {fileID: 0}
     - target: {fileID: 1368588726152140838, guid: f8bed5f4aa3a4e74ca94164d644cde45,
         type: 3}
