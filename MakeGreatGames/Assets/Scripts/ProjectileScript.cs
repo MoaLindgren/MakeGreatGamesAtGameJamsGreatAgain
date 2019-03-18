@@ -63,8 +63,8 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         {
             hitTank.TakeDamage(damage);
         }
-        AudioManager.Instance.SpawnSound("ImpactSound", other.transform, true, false, false, 0.5f);
-        Instantiate(impactParticles, transform.position, transform.rotation);
+        GameObject particles = Instantiate(impactParticles, transform.position, transform.rotation);
+        AudioManager.Instance.SpawnSound("ImpactSound", particles.transform, true, false, false, 0.5f);
         GameManager.Instance.ProjectilePool.RePoolObject(gameObject);
     }
     
