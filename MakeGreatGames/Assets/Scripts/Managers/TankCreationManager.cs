@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TankCreationManager : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     GameObject testObject;
 
     int baseIndex = 0, towerIndex = 0, currentCollection = 0;
@@ -19,6 +19,8 @@ public class TankCreationManager : MonoBehaviour
         Object[] loadedTowerMeshes = Resources.LoadAll("Meshes/Towers");
         
         print(loadedBaseMeshes.Length);
+
+        testObject = Resources.Load("Meshes/Bases/Test") as GameObject;
 
         allMeshes[0] = new Mesh[loadedBaseMeshes.Length];
         allMeshes[1] = new Mesh[loadedTowerMeshes.Length];
