@@ -33,7 +33,7 @@ public class CoinManager : MonoBehaviour
 
     int activeCoins = 0;
 
-    public UnityEvent CoinSpawned = new UnityEvent();
+    public UnityEvent CoinSpawned = new UnityEvent(), CoinCollected = new UnityEvent();
 
     private void Awake()
     {
@@ -47,6 +47,7 @@ public class CoinManager : MonoBehaviour
     {
         coin.SetActive(false);
         activeCoins--;
+        CoinCollected.Invoke();
     }
 
     IEnumerator SpawnCoin()

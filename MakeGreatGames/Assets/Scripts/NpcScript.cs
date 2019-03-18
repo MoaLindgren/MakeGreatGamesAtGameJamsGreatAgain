@@ -37,6 +37,7 @@ public class NpcScript : TankScript, IPoolable
     void Start()
     {
         CoinManager.Instance.CoinSpawned.AddListener(GenerateNewDestination);
+        CoinManager.Instance.CoinCollected.AddListener(GenerateNewDestination);
     }
 
     void Update()

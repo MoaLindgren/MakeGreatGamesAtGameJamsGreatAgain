@@ -49,6 +49,11 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource SpawnSound(string clip, Transform t, bool stationarySound, bool looping, bool isMusic, float volume)       //Determines which AudioSource to use and returns that AudioSource to the caller
     {
+        if (!clips.ContainsKey(clip))
+        {
+            print("Clip \"" + clip + "\" not found, please check spelling.");
+            return null;
+        }
         AudioSource[] arrToUse = isMusic ? musicSources : sfxSources;
         int index = isMusic ? currentMusicIndex : currentSFXIndex, sourcesTried = 0;
         AudioSource sourceToUse = arrToUse[index];
