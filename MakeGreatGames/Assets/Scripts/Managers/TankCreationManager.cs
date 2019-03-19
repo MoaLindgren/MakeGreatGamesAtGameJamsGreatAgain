@@ -8,7 +8,7 @@ public class TankCreationManager : MonoBehaviour
     //[SerializeField]
     GameObject testObject;
 
-    int baseIndex = 0, towerIndex = 0, currentCollection = 0;
+    int baseIndex = 0, towerIndex = 0, currentCollection = 0, matIndex = 0;
 
     Mesh[][] allMeshes = new Mesh[2][];
 
@@ -47,6 +47,11 @@ public class TankCreationManager : MonoBehaviour
     }
 
     public void ChangeCollection(int next)
+    {
+
+    }
+
+    public void SaveSettings()
     {
 
     }

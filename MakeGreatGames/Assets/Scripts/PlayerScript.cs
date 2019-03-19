@@ -12,6 +12,7 @@ public class PlayerScript : TankScript
     Rigidbody rB;
 
     float rotationCompensation = 0f;
+
     public float RotationCompensation
     {
         get

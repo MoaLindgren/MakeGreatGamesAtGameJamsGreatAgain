@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     Sprite specialAttackDefaultSprite;
 
     [SerializeField]
-    Image specialAttackImage;
+    Image specialAttackImage, damageOverlay;
 
     int coins, score, maxNumberOfCoins;
 
@@ -70,6 +70,7 @@ public class UIManager : MonoBehaviour
     {
         maxNumberOfCoins = CoinManager.Instance.CoinsToUlt;
         coinProgressSlider.maxValue = maxNumberOfCoins;
+        damageOverlay.color = new Color(255f, 255f, 255f, 0f);
     }
 
     public void AddScore(int scoreToAdd)
@@ -81,6 +82,12 @@ public class UIManager : MonoBehaviour
     public void SpinWheel()
     {
         AudioSource spinSound = AudioManager.Instance.SpawnSound("SpinSound", transform, true, false, true, 0.65f);
+    }
+
+    public void ShowDamage(int healthRemaining, int maxHealth)
+    {
+        float healthPercentage = healthRemaining * (maxHealth / 100);
+        damageOverlay.color = new Color(1f, 1f, 1f, 1f - (healthPercentage / 100));
     }
 
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)

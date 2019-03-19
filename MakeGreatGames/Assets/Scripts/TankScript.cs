@@ -147,6 +147,8 @@ public class TankScript : MonoBehaviour
             return;
         health -= damage;
         healthSlider.value = health;
+        if (this is PlayerScript)
+            UIManager.Instance.ShowDamage(health, maxHealth);
         if (health <= 0)
         {
             engineSound.pitch = 1f;
@@ -269,6 +271,8 @@ public class TankScript : MonoBehaviour
         if (health > maxHealth)
             health = maxHealth;
         healthSlider.value = health;
+        if (this is PlayerScript)
+            UIManager.Instance.ShowDamage(health, maxHealth);
     }
 
     protected void SuperHeal()
@@ -280,6 +284,8 @@ public class TankScript : MonoBehaviour
         }
         health = maxHealth;
         healthSlider.value = health;
+        if (this is PlayerScript)
+            UIManager.Instance.ShowDamage(health, maxHealth);
     }
 
     protected void SuperShots()
