@@ -11,6 +11,15 @@ public class PlayerScript : TankScript
 
     Rigidbody rB;
 
+    float rotationCompensation = 0f;
+    public float RotationCompensation
+    {
+        get
+        {
+            return rotationCompensation;
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -137,13 +146,27 @@ public class PlayerScript : TankScript
             currentMovement(0f);
         }
         float turnAmount = currentRotationMethod == RotateTank ? turnSpeed : towerTurnSpeed;
-        if (Input.GetAxisRaw("Horizontal") < 0f)
+        if (Input.GetKey(KeyCode.A))
         {
             currentRotationMethod(-turnAmount);
+            rotationCompensation = -turnSpeed;
         }
-        else if (Input.GetAxisRaw("Horizontal") > 0f)
+        else if (Input.GetKey(KeyCode.D))
         {
             currentRotationMethod(turnAmount);
+            rotationCompensation = turnSpeed;
+        }
+        else
+        {
+            rotationCompensation = 0f;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            RotateTower(-towerTurnSpeed);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            RotateTower(towerTurnSpeed);
         }
     }
 }

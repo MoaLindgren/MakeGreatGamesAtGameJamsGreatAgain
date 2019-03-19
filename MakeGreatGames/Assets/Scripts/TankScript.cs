@@ -78,7 +78,9 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        tower.transform.Rotate(0f, amount, 0f);
+        float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
+        tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
+        //tower.transform.localRotation = new Quaternion(tower.transform.localRotation.x, tower.transform.localRotation.y + amount, tower.transform.localRotation.z, tower.transform.localRotation.w);
     }
 
     protected void RotateTank(float amount)
