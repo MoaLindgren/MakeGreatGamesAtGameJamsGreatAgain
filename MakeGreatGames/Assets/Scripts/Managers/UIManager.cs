@@ -93,15 +93,14 @@ public class UIManager : MonoBehaviour
     public void SpecialAttack(bool specialAttack, int timer, int specialAttackIndex)
     {
         this.specialAttack = specialAttack;
+        specialAttackTimer.gameObject.SetActive(specialAttack);
         if (specialAttack)
         {
             counter = timer;
-            specialAttackTimer.gameObject.SetActive(true);
             specialAttackImage.sprite = specialAttacksSprites[specialAttackIndex];
         }
         else
         {
-            specialAttackTimer.gameObject.SetActive(false);
             specialAttackImage.sprite = specialAttackDefaultSprite;
         }
     }

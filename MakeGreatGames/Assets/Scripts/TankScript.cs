@@ -134,6 +134,7 @@ public class TankScript : MonoBehaviour
         }
         yield return new WaitForSeconds(spinTime);
         specialAttackIndex = forceSpecialAttack ? forcedSpecialIndex : Random.Range(0, specialAttackMethods.Length);
+        StartCoroutine("SpecialAttackTimer");
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
         if (this is PlayerScript)
         {
@@ -173,6 +174,7 @@ public class TankScript : MonoBehaviour
     protected IEnumerator SpecialAttackTimer()
     {
         yield return new WaitForSeconds(specialAttackTimer);
+        print("Special attack timed out");
         currentSpecialAttack = Nothing;
     }
 

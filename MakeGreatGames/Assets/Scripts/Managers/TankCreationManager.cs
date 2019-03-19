@@ -33,7 +33,6 @@ public class TankCreationManager : MonoBehaviour
         testObject.GetComponent<MeshFilter>().mesh = allMeshes[0][0];
 
         GameObject instanceObject = Instantiate(testObject);
-        
     }
 
     public void ViewNext(int next)
