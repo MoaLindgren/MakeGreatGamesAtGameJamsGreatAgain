@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class TankCreationManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class TankCreationManager : MonoBehaviour
 
         for (int i = 0; i < loadedTowerMeshes.Length; i++)
             allMeshes[1][i] = (loadedTowerMeshes[i] as GameObject).GetComponent<MeshFilter>().sharedMesh;
-
+        
         testObject.GetComponent<MeshFilter>().mesh = allMeshes[0][0];
 
         GameObject instanceObject = Instantiate(testObject);
