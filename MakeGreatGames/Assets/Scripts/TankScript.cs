@@ -21,7 +21,7 @@ public class TankScript : MonoBehaviour
     protected Slider healthSlider;
     
     [SerializeField]
-    protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles;
+    protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles, superShotParticles;
 
     [SerializeField]
     protected bool forceSpecialAttack;    //Debugging purposes
@@ -80,7 +80,6 @@ public class TankScript : MonoBehaviour
             return;
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
         tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
-        //tower.transform.localRotation = new Quaternion(tower.transform.localRotation.x, tower.transform.localRotation.y + amount, tower.transform.localRotation.z, tower.transform.localRotation.w);
     }
 
     protected void RotateTank(float amount)
@@ -206,10 +205,16 @@ public class TankScript : MonoBehaviour
 
     protected IEnumerator SuperShotTimer()
     {
+        foreach (ParticleSystem p in superShotParticles)
+            p.Play();
+        AudioSource superShotSound = AudioManager.Instance.SpawnSound("SuperShotSound", transform, false, true, false, 1f);
         int originalDamage = shotDamage;
         shotDamage *= 3;
         yield return new WaitForSeconds(10);
         shotDamage = originalDamage;
+        AudioManager.Instance.ReturnSource(superShotSound);
+        foreach (ParticleSystem p in superShotParticles)
+            p.Stop();
     }
 
     protected void DeployMine()
