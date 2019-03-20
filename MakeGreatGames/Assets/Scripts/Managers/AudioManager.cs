@@ -62,9 +62,16 @@ public class AudioManager : MonoBehaviour
             index = (index + 1) % arrToUse.Length;
             sourceToUse = arrToUse[index];
             sourcesTried++;
-            if (sourcesTried >= arrToUse.Length)
+            if (sourcesTried >= arrToUse.Length)        //If there are no free AudioSources we check if we can reuse one currently playing
             {
-                print("too many sounds");
+                foreach(AudioSource playingSound in soundsInUse.Keys)
+                {
+                    if (playingSound.clip.name == clip)
+                    {
+                        ReturnSource(playingSound);
+                        return SpawnSound(clip, t, stationarySound, looping, isMusic, volume);      //If an AudioSource with the same clip is already playing, we stop that clip and reuse the AudioSource for the new sound
+                    }
+                }
                 return null;        //No free AudioSources for that soundtype, sorry
             }
         }
