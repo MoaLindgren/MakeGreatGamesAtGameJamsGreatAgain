@@ -10,18 +10,20 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     Transform[] spawnPoints;
 
+    int currentWave = 0, spawnPointIndex = 0, remainingEnemies;
+
+    float bonusPoints = 0;
+
+    List<GameObject> currentWaveTanks = new List<GameObject>();
+
+    bool waveSpawned = false;
+
     static WaveSpawner instance;
 
     public static WaveSpawner Instance
     {
         get { return instance; }
     }
-
-    int currentWave = 0, spawnPointIndex = 0, remainingEnemies;
-
-    List<GameObject> currentWaveTanks = new List<GameObject>();
-
-    bool waveSpawned = false;
 
     public List<GameObject> CurrentWaveTanks
     {
@@ -45,6 +47,15 @@ public class WaveSpawner : MonoBehaviour
         StartCoroutine("SpawnWave");
     }
 
+    private void Update()
+    {
+        if (waveSpawned)
+        {
+            bonusPoints = Mathf.Clamp(bonusPoints - Time.deltaTime, 0f, Mathf.Infinity);
+            print(bonusPoints);
+        }
+    }
+
     IEnumerator SpawnWave()
     {
         waveSpawned = false;
@@ -57,9 +68,10 @@ public class WaveSpawner : MonoBehaviour
             spawnPointIndex = (spawnPointIndex + 1) % spawnPoints.Length;
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
+        bonusPoints = 60f * currentWave;
         waveSpawned = true;
     }
-    
+
     public void TankDestroyed(GameObject tank)
     {
         if (currentWaveTanks.Contains(tank))
@@ -68,8 +80,8 @@ public class WaveSpawner : MonoBehaviour
         remainingEnemies--;
         if (currentWaveTanks.Count < 1 && waveSpawned)
         {
-            UIManager.Instance.AddScore(50 * currentWave);
-            GameManager.Instance.Score = 50 * currentWave;
+            UIManager.Instance.AddScore((int)bonusPoints);
+            GameManager.Instance.Score = (int)bonusPoints;
             StartCoroutine("NextWave");
         }
     }
