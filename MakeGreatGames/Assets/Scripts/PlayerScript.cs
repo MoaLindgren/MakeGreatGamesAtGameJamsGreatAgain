@@ -29,7 +29,7 @@ public class PlayerScript : TankScript
 
     private void Start()
     {
-        engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 0.612f);
+        engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
     }
 
     public override void AddCoin()

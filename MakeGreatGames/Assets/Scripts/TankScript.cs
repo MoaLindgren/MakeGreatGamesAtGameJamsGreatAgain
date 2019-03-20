@@ -95,8 +95,7 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        float targetPitch = amount == 0f ? 1f : 1.1f;
-        engineSound.pitch = Mathf.Lerp(engineSound.pitch, targetPitch, amount == 0f ? 0.1f: 0.05f);
+        engineSound.pitch = 0.95f + ((Mathf.Abs(amount) / (maxSpeed / 100f)) / 500f);
     }
 
     protected void DontMoveTank(float amount)
