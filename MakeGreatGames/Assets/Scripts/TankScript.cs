@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float speed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime, destroyTimer;
+    protected float maxSpeed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime, destroyTimer, acceleration;
 
     [SerializeField]
     protected int maxHealth, shotDamage, specialAttackTimer;
@@ -51,6 +51,8 @@ public class TankScript : MonoBehaviour
     protected Transform canvasTF;
 
     protected AudioSource engineSound;
+
+    protected float speed;
 
     protected virtual void Awake()
     {
@@ -197,14 +199,14 @@ public class TankScript : MonoBehaviour
 
     protected virtual IEnumerator SpeedBoosted()
     {
-        float originalSpeed = speed;
+        float originalSpeed = maxSpeed;
         float originalTurnSpeed = turnSpeed;
         AudioManager.Instance.SpawnSound("SpeedBoostSound", transform, false, false, false, 1f);
         turnSpeed *= 2;
-        speed *= 2;
+        maxSpeed *= 2;
         yield return new WaitForSeconds(10);
         turnSpeed = originalTurnSpeed;
-        speed = originalSpeed;
+        maxSpeed = originalSpeed;
     }
 
     protected IEnumerator SuperShotTimer()

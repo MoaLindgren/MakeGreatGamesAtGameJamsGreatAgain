@@ -56,7 +56,7 @@ public class PlayerScript : TankScript
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentRotationMethod = RotateTower;
-            currentMovement = DontMoveTank;
+            //currentMovement = DontMoveTank;
             RaycastHit hit;
             if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
@@ -69,7 +69,7 @@ public class PlayerScript : TankScript
         else
         {
             currentRotationMethod = RotateTank;
-            currentMovement = MoveTank;
+            //currentMovement = MoveTank;
             line.enabled = false;
         }
 
@@ -110,6 +110,7 @@ public class PlayerScript : TankScript
 
         if (Input.GetAxisRaw("Vertical") > 0f)
         {
+            speed = Mathf.Lerp(speed, maxSpeed, acceleration);
             foreach (ParticleSystem p in backSmoke)
             {
                 p.emissionRate = 0;
@@ -118,10 +119,10 @@ public class PlayerScript : TankScript
             {
                 p.emissionRate = 20;
             }
-            currentMovement(speed);
         }
         else if (Input.GetAxisRaw("Vertical") < 0f)
         {
+            speed = Mathf.Lerp(speed, -maxSpeed * 0.7f, acceleration);
             foreach (ParticleSystem p in backSmoke)
             {
                 p.emissionRate = 20;
@@ -130,10 +131,10 @@ public class PlayerScript : TankScript
             {
                 p.emissionRate = 0;
             }
-            currentMovement(-speed);
         }
         else
         {
+            speed = Mathf.Lerp(speed, 0f, acceleration * 3f);
             foreach (ParticleSystem p in backSmoke)
             {
                 p.emissionRate = 0;
@@ -143,9 +144,14 @@ public class PlayerScript : TankScript
                 p.emissionRate = 0;
             }
             rB.velocity = Vector3.zero;
-            rB.constraints = RigidbodyConstraints.FreezeAll;
-            currentMovement(0f);
+            if (Mathf.Abs(speed) < acceleration * 40f)
+            {
+                speed = 0f;
+                rB.constraints = RigidbodyConstraints.FreezeAll;
+            }
         }
+        speed = Mathf.Clamp(speed, -maxSpeed * 0.7f, maxSpeed);
+        currentMovement(speed);
         float turnAmount = currentRotationMethod == RotateTank ? turnSpeed : towerTurnSpeed;
         if (Input.GetKey(KeyCode.A))
         {
