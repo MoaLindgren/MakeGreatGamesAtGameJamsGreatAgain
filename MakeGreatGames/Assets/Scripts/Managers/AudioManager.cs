@@ -114,11 +114,4 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(playTime);
         ReturnSource(source);
     }
-
-    /*
-    IEnumerator DuckSounds(string soundsToDuck)     //Ducks sounds when several AudioSources play the same clip to keep the audio clean
-    {
-
-    }
-    */
 }
