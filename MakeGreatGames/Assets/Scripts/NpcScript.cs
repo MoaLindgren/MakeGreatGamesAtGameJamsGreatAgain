@@ -31,13 +31,13 @@ public class NpcScript : TankScript, IPoolable
         base.Awake();
         lastPos = frontSmoke[0].transform.position;
         agent = GetComponent<NavMeshAgent>();
-        target = FindObjectOfType<PlayerScript>();
     }
 
     void Start()
     {
         CoinManager.Instance.CoinSpawned.AddListener(GenerateNewDestination);
         CoinManager.Instance.CoinCollected.AddListener(GenerateNewDestination);
+        target = FindObjectOfType<PlayerScript>();
     }
 
     void Update()
