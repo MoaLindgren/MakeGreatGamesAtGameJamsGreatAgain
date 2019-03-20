@@ -5,10 +5,12 @@ using System.IO;
 
 public class TankCreationManager : MonoBehaviour
 {
-    //[SerializeField]
-    GameObject testObject;
+    [SerializeField]
+    GameObject tankPrefab;
 
-    int baseIndex = 0, towerIndex = 0, currentCollection = 0, matIndex = 0;
+    MeshFilter prefabTankBaseMesh, prefabTankTowerMesh, previewTankBaseMesh, previewTankTowerMesh;
+
+    int baseIndex = 0, towerIndex = 0, currentCollection = 0, baseMatIndex = 0, towerMatIndex = 0;
 
     Mesh[][] allMeshes = new Mesh[2][];
 
@@ -19,7 +21,7 @@ public class TankCreationManager : MonoBehaviour
         Object[] loadedBaseMeshes = Resources.LoadAll("Meshes/Bases");
         Object[] loadedTowerMeshes = Resources.LoadAll("Meshes/Towers");
 
-        testObject = Resources.Load("Meshes/Bases/Test") as GameObject;
+        //tankPrefab = Resources.Load("Meshes/Bases/Test") as GameObject;
 
         allMeshes[0] = new Mesh[loadedBaseMeshes.Length];
         allMeshes[1] = new Mesh[loadedTowerMeshes.Length];
@@ -29,10 +31,14 @@ public class TankCreationManager : MonoBehaviour
 
         for (int i = 0; i < loadedTowerMeshes.Length; i++)
             allMeshes[1][i] = (loadedTowerMeshes[i] as GameObject).GetComponent<MeshFilter>().sharedMesh;
-        
-        testObject.GetComponent<MeshFilter>().mesh = allMeshes[0][0];
 
-        GameObject instanceObject = Instantiate(testObject);
+        prefabTankBaseMesh = tankPrefab.GetComponentInChildren<MeshFilter>();
+        prefabTankTowerMesh = prefabTankBaseMesh.GetComponentInChildren<MeshFilter>();
+
+        prefabTankBaseMesh.GetComponent<TankScript>().enabled = false;
+
+        previewTankBaseMesh = Instantiate(tankPrefab).GetComponentInChildren<MeshFilter>();
+        previewTankTowerMesh = previewTankBaseMesh.GetComponentInChildren<MeshFilter>();
     }
 
     public void ViewNext(int next)
@@ -52,6 +58,6 @@ public class TankCreationManager : MonoBehaviour
 
     public void SaveSettings()
     {
-
+        //tankPrefab.GetComponent<MeshFilter>().mesh = allMeshes[0][0];
     }
 }
