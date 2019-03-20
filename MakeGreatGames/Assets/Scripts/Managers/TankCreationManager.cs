@@ -21,8 +21,6 @@ public class TankCreationManager : MonoBehaviour
         Object[] loadedBaseMeshes = Resources.LoadAll("Meshes/Bases");
         Object[] loadedTowerMeshes = Resources.LoadAll("Meshes/Towers");
 
-        //tankPrefab = Resources.Load("Meshes/Bases/Test") as GameObject;
-
         allMeshes[0] = new Mesh[loadedBaseMeshes.Length];
         allMeshes[1] = new Mesh[loadedTowerMeshes.Length];
 
@@ -58,6 +56,9 @@ public class TankCreationManager : MonoBehaviour
 
     public void SaveSettings()
     {
-        //tankPrefab.GetComponent<MeshFilter>().mesh = allMeshes[0][0];
+        prefabTankBaseMesh.sharedMesh = previewTankBaseMesh.mesh;
+        prefabTankBaseMesh.GetComponent<MeshRenderer>().material = previewTankBaseMesh.GetComponent<MeshRenderer>().material;
+        prefabTankTowerMesh.sharedMesh = prefabTankTowerMesh.mesh;
+        prefabTankTowerMesh.GetComponent<MeshRenderer>().material = previewTankTowerMesh.GetComponent<MeshRenderer>().material;
     }
 }
