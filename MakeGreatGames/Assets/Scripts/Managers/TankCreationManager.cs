@@ -34,8 +34,18 @@ public class TankCreationManager : MonoBehaviour
 
         prefabTankBaseMesh.GetComponent<TankScript>().enabled = false;
 
-        previewTankBaseMesh = Instantiate(tankPrefab).GetComponentInChildren<MeshFilter>();
+        GameObject previewTank = Instantiate(tankPrefab);
+
+        previewTankBaseMesh = previewTank.GetComponentInChildren<MeshFilter>();
         previewTankTowerMesh = previewTankBaseMesh.GetComponentInChildren<MeshFilter>();
+
+        foreach (ParticleSystem p in previewTankBaseMesh.GetComponentsInChildren<ParticleSystem>())
+            p.Stop();
+
+        if(previewTank.GetComponentInChildren<Canvas>() == null)
+            print("no canvas");
+
+        previewTank.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
     }
 
     public void ViewNext(int next)
