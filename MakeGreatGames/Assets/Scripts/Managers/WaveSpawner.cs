@@ -52,7 +52,6 @@ public class WaveSpawner : MonoBehaviour
         if (waveSpawned)
         {
             bonusPoints = Mathf.Clamp(bonusPoints - Time.deltaTime, 0f, Mathf.Infinity);
-            print(bonusPoints);
         }
     }
 
