@@ -33,12 +33,16 @@ public class TankCreationManager : MonoBehaviour
         prefabTankBaseMesh = tankPrefab.GetComponentInChildren<MeshFilter>();
         prefabTankTowerMesh = prefabTankBaseMesh.GetComponentInChildren<MeshFilter>();
 
-        prefabTankBaseMesh.GetComponent<TankScript>().enabled = false;
+        if (prefabTankBaseMesh == null)
+            print("nullmeshyao");
+
 
         GameObject previewTank = Instantiate(tankPrefab);
 
         previewTankBaseMesh = previewTank.GetComponentInChildren<MeshFilter>();
         previewTankTowerMesh = previewTankBaseMesh.GetComponentInChildren<MeshFilter>();
+
+        previewTankBaseMesh.GetComponentInParent<TankScript>().enabled = false;
 
         foreach (ParticleSystem p in previewTankBaseMesh.GetComponentsInChildren<ParticleSystem>())
             p.Stop();
@@ -64,10 +68,10 @@ public class TankCreationManager : MonoBehaviour
     public void ReturnButtonPressed()
     {
         if (
-            prefabTankBaseMesh.sharedMesh != previewTankBaseMesh.mesh
-            || prefabTankTowerMesh.sharedMesh != previewTankTowerMesh.mesh
-            || prefabTankBaseMesh.GetComponent<MeshRenderer>().material != previewTankBaseMesh.GetComponent<MeshRenderer>().material
-            || prefabTankTowerMesh.GetComponent<MeshRenderer>().material != previewTankTowerMesh.GetComponent<MeshRenderer>().material
+            prefabTankBaseMesh.sharedMesh != previewTankBaseMesh.sharedMesh
+            || prefabTankTowerMesh.sharedMesh != previewTankTowerMesh.sharedMesh
+            || prefabTankBaseMesh.GetComponent<MeshRenderer>().sharedMaterial != previewTankBaseMesh.GetComponent<MeshRenderer>().sharedMaterial
+            || prefabTankTowerMesh.GetComponent<MeshRenderer>().sharedMaterial != previewTankTowerMesh.GetComponent<MeshRenderer>().sharedMaterial
            )
         {
             ShowConfirmExitMenu(true);

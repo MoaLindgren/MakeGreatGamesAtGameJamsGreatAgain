@@ -85,7 +85,6 @@ GameObject:
   - component: {fileID: 5010120826110822348}
   - component: {fileID: 5819607231712954501}
   - component: {fileID: 7766292399460344409}
-  - component: {fileID: 6917922866176460052}
   - component: {fileID: 9140513011955769615}
   m_Layer: 0
   m_Name: Player
@@ -187,14 +186,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!33 &6917922866176460052
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 391227668271621377}
-  m_Mesh: {fileID: 4300000, guid: b6b861f89ae72934f9cb95027d403aa2, type: 3}
 --- !u!64 &9140513011955769615
 MeshCollider:
   m_ObjectHideFlags: 0
