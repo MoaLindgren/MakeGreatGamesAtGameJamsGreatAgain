@@ -15,7 +15,7 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
     MeshFilter prefabTankBaseMesh, prefabTankTowerMesh, previewTankBaseMesh, previewTankTowerMesh;
 
-    int baseIndex = 0, towerIndex = 0, currentCollection = 0, baseMatIndex = 0, towerMatIndex = 0;
+    int baseIndex = 0, towerIndex = 0, baseMatIndex = 0, towerMatIndex = 0;
 
     Mesh[][] allMeshes = new Mesh[2][];
 
@@ -53,8 +53,7 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
             p.Stop();
 
         previewTank.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-
-
+        
     }
 
     private void Update()
@@ -82,17 +81,22 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
     */
 
-    public void ChangeMat(bool next)
+    public void ChangeBaseMat(int next)
     {
 
     }
 
-    public void ChangeBaseMesh(bool next)
+    public void ChangeTowerMat(int next)
     {
-
+        towerMatIndex = 0;
     }
 
-    public void ChangeTowerMesh(bool next)
+    public void ChangeBaseMesh(int next)
+    {
+        baseMatIndex = 0;
+    }
+
+    public void ChangeTowerMesh(int next)
     {
 
     }
