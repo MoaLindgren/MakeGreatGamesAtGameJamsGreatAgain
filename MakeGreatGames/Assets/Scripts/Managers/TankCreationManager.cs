@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TankCreationManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject tankPrefab;
+    GameObject tankPrefab, confirmExitMenu;
 
     MeshFilter prefabTankBaseMesh, prefabTankTowerMesh, previewTankBaseMesh, previewTankTowerMesh;
 
@@ -42,25 +43,47 @@ public class TankCreationManager : MonoBehaviour
         foreach (ParticleSystem p in previewTankBaseMesh.GetComponentsInChildren<ParticleSystem>())
             p.Stop();
 
-        if(previewTank.GetComponentInChildren<Canvas>() == null)
-            print("no canvas");
-
         previewTank.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
     }
 
-    public void ViewNext(int next)
+    public void ChangeMat(bool next)
     {
 
     }
 
-    public void ViewMesh(int collection, int index)
+    public void ChangeBaseMesh(bool next)
     {
 
     }
 
-    public void ChangeCollection(int next)
+    public void ChangeTowerMesh(bool next)
     {
 
+    }
+
+    public void ReturnButtonPressed()
+    {
+        if (
+            prefabTankBaseMesh.sharedMesh != previewTankBaseMesh.mesh
+            || prefabTankTowerMesh.sharedMesh != previewTankTowerMesh.mesh
+            || prefabTankBaseMesh.GetComponent<MeshRenderer>().material != previewTankBaseMesh.GetComponent<MeshRenderer>().material
+            || prefabTankTowerMesh.GetComponent<MeshRenderer>().material != previewTankTowerMesh.GetComponent<MeshRenderer>().material
+           )
+        {
+            ShowConfirmExitMenu(true);
+        }
+        else
+            ReturnToMainMenu();
+    }
+
+    public void ShowConfirmExitMenu(bool show)
+    {
+        confirmExitMenu.SetActive(show);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void SaveSettings()
