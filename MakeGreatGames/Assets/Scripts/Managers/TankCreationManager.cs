@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class TankCreationManager : MonoBehaviour
+public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField]
     GameObject tankPrefab, confirmExitMenu;
+
+    [SerializeField]
+    Button rotLeftButton, rotRightButton;
 
     MeshFilter prefabTankBaseMesh, prefabTankTowerMesh, previewTankBaseMesh, previewTankTowerMesh;
 
@@ -16,7 +21,11 @@ public class TankCreationManager : MonoBehaviour
 
     Material[][][] allMats = new Material[2][][];
 
-    private void Awake()
+    GameObject previewTank;
+
+    float rotAmount = 0f;
+
+    private void Start()
     {
         Object[] loadedBaseMeshes = Resources.LoadAll("Meshes/Bases");
         Object[] loadedTowerMeshes = Resources.LoadAll("Meshes/Towers");
@@ -33,11 +42,7 @@ public class TankCreationManager : MonoBehaviour
         prefabTankBaseMesh = tankPrefab.GetComponentInChildren<MeshFilter>();
         prefabTankTowerMesh = prefabTankBaseMesh.GetComponentInChildren<MeshFilter>();
 
-        if (prefabTankBaseMesh == null)
-            print("nullmeshyao");
-
-
-        GameObject previewTank = Instantiate(tankPrefab);
+        previewTank = Instantiate(tankPrefab);
 
         previewTankBaseMesh = previewTank.GetComponentInChildren<MeshFilter>();
         previewTankTowerMesh = previewTankBaseMesh.GetComponentInChildren<MeshFilter>();
@@ -48,7 +53,34 @@ public class TankCreationManager : MonoBehaviour
             p.Stop();
 
         previewTank.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+
+
     }
+
+    private void Update()
+    {
+        if (rotAmount != 0f)
+            previewTank.transform.Rotate(0f, rotAmount * Time.deltaTime, 0f);
+    }
+
+    /*
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+            rotAmount = 0f;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.selectedObject == rotLeftButton)
+                rotAmount = 50f;
+            else if (eventData.selectedObject == rotLeftButton)
+                rotAmount = -50f;
+    }
+
+    */
 
     public void ChangeMat(bool next)
     {
@@ -63,6 +95,11 @@ public class TankCreationManager : MonoBehaviour
     public void ChangeTowerMesh(bool next)
     {
 
+    }
+
+    public void RotateTank(float amount)
+    {
+        rotAmount = amount;
     }
 
     public void ReturnButtonPressed()
