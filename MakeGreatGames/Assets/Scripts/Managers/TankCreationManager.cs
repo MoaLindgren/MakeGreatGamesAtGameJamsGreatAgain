@@ -19,7 +19,7 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
     Mesh[][] allMeshes = new Mesh[2][];
 
-    Material[][][] allMats = new Material[2][][];
+    Dictionary<string, Material[]>[] allMats = new Dictionary<string, Material[]>[2];
 
     GameObject previewTank;
 
@@ -53,7 +53,19 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
             p.Stop();
 
         previewTank.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-        
+
+        allMats[0] = new Dictionary<string, Material[]>();
+        allMats[1] = new Dictionary<string, Material[]>();
+
+        foreach (Mesh baseMesh in loadedBaseMeshes)
+        {
+            allMats[0].Add(baseMesh.name, (Material[])Resources.LoadAll("Materials/Bases/" + baseMesh.name, typeof(Material)));
+        }
+        foreach (Mesh towerMesh in loadedTowerMeshes)
+        {
+            allMats[1].Add(towerMesh.name, (Material[])Resources.LoadAll("Materials/Towers/" + towerMesh.name, typeof(Material)));
+        }
+
     }
 
     private void Update()
