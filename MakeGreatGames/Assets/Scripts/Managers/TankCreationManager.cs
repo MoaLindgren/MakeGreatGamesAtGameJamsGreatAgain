@@ -65,7 +65,6 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
         {
             allMats[1].Add(towerMesh.name, (Material[])Resources.LoadAll("Materials/Towers/" + towerMesh.name, typeof(Material)));
         }
-
     }
 
     private void Update()

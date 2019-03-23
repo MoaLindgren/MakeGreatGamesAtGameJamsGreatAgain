@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     #region PrivateVariables
 
-    XmlDocument highScoreXml = new XmlDocument();
+    XmlDocument highScoreXml = new XmlDocument(), statsXML = new XmlDocument();
 
     int score = 0;
 
@@ -119,6 +120,7 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += ResetTimescale;
         Cursor.visible = false;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
+        statsXML.Load(Application.streamingAssetsPath + "/TankStatsXML.xml");
         Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
         cam = FindObjectOfType<Camera>();
         if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
@@ -143,6 +145,28 @@ public class GameManager : MonoBehaviour
             paused = !paused;
             PauseAndUnpause(paused);
         }
+    }
+
+    public T GetTankStat<T>(string baseOrTower, string objectName, string statName) where T : IComparable
+    {
+        foreach (XmlNode node in statsXML.SelectNodes("//" + baseOrTower))
+        {
+            if (node.Attributes["Name"].Value == objectName)
+            {
+                T returnVar;
+                try
+                {
+                    returnVar = (T)Convert.ChangeType(node.Attributes[statName].Value, typeof(T));
+
+                }
+                catch
+                {
+                    returnVar = (T)Convert.ChangeType(statsXML.SelectSingleNode("/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));
+                }
+                return returnVar;
+            }
+        }
+        return (T)Convert.ChangeType(statsXML.SelectSingleNode("/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));
     }
 
     public void RestartGame()
