@@ -156,17 +156,18 @@ public class GameManager : MonoBehaviour
                 T returnVar;
                 try
                 {
-                    returnVar = (T)Convert.ChangeType(node.Attributes[statName].Value, typeof(T));
-
+                    returnVar = (T)Convert.ChangeType(node.Attributes[statName].Value, typeof(T));  //Value successfully converted
                 }
                 catch
                 {
-                    returnVar = (T)Convert.ChangeType(statsXML.SelectSingleNode("/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));
+                    print("Value could not be converted, returning default value");
+                    returnVar = (T)Convert.ChangeType(statsXML.SelectSingleNode("/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));    //Value could not be converted, returning default value
                 }
                 return returnVar;
             }
         }
-        return (T)Convert.ChangeType(statsXML.SelectSingleNode("/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));
+        print("Item not found, returning default value");
+        return (T)Convert.ChangeType(statsXML.SelectSingleNode("/Components/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));     //Item not found, returning default value
     }
 
     public void RestartGame()

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <Components>
   <Bases>
-    <Default Name="DefaultBase" MaxSpeed="50" TurningSpeed="2.5" ReverseSpeedMultiplier="0.7" Acceleration="0.025" MaxHealth="100"/>
+    <Default Name="DefaultBase" MaxSpeed="50" TurnSpeed="2,5" ReverseSpeedMultiplier="0,7" Acceleration="0,025" MaxHealth="100"/>
   </Bases>
   <Towers>
-    <Default Name="DefaultTower" TurningSpeed="2.2" Damage ="34" ShotCooldown="1" ProjectileSpeed="80"/>
+    <Default Name="DefaultTower" TurnSpeed="2,2" Damage ="34" ShotCooldown="1" ProjectileSpeed="80"/>
   </Towers>
 </Components>

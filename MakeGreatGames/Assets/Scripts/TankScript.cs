@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField]
-    protected float maxSpeed, turnSpeed, towerTurnSpeed, projectileSpeed, spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime, destroyTimer, acceleration;
+    protected float spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime, destroyTimer;
 
     [SerializeField]
-    protected int maxHealth, shotDamage, specialAttackTimer;
+    protected int specialAttackTimer;
 
     [SerializeField]
     protected GameObject tankBase, tower, trackingMissile, mine;
@@ -19,7 +19,7 @@ public class TankScript : MonoBehaviour
 
     [SerializeField]
     protected Slider healthSlider;
-    
+
     [SerializeField]
     protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles, superShotParticles;
 
@@ -32,7 +32,7 @@ public class TankScript : MonoBehaviour
 
     protected bool alive = true, shielded = false, canShoot = true;
 
-    protected int health, coins = 0, maxCoins = 10, specialAttackIndex;
+    protected int maxHealth, shotDamage, health, coins = 0, maxCoins = 10, specialAttackIndex;
 
     protected delegate void MovementMethod(float amount);
 
@@ -52,16 +52,35 @@ public class TankScript : MonoBehaviour
 
     protected AudioSource engineSound;
 
-    protected float speed;
+    protected float speed, maxSpeed, turnSpeed, towerTurnSpeed, projectileSpeed, acceleration ;
 
     protected virtual void Awake()
     {
-        health = maxHealth;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
         currentSpecialAttack = Nothing;
         canvasTF = healthSlider.gameObject.GetComponentInParent<Transform>();
+    }
+
+    protected virtual void Start()
+    {
+        InitializeStats();
+    }
+
+    protected void InitializeStats()
+    {
+        Transform baseTransform = transform.Find("Tank_Base");
+        string baseName = baseTransform.GetComponent<MeshFilter>().sharedMesh.name, towerName = baseTransform.Find("Tank_Tower") == null ? baseTransform.Find("TowerRotator").Find("Tank_Tower").GetComponent<MeshFilter>().sharedMesh.name : baseTransform.Find("Tank_Tower").GetComponent<MeshFilter>().sharedMesh.name;
+        maxHealth = GameManager.Instance.GetTankStat<int>("Base", baseName, "MaxHealth");
+        turnSpeed = GameManager.Instance.GetTankStat<float>("Base", baseName, "TurnSpeed");
+        acceleration = GameManager.Instance.GetTankStat<float>("Base", baseName, "Acceleration");
+        maxSpeed = GameManager.Instance.GetTankStat<float>("Base", baseName, "MaxSpeed");
+        towerTurnSpeed = GameManager.Instance.GetTankStat<float>("Tower", towerName, "TurnSpeed");
+        projectileSpeed = GameManager.Instance.GetTankStat<float>("Tower", towerName, "ProjectileSpeed");
+        attackCooldown = GameManager.Instance.GetTankStat<float>("Tower", towerName, "ShotCooldown");
+        shotDamage = GameManager.Instance.GetTankStat<int>("Tower", towerName, "Damage");
+        health = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
     }

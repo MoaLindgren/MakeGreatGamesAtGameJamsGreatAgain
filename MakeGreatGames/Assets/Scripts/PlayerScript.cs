@@ -27,8 +27,9 @@ public class PlayerScript : TankScript
         rB = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
     }
 

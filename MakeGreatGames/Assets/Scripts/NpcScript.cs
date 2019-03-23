@@ -33,8 +33,9 @@ public class NpcScript : TankScript, IPoolable
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         CoinManager.Instance.CoinSpawned.AddListener(GenerateNewDestination);
         CoinManager.Instance.CoinCollected.AddListener(GenerateNewDestination);
         target = FindObjectOfType<PlayerScript>();
