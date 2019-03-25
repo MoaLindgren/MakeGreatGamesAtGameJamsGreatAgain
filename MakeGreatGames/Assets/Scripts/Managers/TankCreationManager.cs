@@ -10,8 +10,13 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
     [SerializeField]
     GameObject tankPrefab, confirmExitMenu;
 
+    /*
     [SerializeField]
     Button rotLeftButton, rotRightButton;
+    */
+
+    [SerializeField]
+    Text baseNameText, baseMatText, towerNameText, towerMatText;
 
     MeshFilter prefabTankBaseMesh, prefabTankTowerMesh, previewTankBaseMesh, previewTankTowerMesh;
 
@@ -94,22 +99,43 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
     public void ChangeBaseMat(int next)
     {
-
+        baseMatIndex += next;
+        if (baseMatIndex >= allMats[0][allMeshes[0][baseIndex].name].Length)
+            baseMatIndex = 0;
+        else if (baseMatIndex < 0)
+            baseMatIndex = allMats[0][allMeshes[0][baseIndex].name].Length - 1;
+        baseMatText.text = allMats[0][allMeshes[0][baseIndex].name][baseMatIndex].name;
     }
 
     public void ChangeTowerMat(int next)
     {
-        towerMatIndex = 0;
+        towerMatIndex += next;
+        if (towerMatIndex >= allMats[1][allMeshes[1][towerIndex].name].Length)
+            towerMatIndex = 0;
+        else if (towerMatIndex < 0)
+            towerMatIndex = allMats[1][allMeshes[1][towerIndex].name].Length - 1;
+        towerMatText.text = allMats[1][allMeshes[1][towerIndex].name][towerMatIndex].name;
     }
 
     public void ChangeBaseMesh(int next)
     {
-        baseMatIndex = 0;
+        baseIndex += next;
+        if (baseIndex >= allMeshes[0].Length)
+            baseIndex = 0;
+        else if (baseIndex < 0)
+            baseIndex = allMeshes[0].Length - 1;
+        previewTankBaseMesh.sharedMesh = allMeshes[0][baseIndex];
+        ChangeBaseMat(next);
     }
 
     public void ChangeTowerMesh(int next)
     {
-
+        towerIndex += next;
+        if (towerIndex >= allMeshes[1].Length)
+            towerIndex = 0;
+        else if (towerIndex < 0)
+            towerIndex = allMeshes[1].Length - 1;
+        previewTankTowerMesh.sharedMesh = allMeshes[1][towerIndex];
     }
 
     public void RotateTank(float amount)
