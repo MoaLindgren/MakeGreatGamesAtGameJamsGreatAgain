@@ -71,7 +71,7 @@ public class TankScript : MonoBehaviour
     protected void InitializeStats()
     {
         Transform baseTransform = transform.Find("Tank_Base");
-        string baseName = this is PlayerScript ? baseTransform.GetComponent<MeshFilter>().sharedMesh.name : "Default", towerName = baseTransform.Find("Tank_Tower") == null ? baseTransform.Find("TowerRotator").Find("Tank_Tower").GetComponent<MeshFilter>().sharedMesh.name : baseTransform.Find("Tank_Tower").GetComponent<MeshFilter>().sharedMesh.name;
+        string baseName = this is PlayerScript ? baseTransform.GetComponent<MeshFilter>().sharedMesh.name : "Enemy_Base", towerName = this is PlayerScript ? baseTransform.Find("Tank_Tower").GetComponent<MeshFilter>().sharedMesh.name : "Enemy_Tower";
         maxHealth = GameManager.Instance.GetTankStat<int>("Base", baseName, "MaxHealth");
         turnSpeed = GameManager.Instance.GetTankStat<float>("Base", baseName, "TurnSpeed");
         acceleration = GameManager.Instance.GetTankStat<float>("Base", baseName, "Acceleration");

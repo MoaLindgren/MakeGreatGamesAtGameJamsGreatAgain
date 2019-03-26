@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
                 return returnVar;
             }
         }
-        print("Item not found, returning default value");
+        print(objectName + ": Item " + statName + " not found, returning default value");
         return (T)Convert.ChangeType(statsXML.SelectSingleNode("/Components/" + baseOrTower + "s/Default").Attributes[statName].Value, typeof(T));     //Item not found, returning default value
     }
 
