@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField]
     Transform[] spawnPoints;
+
+    [SerializeField]
+    Text waveCount;
 
     int currentWave = 0, spawnPointIndex = 0, remainingEnemies;
 
@@ -59,7 +63,7 @@ public class WaveSpawner : MonoBehaviour
     {
         waveSpawned = false;
         currentWave++;
-        print("WAVE: " + currentWave);
+        waveCount.text = "<" + currentWave + ">";
         remainingEnemies = currentWave;
         for (int i = 0; i < currentWave && i < 100; i++)
         {
@@ -87,7 +91,11 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator NextWave()
     {
-        yield return new WaitForSeconds(timeBetweenWaves);
+        for (int i = (int)timeBetweenWaves; i > 0; i--)
+        {
+            waveCount.text = ">" + i + "<";
+            yield return new WaitForSeconds(1);
+        }
         StartCoroutine("SpawnWave");
     }
 }

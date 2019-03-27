@@ -47,8 +47,9 @@ public class PlayerScript : TankScript
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!alive)
         {
             return;

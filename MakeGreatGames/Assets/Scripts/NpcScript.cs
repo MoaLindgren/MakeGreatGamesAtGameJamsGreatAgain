@@ -41,8 +41,9 @@ public class NpcScript : TankScript, IPoolable
         target = FindObjectOfType<PlayerScript>();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!isActive || !alive)
         {
             ActivateParticles(backSmoke, false);
@@ -161,6 +162,7 @@ public class NpcScript : TankScript, IPoolable
         AudioManager.Instance.ReturnSource(engineSound);
         agent.enabled = false;
         health = maxHealth;
+        targetHealth = maxHealth;
         coins = 0;
         isActive = false;
         alive = false;
@@ -171,6 +173,7 @@ public class NpcScript : TankScript, IPoolable
         health = maxHealth;
         alive = true;
         healthSlider.value = healthSlider.maxValue;
+        healthSliderDelayed.value = healthSliderDelayed.maxValue;
         isActive = true;
         agent.enabled = true;
         agent.isStopped = false;

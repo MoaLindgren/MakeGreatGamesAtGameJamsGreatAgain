@@ -18,7 +18,7 @@ public class TankScript : MonoBehaviour
     protected Transform shotStart, missileStart;
 
     [SerializeField]
-    protected Slider healthSlider;
+    protected Slider healthSlider, healthSliderDelayed;
 
     [SerializeField]
     protected ParticleSystem[] frontSmoke, backSmoke, cannonParticles, healingParticles, shieldParticles, superShotParticles;
@@ -32,7 +32,7 @@ public class TankScript : MonoBehaviour
 
     protected bool alive = true, shielded = false, canShoot = true;
 
-    protected int maxHealth, shotDamage, health, coins = 0, maxCoins = 10, specialAttackIndex;
+    protected int maxHealth, shotDamage, health, coins = 0, maxCoins = 10, specialAttackIndex, targetHealth;
 
     protected delegate void MovementMethod(float amount);
 
@@ -48,7 +48,7 @@ public class TankScript : MonoBehaviour
 
     protected SpecialAttackMethod[] specialAttackMethods;
 
-    protected Transform canvasTF;
+    protected Transform directSliderTF, delayedSliderTF;
 
     protected AudioSource engineSound;
 
@@ -60,7 +60,8 @@ public class TankScript : MonoBehaviour
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
         currentSpecialAttack = Nothing;
-        canvasTF = healthSlider.gameObject.GetComponentInParent<Transform>();
+        directSliderTF = healthSlider.gameObject.GetComponentInParent<Transform>();
+        delayedSliderTF = healthSliderDelayed.gameObject.GetComponentInParent<Transform>();
     }
 
     protected virtual void Start()
@@ -83,11 +84,24 @@ public class TankScript : MonoBehaviour
         health = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
+        healthSliderDelayed.maxValue = maxHealth;
+        healthSliderDelayed.value = health;
+        targetHealth = maxHealth;
+    }
+
+    protected virtual void Update()
+    {
+        healthSliderDelayed.value = Mathf.Lerp(healthSliderDelayed.value, targetHealth, targetHealth == 0 ? 0.01f : Mathf.Abs((targetHealth / 100f) / (healthSliderDelayed.value / 100f)) / 50f);
+        if(healthSliderDelayed.value < targetHealth || healthSliderDelayed.value - targetHealth < 0.1f)
+        {
+            healthSliderDelayed.value = targetHealth;
+        }
     }
 
     protected void LateUpdate()
     {
-        canvasTF.LookAt(canvasTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
+        directSliderTF.LookAt(directSliderTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
+        delayedSliderTF.LookAt(directSliderTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
     }
 
     public virtual void AddCoin()
@@ -168,6 +182,7 @@ public class TankScript : MonoBehaviour
             return;
         health -= damage;
         healthSlider.value = health;
+        StartCoroutine("WaitForDamage");
         if (this is PlayerScript)
             UIManager.Instance.ShowDamage(health, maxHealth);
         if (health <= 0)
@@ -179,6 +194,12 @@ public class TankScript : MonoBehaviour
         }
         if (this is PlayerScript)
             CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
+    }
+
+    protected IEnumerator WaitForDamage()
+    {
+        yield return new WaitForSeconds(0.7f);
+        targetHealth = health;
     }
 
     protected IEnumerator DestroyTimer()
