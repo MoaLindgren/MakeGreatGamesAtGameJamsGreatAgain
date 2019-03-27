@@ -231,7 +231,7 @@ public class TankScript : MonoBehaviour
         shielded = false;
         foreach (ParticleSystem p in shieldParticles)
         {
-            p.Stop();
+            p.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         AudioManager.Instance.ReturnSource(shieldSound);
     }
