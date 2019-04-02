@@ -7,13 +7,6 @@ using UnityEngine.UI;
 using System.IO;
 using System.Xml;
 
-[Serializable]
-struct ButtonArray
-{
-    [SerializeField]
-    Selectable[] elements;
-}
-
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
@@ -24,9 +17,6 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField]
     Text[] highScoreNameTexts, highScoreTexts;
-
-    [SerializeField]
-    ButtonArray[] allGUIElements;
 
     XmlDocument highscoreDoc = new XmlDocument();
 
