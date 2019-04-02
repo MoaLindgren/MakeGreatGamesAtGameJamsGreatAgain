@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using System.Xml;
+
+[Serializable]
+struct ButtonArray
+{
+    [SerializeField]
+    Selectable[] elements;
+}
 
 public class MenuManager : MonoBehaviour
 {
@@ -16,6 +24,9 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField]
     Text[] highScoreNameTexts, highScoreTexts;
+
+    [SerializeField]
+    ButtonArray[] allGUIElements;
 
     XmlDocument highscoreDoc = new XmlDocument();
 
@@ -59,7 +70,7 @@ public class MenuManager : MonoBehaviour
         if (!show)
             playerNameInput.text = "";
         newGameMenu.SetActive(show);
-        if(show)
+        if (show)
         {
             playerNameInput.Select();
             playerNameInput.ActivateInputField();
