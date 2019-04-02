@@ -101,7 +101,7 @@ public class PlayerScript : TankScript
             return;
         }
 
-        float horizontal = Input.GetAxis("Horizontal"), vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal"), vertical = Input.GetAxis("Vertical");
 
         rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
