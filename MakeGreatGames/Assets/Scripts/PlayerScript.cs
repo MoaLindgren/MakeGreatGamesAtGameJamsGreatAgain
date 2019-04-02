@@ -55,10 +55,8 @@ public class PlayerScript : TankScript
             return;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetAxisRaw("Line") < 0f)
         {
-            currentRotationMethod = RotateTower;
-            //currentMovement = DontMoveTank;
             RaycastHit hit;
             if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
@@ -70,29 +68,24 @@ public class PlayerScript : TankScript
         }
         else
         {
-            currentRotationMethod = RotateTank;
-            //currentMovement = MoveTank;
             line.enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetAxis("Fire") > 0.5f && canShoot)
         {
-            if (canShoot)
-            {
-                CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
-                Shoot();
-            }
+            CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
+            Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && coins >= CoinManager.Instance.CoinsToUlt)
+        if (Input.GetButtonDown("Spin") && coins >= CoinManager.Instance.CoinsToUlt)
         {
             coins -= CoinManager.Instance.CoinsToUlt;
             UIManager.Instance.Coins = coins;
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
-
-        if (Input.GetKeyDown(KeyCode.Q) && currentSpecialAttack != Nothing)
+        
+        if (Input.GetButtonDown("Ultimate") && currentSpecialAttack != Nothing)
         {
             currentSpecialAttack();
             StopCoroutine("SpecialAttackTimer");
@@ -108,11 +101,13 @@ public class PlayerScript : TankScript
             return;
         }
 
+        float horizontal = Input.GetAxis("Horizontal"), vertical = Input.GetAxis("Vertical");
+
         rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        if (Input.GetAxisRaw("Vertical") > 0f)
+        if (vertical > 0f)
         {
-            speed = Mathf.Lerp(speed, maxSpeed, acceleration);
+            speed = Mathf.Lerp(speed, maxSpeed, acceleration * vertical);
             foreach (ParticleSystem p in backSmoke)
             {
                 p.emissionRate = 0;
@@ -122,9 +117,9 @@ public class PlayerScript : TankScript
                 p.emissionRate = 20;
             }
         }
-        else if (Input.GetAxisRaw("Vertical") < 0f)
+        else if (vertical < 0f)
         {
-            speed = Mathf.Lerp(speed, -maxSpeed * 0.7f, acceleration);
+            speed = Mathf.Lerp(speed, -maxSpeed * 0.7f, acceleration * Mathf.Abs(vertical));
             foreach (ParticleSystem p in backSmoke)
             {
                 p.emissionRate = 20;
@@ -154,28 +149,24 @@ public class PlayerScript : TankScript
         }
         speed = Mathf.Clamp(speed, -maxSpeed * 0.7f, maxSpeed);
         currentMovement(speed);
-        float turnAmount = currentRotationMethod == RotateTank ? turnSpeed : towerTurnSpeed;
-        if (Input.GetKey(KeyCode.A))
+        if (horizontal < -0.19f)
         {
-            currentRotationMethod(-turnAmount);
+            RotateTank(-turnSpeed * Mathf.Abs(horizontal));
             rotationCompensation = -turnSpeed;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (horizontal > 0.19f)
         {
-            currentRotationMethod(turnAmount);
+            RotateTank(turnSpeed * Mathf.Abs(horizontal));
             rotationCompensation = turnSpeed;
         }
         else
         {
             rotationCompensation = 0f;
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        float aim = Input.GetAxis("Aim");
+        if (Mathf.Abs(aim) > 0.19f)
         {
-            RotateTower(-towerTurnSpeed);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            RotateTower(towerTurnSpeed);
+            RotateTower(towerTurnSpeed * aim);
         }
     }
 }
