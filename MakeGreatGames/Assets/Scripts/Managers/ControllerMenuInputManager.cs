@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-
-[Serializable]
-struct Selectables
-{
-    [SerializeField]
-    Selectable[] selectables;
-}
+using UnityEngine.EventSystems;
 
 public class ControllerMenuInputManager : MonoBehaviour
 {
     [SerializeField]
-    Selectables[] allElements;
+    GameObject defaultSelectable;
 
-    int[] currentSelectedElements;
-
-    int currentElementArr = 0;
+    Selectable currentSelectable;
 
     static ControllerMenuInputManager instance;
 
@@ -36,16 +28,25 @@ public class ControllerMenuInputManager : MonoBehaviour
 
     private void Start()
     {
-        currentSelectedElements = new int[allElements.Length];
+        currentSelectable = defaultSelectable.GetComponent<Selectable>();
+        EventSystem.current.SetSelectedGameObject(currentSelectable.gameObject);
     }
 
     private void Update()
     {
+        print(currentSelectable.name);
+        currentSelectable = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>();
+        if (Input.GetButtonDown("Submit") && currentSelectable is Button)
+        {
+            (currentSelectable as Button).onClick.Invoke();
+        }
+        else if(currentSelectable is Slider && Input.GetAxis("Horizontal") != 0f)
+        {
+            (currentSelectable as Slider).value += Input.GetAxis("Horizontal");
+        }
+        else if (Input.GetButtonDown("Cancel"))
+        {
 
-    }
-
-    public void ChangeCurrentElementArr()
-    {
-
+        }
     }
 }
