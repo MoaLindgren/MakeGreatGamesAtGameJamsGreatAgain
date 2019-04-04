@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using System.Xml;
-using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -22,8 +21,6 @@ public class MenuManager : MonoBehaviour
     XmlDocument highscoreDoc = new XmlDocument();
 
     static MenuManager instance;
-
-    Selectable currentSelectable;
 
     public static MenuManager Instance
     {
