@@ -7,10 +7,10 @@ using UnityEngine.EventSystems;
 
 public class ControllerMenuInputManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject defaultSelectable;
+    Selectable currentSelectable, lastSelectable;
 
-    Selectable currentSelectable;
+    [SerializeField]
+    Button backButton;
 
     static ControllerMenuInputManager instance;
 
@@ -26,27 +26,32 @@ public class ControllerMenuInputManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        currentSelectable = defaultSelectable.GetComponent<Selectable>();
-        EventSystem.current.SetSelectedGameObject(currentSelectable.gameObject);
-    }
-
     private void Update()
     {
-        print(currentSelectable.name);
-        currentSelectable = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>();
-        if (Input.GetButtonDown("Submit") && currentSelectable is Button)
+        GameObject currentSelectedGO = EventSystem.current.currentSelectedGameObject;
+        if (currentSelectedGO == null)
         {
-            (currentSelectable as Button).onClick.Invoke();
+            lastSelectable.Select();
+            currentSelectedGO = lastSelectable.gameObject;
         }
-        else if(currentSelectable is Slider && Input.GetAxis("Horizontal") != 0f)
+        currentSelectable = currentSelectedGO.GetComponent<Selectable>();
+        if (currentSelectable is Slider && Input.GetAxis("Horizontal") != 0f)
         {
             (currentSelectable as Slider).value += Input.GetAxis("Horizontal");
         }
+        else if(currentSelectable is InputField && Input.GetAxisRaw("Vertical") != 0f)
+        {
+            (currentSelectable as InputField).DeactivateInputField();
+        }
         else if (Input.GetButtonDown("Cancel"))
         {
-
+            backButton.onClick.Invoke();
         }
+        lastSelectable = currentSelectable;
+    }
+
+    public void SetBackButton(GameObject newBackButton)
+    {
+        backButton = newBackButton.GetComponent<Button>();
     }
 }
