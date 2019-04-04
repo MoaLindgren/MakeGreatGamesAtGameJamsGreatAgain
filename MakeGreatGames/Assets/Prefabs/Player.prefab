@@ -236,7 +236,7 @@ MonoBehaviour:
   - {fileID: 3085382481955018209}
   superShotParticles:
   - {fileID: 279442314913653613}
-  forceSpecialAttack: 1
+  forceSpecialAttack: 0
   forcedSpecialIndex: 4
   line: {fileID: 8429361019541647097}
 --- !u!54 &1166912500125730362
