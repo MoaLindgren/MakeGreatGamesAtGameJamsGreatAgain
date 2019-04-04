@@ -236,8 +236,8 @@ MonoBehaviour:
   - {fileID: 3085382481955018209}
   superShotParticles:
   - {fileID: 279442314913653613}
-  forceSpecialAttack: 0
-  forcedSpecialIndex: 6
+  forceSpecialAttack: 1
+  forcedSpecialIndex: 4
   line: {fileID: 8429361019541647097}
 --- !u!54 &1166912500125730362
 Rigidbody:
@@ -1921,15 +1921,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8429361019468322964}
     m_Modifications:
-    - target: {fileID: 6375150835294236593, guid: e5224995db114cf41ba5d92269b2fe3f,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 270519871128080630, guid: e5224995db114cf41ba5d92269b2fe3f,
         type: 3}
       propertyPath: m_Name
       value: PowerShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375150835294236593, guid: e5224995db114cf41ba5d92269b2fe3f,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3881731928164954613, guid: e5224995db114cf41ba5d92269b2fe3f,
         type: 3}

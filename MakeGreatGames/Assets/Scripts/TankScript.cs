@@ -262,6 +262,18 @@ public class TankScript : MonoBehaviour
             p.Stop();
     }
 
+    protected IEnumerator SuperHealing()
+    {
+        for(int i = 0; i < 20; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            health = Mathf.Clamp(health + (maxHealth / 20), 0, maxHealth);
+            healthSlider.value = health;
+            if (this is PlayerScript)
+                UIManager.Instance.ShowDamage(health, maxHealth);
+        }
+    }
+
     protected void DeployMine()
     {
         GameManager.Instance.MinePool.GetObject(transform.position, Quaternion.identity);
@@ -325,10 +337,7 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        health = maxHealth;
-        healthSlider.value = health;
-        if (this is PlayerScript)
-            UIManager.Instance.ShowDamage(health, maxHealth);
+        StartCoroutine("SuperHealing");
     }
 
     protected void SuperShots()
