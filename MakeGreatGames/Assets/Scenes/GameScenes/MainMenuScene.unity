@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1336,9 +1336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1914019569}
+    m_SelectOnDown: {fileID: 1238738563}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2185,9 +2185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1238738563}
+    m_SelectOnDown: {fileID: 1914019569}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2562,9 +2562,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 577757919}
+    m_SelectOnDown: {fileID: 898357354}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2819,18 +2819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714b43c14d3bbdc4fbf6dbffd8cb1625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allElements:
-  - selectables:
-    - {fileID: 577757919}
-    - {fileID: 1238738563}
-    - {fileID: 898357354}
-    - {fileID: 1914019569}
-  - selectables:
-    - {fileID: 370846507}
-    - {fileID: 1917358189}
-    - {fileID: 667155427}
-  - selectables:
-    - {fileID: 637443534}
+  defaultSelectable: {fileID: 577757917}
 --- !u!1 &1383154082
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,9 +3679,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 898357354}
+    m_SelectOnDown: {fileID: 577757919}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
