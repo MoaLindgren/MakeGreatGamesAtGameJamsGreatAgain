@@ -55,7 +55,7 @@ public class PlayerScript : TankScript
             return;
         }
 
-        if (Input.GetAxisRaw("Line") < 0f)
+        if (Input.GetButton("Line"))
         {
             RaycastHit hit;
             if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
@@ -101,7 +101,7 @@ public class PlayerScript : TankScript
             return;
         }
 
-        float horizontal = Input.GetAxisRaw("Horizontal"), vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("TankHorizontal"), vertical = Input.GetAxis("TankVertical");
 
         rB.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
