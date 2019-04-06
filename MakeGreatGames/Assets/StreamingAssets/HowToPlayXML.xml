@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
 <HowToPlay>
-  <Page Name="Example Page" Text="Yes, this is how to play gejm." />
+  <Page Name="Example Page 1" Text="Yes, this is how to play gejm." />
+  <Page Name="Example Page 2" Text="Also yes. gejm." />
+  <Page Name="Example Page 3" Text="WOOOHOOOOOO" />
 </HowToPlay>

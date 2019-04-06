@@ -4,16 +4,24 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Xml;
 
 public class ControllerMenuInputManager : MonoBehaviour
 {
     Selectable currentSelectable, lastSelectable;
 
     [SerializeField]
-    Button backButton;
+    Button backButton, previousPageButton, nextPageButton;
 
     [SerializeField]
     Selectable defaultSelectable;
+
+    [SerializeField]
+    Text pageName, pageText;
+
+    string[] pageTexts, pageNames;
+
+    int currentPage = 0;
 
     static ControllerMenuInputManager instance;
 
@@ -29,6 +37,16 @@ public class ControllerMenuInputManager : MonoBehaviour
         instance = this;
         if (defaultSelectable != null)
             defaultSelectable.Select();
+        XmlDocument howToPlayDoc = new XmlDocument();
+        howToPlayDoc.Load(Application.streamingAssetsPath + "/HowToPlayXML.xml");
+        XmlNodeList textNodes = howToPlayDoc.SelectNodes("//Page");
+        pageTexts = new string[textNodes.Count];
+        pageNames = new string[textNodes.Count];
+        for(int i = 0; i < pageTexts.Length; i++)
+        {
+            pageTexts[i] = textNodes[i].Attributes["Text"].Value;
+            pageNames[i] = textNodes[i].Attributes["Name"].Value;
+        }
     }
 
     private void Update()
@@ -63,5 +81,41 @@ public class ControllerMenuInputManager : MonoBehaviour
     public void SetBackButton(GameObject newBackButton)
     {
         backButton = newBackButton.GetComponent<Button>();
+    }
+
+    public void NewPage(int next)
+    {
+        currentPage += Mathf.Clamp(next, -1, 1);
+        if(currentPage <= 0)
+        {
+            previousPageButton.gameObject.SetActive(false);
+            backButton.Select();
+        }
+        else
+        {
+            previousPageButton.gameObject.SetActive(true);
+        }
+        if (currentPage >= pageTexts.Length - 1)
+        {
+            nextPageButton.gameObject.SetActive(false);
+            backButton.Select();
+        }
+        else
+        {
+            nextPageButton.gameObject.SetActive(true);
+        }
+        pageName.text = pageNames[currentPage];
+        pageText.text = pageTexts[currentPage];
+    }
+
+    public void LeaveHowToPlay()
+    {
+        currentPage = 0;
+        NewPage(0);
+    }
+
+    public void Select(GameObject newSelectableGO)
+    {
+        newSelectableGO.GetComponent<Selectable>().Select();
     }
 }
