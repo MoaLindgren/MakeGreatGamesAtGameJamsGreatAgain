@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     Text[] highScoreNameTexts, highScoreTexts;
 
-    XmlDocument highscoreDoc = new XmlDocument();
+    XmlDocument highscoreXML = new XmlDocument(), settingsXML = new XmlDocument(), howToPlayXML = new XmlDocument();
 
     static MenuManager instance;
 
@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour
     {
         if (instance != null && instance != this)
             Destroy(this);
-        highscoreDoc.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
+        highscoreXML.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         Time.timeScale = 1;
     }
 
@@ -49,7 +49,7 @@ public class MenuManager : MonoBehaviour
         if (show)
         {
             int index = 0;
-            foreach (XmlNode node in highscoreDoc.SelectNodes("//Player"))
+            foreach (XmlNode node in highscoreXML.SelectNodes("//Player"))
             {
                 highScoreNameTexts[index].text = node.Attributes[0].Value;
                 highScoreTexts[index].text = node.Attributes[1].Value;
