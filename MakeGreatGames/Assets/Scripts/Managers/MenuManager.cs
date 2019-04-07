@@ -101,7 +101,11 @@ public class MenuManager : MonoBehaviour
         while (!job.isDone)
         {
             if (loadingScreen != null)
-                loadingScreen.GetComponentInChildren<Slider>().value = job.progress;
+            {
+                Slider slider = loadingScreen.GetComponentInChildren<Slider>();
+                slider.value = job.progress;
+                slider.gameObject.GetComponentInChildren<Text>().text = (job.progress * 100).ToString() + "%";
+            }
             yield return null;
         }
     }
