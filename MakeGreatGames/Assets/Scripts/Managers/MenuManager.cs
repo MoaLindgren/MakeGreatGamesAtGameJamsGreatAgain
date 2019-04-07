@@ -100,7 +100,8 @@ public class MenuManager : MonoBehaviour
         AsyncOperation job = SceneManager.LoadSceneAsync(sceneIndex);
         while (!job.isDone)
         {
-            loadingScreen.GetComponentInChildren<Slider>().value = job.progress;
+            if (loadingScreen != null)
+                loadingScreen.GetComponentInChildren<Slider>().value = job.progress;
             yield return null;
         }
     }
