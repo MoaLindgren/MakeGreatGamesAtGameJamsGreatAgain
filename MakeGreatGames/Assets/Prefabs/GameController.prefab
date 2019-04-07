@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 151544142004321167}
   - component: {fileID: 151544142004321168}
-  - component: {fileID: 151544142004321169}
   - component: {fileID: 151544142004321170}
   - component: {fileID: 151544142720354241}
   - component: {fileID: 151544142720354246}
@@ -55,102 +54,17 @@ MonoBehaviour:
   - {fileID: 0}
   minCoinTime: 5
   maxCoinTime: 10
---- !u!82 &151544142004321169
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151544142004321171}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  coinsToUlt: 0
+  CoinSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  CoinCollected:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &151544142004321170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ed5d747ad13594581d8ab3b9fe741a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
   gameOverScreen: {fileID: 0}
+  playerPrefab: {fileID: 0}
+  playerSpawn: {fileID: 0}
+  scoreText: {fileID: 0}
+  enemyPool: {fileID: 0}
+  projectilePool: {fileID: 0}
+  missilePool: {fileID: 0}
+  minePool: {fileID: 0}
 --- !u!114 &151544142720354241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52a7d06d96d1b14e968b965c2e2f0ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank: {fileID: 2518981942468308666, guid: 9e62922ed49354344b6c2169ce1ad50c, type: 3}
   timeBetweenSpawns: 2
   timeBetweenWaves: 10
   spawnPoints:
@@ -185,6 +104,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  waveCount: {fileID: 0}
 --- !u!114 &151544142720354246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,5 +118,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countCoinsText: {fileID: 0}
+  specialAttackTimer: {fileID: 0}
+  scoreText: {fileID: 0}
   coinProgressSlider: {fileID: 0}
-  maxNumberOfCoins: 3
+  pauseMenu: {fileID: 0}
+  pauseMainMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  readyText: {fileID: 0}
+  specialAttacksSprites: []
+  specialAttackDefaultSprite: {fileID: 0}
+  specialAttackImage: {fileID: 0}
+  damageOverlay: {fileID: 0}

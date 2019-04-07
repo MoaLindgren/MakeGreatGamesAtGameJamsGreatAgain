@@ -41,11 +41,11 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                float4 col = tex2D(_MainTex, i.uv);
                 // just invert the colors
-                //col.rgb = 1 - col.rgb;
-			fixed val = (col.r + col.g + col.b) / 3;
-                return float4(val, val, val, col.a);
+                col.rgb = 1 - col.rgb;
+			//fixed val = (col.r + col.g + col.b) / 3;
+				return col;//float4(val, val, val, col.a);
             }
             ENDCG
         }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 
 public class CameraShaker : MonoBehaviour
 {
@@ -46,6 +45,7 @@ public class CameraShaker : MonoBehaviour
         shakeDuration += duration;//Add to the current time.
         startDuration = shakeDuration;//Reset the start time.
 
+        ControllerShaker.Instance.Shake(amount * 2, duration * 1.5f);
         if (!isRunning) StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
     }
 
@@ -55,7 +55,6 @@ public class CameraShaker : MonoBehaviour
 
         while (shakeDuration > 0.01f && GameManager.Instance.GameRunning)
         {
-            GamePad.SetVibration(0, shakeAmount, shakeAmount);
             Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;//A Vector3 to add to the Local Rotation
             rotationAmount.z = 0;//Don't change the Z; it looks funny.
 
@@ -71,13 +70,13 @@ public class CameraShaker : MonoBehaviour
 
             yield return null;
         }
-        GamePad.SetVibration(0, 0, 0);
         transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
         isRunning = false;
     }
 
     public void StopShaking()
     {
+        ControllerShaker.Instance.Shake(0f, Time.deltaTime);
         gameRunning = false;
         shakeDuration = 0f;
         shakeAmount = 0f;

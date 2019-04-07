@@ -52,9 +52,9 @@
 			//col = fixed4(val, val, val, col.a);
 			// apply fog
 			UNITY_APPLY_FOG(i.fogCoord, col);
-		fixed val = (i.uv.x + i.uv.y) / 2;
-		col *= float4(val, val, val, 1);
-		return col;
+			fixed val = (i.uv.x + i.uv.y) / 2;
+			col *= float4(val, val, val, 1);
+			return col;
 		}
 		ENDCG
 	}

@@ -340,6 +340,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 865876875}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &70431601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 151544142004321171, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 151544142720354239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &70431602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70431601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a24f77670be939499cd6962aa00276b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &106844953
 GameObject:
   m_ObjectHideFlags: 0
@@ -4085,7 +4103,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 151544142720354239}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 70431601}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1329202961eb5f740a19e2a7d378b37f, type: 3}
@@ -5767,7 +5785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorblindShader: {fileID: 4800000, guid: 542b38ea993eb5c489682e81d0521689, type: 3}
-  mat: {fileID: 1079906869}
+  mat: {fileID: 1248793823}
 --- !u!20 &1004792665
 Camera:
   m_ObjectHideFlags: 0
@@ -6673,31 +6691,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
---- !u!21 &1079906869
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Custom/ColorblindModeShader2
-  m_Shader: {fileID: 4800000, guid: 542b38ea993eb5c489682e81d0521689, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
 --- !u!1 &1097667216
 GameObject:
   m_ObjectHideFlags: 0
@@ -7114,6 +7107,31 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 865876875}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1248793823
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom/ColorblindModeShader2
+  m_Shader: {fileID: 4800000, guid: 542b38ea993eb5c489682e81d0521689, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 333410b7daed0ec4e90c03e07a42249b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
 --- !u!1 &1260530014
 GameObject:
   m_ObjectHideFlags: 0
@@ -13596,29 +13614,24 @@ PrefabInstance:
       propertyPath: maxCoinTime
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: dc26aea717af25f438c9ea1cc615dbf8, type: 3}
-    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: m_Volume
       value: 0.7
       objectReference: {fileID: 0}
-    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 243660658698486536, guid: 2be52377d3138dc43ad01021c8bc7900,
         type: 2}
-    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -13699,8 +13712,7 @@ PrefabInstance:
       propertyPath: waveCount
       value: 
       objectReference: {fileID: 857438517}
-    m_RemovedComponents:
-    - {fileID: 151544142004321169, guid: 8dfb805a7fda1024fa9404ea381cf5a2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dfb805a7fda1024fa9404ea381cf5a2, type: 3}
 --- !u!224 &4722738704996503059
 RectTransform:

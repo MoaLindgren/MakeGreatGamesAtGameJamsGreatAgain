@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteAlways]
+[ExecuteInEditMode]
 public class ShaderReplacer : MonoBehaviour
 {
     [SerializeField]
@@ -33,6 +33,7 @@ public class ShaderReplacer : MonoBehaviour
     private void Awake()
     {
         mat = new Material(colorblindShader);
+        print("ello!!");
     }
 
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
