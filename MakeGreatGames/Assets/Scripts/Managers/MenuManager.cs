@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject newGameMenu, highScoreMenu;
+    GameObject newGameMenu, highScoreMenu, loadingScreen;
 
     [SerializeField]
     InputField playerNameInput;
@@ -90,6 +90,18 @@ public class MenuManager : MonoBehaviour
 
     void LoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        if (loadingScreen != null)
+            loadingScreen.SetActive(true);
+        StartCoroutine(SceneLoader(sceneIndex));
+    }
+
+    IEnumerator SceneLoader(int sceneIndex)
+    {
+        AsyncOperation job = SceneManager.LoadSceneAsync(sceneIndex);
+        while (!job.isDone)
+        {
+            loadingScreen.GetComponentInChildren<Slider>().value = job.progress;
+            yield return null;
+        }
     }
 }
