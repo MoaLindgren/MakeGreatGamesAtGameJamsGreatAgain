@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class KeepWorldRotationScript : MonoBehaviour
 {
+    [SerializeField]
+    bool local = false;
+
     void Update()
     {
-        transform.rotation = Quaternion.identity;
+        if (!local)
+            transform.rotation = Quaternion.identity;
+        else
+            transform.localRotation = Quaternion.identity;
     }
 }
