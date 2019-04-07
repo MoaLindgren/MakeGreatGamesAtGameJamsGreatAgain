@@ -2,7 +2,7 @@
 <Components>
   <Bases>
     <Default Name="DefaultBase" MaxSpeed="50" TurnSpeed="2,5" ReverseSpeedMultiplier="0,7" Acceleration="0,025" MaxHealth="100"/>
-    <Base Name="Tank_Body" MaxSpeed="50" TurnSpeed="2,5" ReverseSpeedMultiplier="0,7" Acceleration="0,025" MaxHealth="100000"/>
+    <Base Name="Tank_Body" MaxSpeed="50" TurnSpeed="2,5" ReverseSpeedMultiplier="0,7" Acceleration="0,025" MaxHealth="100"/>
     <Base Name="Enemy_Base" MaxSpeed="20" TurnSpeed="1,4" ReverseSpeedMultiplier="0,7" Acceleration="0,025" MaxHealth="100"/>
   </Bases>
   <Towers>
