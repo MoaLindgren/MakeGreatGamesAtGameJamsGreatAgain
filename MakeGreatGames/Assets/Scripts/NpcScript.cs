@@ -67,17 +67,17 @@ public class NpcScript : TankScript, IPoolable
                     {
                         Shoot();
                     }
-                    if (currentSpecialAttack != Nothing)
-                    {
-                        currentSpecialAttack();
-                        currentSpecialAttack = Nothing;
-                    }
                 }
             }
             else if (Vector3.Distance(transform.position - new Vector3(0f, transform.position.y, 0f), agent.destination - new Vector3(0f, agent.destination.y, 0f)) <= agent.stoppingDistance + 1f)
             {
                 GenerateNewDestination();
             }
+        }
+        if (currentSpecialAttack != Nothing && ShouldUltimate(currentSpecialAttack))
+        {
+            currentSpecialAttack();
+            currentSpecialAttack = Nothing;
         }
         if (coins >= CoinManager.Instance.CoinsToUlt)
         {
@@ -131,6 +131,43 @@ public class NpcScript : TankScript, IPoolable
             }
         }
         agent.destination = CoinManager.Instance.Coins[coinIndex].transform.position;
+    }
+
+    protected bool ShouldUltimate(SpecialAttackMethod currentUlt)
+    {
+        if (currentUlt == null || currentUlt == Nothing)      //Not allowed to use switch on delegate methods :c ugly code it is!
+        {
+            return false;
+        }
+        else if (Time.time > ultStartedTime + specialAttackTimer - 1)
+        {
+            return true;
+        }
+        else if (currentUlt == SuperHeal || currentUlt == Heal)
+        {
+            if (health <= (maxHealth / 3) * 4)
+                return true;
+            return false;
+        }
+        else if (currentUlt == SuperShots || currentUlt == SpawnShield)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(shotStart.transform.position, (target.transform.position - shotStart.transform.position), out hit))
+            {
+                if (hit.transform.GetComponent<PlayerScript>() != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else if(currentUlt == DeployMine)
+        {
+            if (Vector3.Distance(transform.position, agent.destination) < 10f)
+                return true;
+            return false;
+        }
+        return true;
     }
 
     protected override IEnumerator SpeedBoosted()

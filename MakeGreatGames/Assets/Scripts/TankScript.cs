@@ -52,7 +52,7 @@ public class TankScript : MonoBehaviour
 
     protected AudioSource engineSound;
 
-    protected float speed, maxSpeed, turnSpeed, towerTurnSpeed, projectileSpeed, acceleration ;
+    protected float speed, maxSpeed, turnSpeed, towerTurnSpeed, projectileSpeed, acceleration, ultStartedTime = 0f;
 
     protected virtual void Awake()
     {
@@ -215,8 +215,8 @@ public class TankScript : MonoBehaviour
 
     protected IEnumerator SpecialAttackTimer()
     {
+        ultStartedTime = Time.time;
         yield return new WaitForSeconds(specialAttackTimer);
-        print("Special attack timed out");
         currentSpecialAttack = Nothing;
     }
 
