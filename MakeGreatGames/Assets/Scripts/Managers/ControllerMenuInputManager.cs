@@ -42,7 +42,7 @@ public class ControllerMenuInputManager : MonoBehaviour
         XmlNodeList textNodes = howToPlayDoc.SelectNodes("//Page");
         pageTexts = new string[textNodes.Count];
         pageNames = new string[textNodes.Count];
-        for(int i = 0; i < pageTexts.Length; i++)
+        for (int i = 0; i < pageTexts.Length; i++)
         {
             pageTexts[i] = textNodes[i].Attributes["Text"].Value;
             pageNames[i] = textNodes[i].Attributes["Name"].Value;
@@ -86,7 +86,7 @@ public class ControllerMenuInputManager : MonoBehaviour
     public void NewPage(int next)
     {
         currentPage += Mathf.Clamp(next, -1, 1);
-        if(currentPage <= 0)
+        if (currentPage <= 0)
         {
             previousPageButton.gameObject.SetActive(false);
             backButton.Select();

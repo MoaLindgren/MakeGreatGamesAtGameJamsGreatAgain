@@ -10,11 +10,6 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
     [SerializeField]
     GameObject tankPrefab, confirmExitMenu;
 
-    /*
-    [SerializeField]
-    Button rotLeftButton, rotRightButton;
-    */
-
     [SerializeField]
     Text baseNameText, baseMatText, towerNameText, towerMatText;
 
@@ -28,7 +23,7 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
     GameObject previewTank;
 
-    float rotAmount = 0f;
+    float rotAmount = 0f, rotDir = 0f;
 
     private void Start()
     {
@@ -62,6 +57,7 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
         allMats[0] = new Dictionary<string, Material[]>();
         allMats[1] = new Dictionary<string, Material[]>();
 
+        /*
         foreach (Mesh baseMesh in loadedBaseMeshes)
         {
             allMats[0].Add(baseMesh.name, (Material[])Resources.LoadAll("Materials/Bases/" + baseMesh.name, typeof(Material)));
@@ -70,32 +66,30 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
         {
             allMats[1].Add(towerMesh.name, (Material[])Resources.LoadAll("Materials/Towers/" + towerMesh.name, typeof(Material)));
         }
+        */
     }
 
     private void Update()
     {
+        if (rotDir != 0f)
+        {
+            if (Input.GetButton("Submit"))
+            {
+                rotAmount = rotDir;
+            }
+            else
+                rotAmount = 0f;
+        }
+        print(rotAmount);
         if (rotAmount != 0f)
             previewTank.transform.Rotate(0f, rotAmount * Time.deltaTime, 0f);
     }
 
-    /*
-
-    public void OnPointerUp(PointerEventData eventData)
+    public void RotationButtonSelected(float dir)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
-            rotAmount = 0f;
+        rotDir = dir;
+        rotAmount = 0f;
     }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Left)
-            if (eventData.selectedObject == rotLeftButton)
-                rotAmount = 50f;
-            else if (eventData.selectedObject == rotLeftButton)
-                rotAmount = -50f;
-    }
-
-    */
 
     public void ChangeBaseMat(int next)
     {
@@ -170,9 +164,9 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
     public void SaveSettings()
     {
-        prefabTankBaseMesh.sharedMesh = previewTankBaseMesh.mesh;
+        prefabTankBaseMesh.sharedMesh = previewTankBaseMesh.sharedMesh;
         prefabTankBaseMesh.GetComponent<MeshRenderer>().material = previewTankBaseMesh.GetComponent<MeshRenderer>().material;
-        prefabTankTowerMesh.sharedMesh = prefabTankTowerMesh.mesh;
+        prefabTankTowerMesh.sharedMesh = prefabTankTowerMesh.sharedMesh;
         prefabTankTowerMesh.GetComponent<MeshRenderer>().material = previewTankTowerMesh.GetComponent<MeshRenderer>().material;
     }
 }

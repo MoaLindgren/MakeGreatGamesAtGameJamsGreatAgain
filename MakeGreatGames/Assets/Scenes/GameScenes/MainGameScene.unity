@@ -5745,6 +5745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1004792666}
   - component: {fileID: 1004792665}
+  - component: {fileID: 1004792664}
   - component: {fileID: 1004792667}
   m_Layer: 0
   m_Name: Main Camera
@@ -5753,6 +5754,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1004792664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004792663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973d42ef6285fef489ef715a9bad58a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorblindShader: {fileID: 4800000, guid: 542b38ea993eb5c489682e81d0521689, type: 3}
+  mat: {fileID: 1079906869}
 --- !u!20 &1004792665
 Camera:
   m_ObjectHideFlags: 0
@@ -6545,7 +6560,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButton: {fileID: 1911561198}
+  previousPageButton: {fileID: 0}
+  nextPageButton: {fileID: 0}
   defaultSelectable: {fileID: 238520018}
+  pageName: {fileID: 0}
+  pageText: {fileID: 0}
 --- !u!1 &1074797006
 GameObject:
   m_ObjectHideFlags: 0
@@ -6654,6 +6673,31 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0
+--- !u!21 &1079906869
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom/ColorblindModeShader2
+  m_Shader: {fileID: 4800000, guid: 542b38ea993eb5c489682e81d0521689, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
 --- !u!1 &1097667216
 GameObject:
   m_ObjectHideFlags: 0
@@ -10879,7 +10923,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButton: {fileID: 834795476}
+  previousPageButton: {fileID: 0}
+  nextPageButton: {fileID: 0}
   defaultSelectable: {fileID: 142079004}
+  pageName: {fileID: 0}
+  pageText: {fileID: 0}
 --- !u!1 &1780313092
 GameObject:
   m_ObjectHideFlags: 0
