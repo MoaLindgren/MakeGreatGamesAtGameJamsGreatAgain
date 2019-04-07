@@ -20,7 +20,9 @@ public class CameraShaker : MonoBehaviour
     float startAmount;//The initial shake amount (to determine percentage), set when ShakeCamera is called.
     float startDuration;//The initial shake duration, set when ShakeCamera is called.
 
-    bool isRunning = false, gameRunning = true; //Is the coroutine running right now?
+    bool gameRunning = true; //Is the coroutine running right now?
+
+    Coroutine currentShake;
 
     static CameraShaker instance;
 
@@ -46,13 +48,13 @@ public class CameraShaker : MonoBehaviour
         startDuration = shakeDuration;//Reset the start time.
 
         ControllerShaker.Instance.Shake(amount * 2, duration * 1.5f);
-        if (!isRunning) StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
+        if (currentShake != null)
+            StopCoroutine(currentShake);
+        currentShake = StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
     }
 
     IEnumerator Shake()
     {
-        isRunning = true;
-
         while (shakeDuration > 0.01f && GameManager.Instance.GameRunning)
         {
             Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;//A Vector3 to add to the Local Rotation
@@ -71,7 +73,6 @@ public class CameraShaker : MonoBehaviour
             yield return null;
         }
         transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
-        isRunning = false;
     }
 
     public void StopShaking()
@@ -80,7 +81,6 @@ public class CameraShaker : MonoBehaviour
         gameRunning = false;
         shakeDuration = 0f;
         shakeAmount = 0f;
-        isRunning = false;
         StopCoroutine("Shake");
         transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
     }
