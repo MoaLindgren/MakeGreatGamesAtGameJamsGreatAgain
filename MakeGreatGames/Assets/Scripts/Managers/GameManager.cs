@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
 
     bool paused = false;
 
+    bool gameRunning = false;
+
     #endregion
 
     #region Properties
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
     public int Score
     {
         set { score += value; }
+    }
+
+    public bool GameRunning
+    {
+        get { return gameRunning; }
     }
 
     public bool Paused
@@ -136,6 +143,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         AudioSource mainThemeAudio = AudioManager.Instance.SpawnSound("BANDITANKSThemeMaybe", transform, true, true, true, 1f);
+        gameRunning = true;
     }
 
     private void Update()

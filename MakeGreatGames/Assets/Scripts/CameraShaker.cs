@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class CameraShaker : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class CameraShaker : MonoBehaviour
 
     [SerializeField]
     float smoothAmount = 5f;//Amount to smooth
-    
+
     float shakePercentage;//A percentage (0-1) representing the amount of shake to be applied when setting rotation.
     float startAmount;//The initial shake amount (to determine percentage), set when ShakeCamera is called.
     float startDuration;//The initial shake duration, set when ShakeCamera is called.
@@ -47,13 +48,14 @@ public class CameraShaker : MonoBehaviour
 
         if (!isRunning) StartCoroutine(Shake());//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
     }
-    
+
     IEnumerator Shake()
     {
         isRunning = true;
 
-        while (shakeDuration > 0.01f)
+        while (shakeDuration > 0.01f && GameManager.Instance.GameRunning)
         {
+            GamePad.SetVibration(0, shakeAmount, shakeAmount);
             Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;//A Vector3 to add to the Local Rotation
             rotationAmount.z = 0;//Don't change the Z; it looks funny.
 
@@ -61,7 +63,7 @@ public class CameraShaker : MonoBehaviour
 
             shakeAmount = startAmount * shakePercentage;//Set the amount of shake (% * startAmount).
             shakeDuration = Mathf.Lerp(shakeDuration, 0, Time.deltaTime);//Lerp the time, so it is less and tapers off towards the end.
-            
+
             if (smooth)
                 transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * smoothAmount);
             else
@@ -69,6 +71,7 @@ public class CameraShaker : MonoBehaviour
 
             yield return null;
         }
+        GamePad.SetVibration(0, 0, 0);
         transform.localRotation = Quaternion.identity;//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
         isRunning = false;
     }

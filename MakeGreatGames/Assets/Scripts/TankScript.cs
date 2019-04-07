@@ -184,7 +184,10 @@ public class TankScript : MonoBehaviour
         healthSlider.value = health;
         StartCoroutine("WaitForDamage");
         if (this is PlayerScript)
+        {
             UIManager.Instance.ShowDamage(health, maxHealth);
+            CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
+        }
         if (health <= 0)
         {
             engineSound.pitch = 1f;
@@ -192,8 +195,6 @@ public class TankScript : MonoBehaviour
             alive = false;
             StartCoroutine("DestroyTimer");
         }
-        if (this is PlayerScript)
-            CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
     }
 
     protected IEnumerator WaitForDamage()
