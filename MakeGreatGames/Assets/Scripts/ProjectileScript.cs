@@ -5,8 +5,8 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
-    GameObject impactParticles;
-    
+    GameObject impactParticles, crackPrefab;
+
     [SerializeField]
     ParticleSystem[] projectileParticles;
 
@@ -63,11 +63,27 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         {
             hitTank.TakeDamage(damage);
         }
+        else if (other.GetComponent<IPoolable>() == null && other.GetComponent<Renderer>() != null)
+        {
+            RaycastHit hit;
+            Vector3 hitPoint = other.ClosestPointOnBounds(transform.position);
+            Physics.Raycast(transform.position, hitPoint - transform.position, out hit);
+            GameObject crack = GameManager.Instance.CrackPool.GetObject(hitPoint, other.transform.rotation);
+            if (crack != null && crack.GetComponent<Renderer>() != null)
+            {
+                Material crackMat = crack.GetComponent<Renderer>().material;
+                if (crackMat != null)
+                {
+                    crackMat.SetTexture("_HitTex", other.GetComponent<Renderer>().material.mainTexture);
+                    crackMat.SetVector("_HitPoint", hit.normal);
+                }
+            }
+        }
         GameObject particles = Instantiate(impactParticles, transform.position, transform.rotation);
         AudioManager.Instance.SpawnSound("ImpactSound", particles.transform, true, false, false, 0.5f);
         GameManager.Instance.ProjectilePool.RePoolObject(gameObject);
     }
-    
+
     public void ShootMe()
     {
         return;
