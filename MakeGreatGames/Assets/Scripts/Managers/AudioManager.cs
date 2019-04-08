@@ -10,6 +10,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     GameObject sfxAudioPrefab, musicAudioPrefab;       //Different prefabs for music and SFX sounds so they can use different groups in the AudioMixer
 
+    [SerializeField]
+    List<string> irreplaceables;        //Sounds we don't want to be replace even if we run out of AudioSources
+
     int currentSFXIndex = 0, currentMusicIndex = 0;     //Keep track of which object to use
 
     AudioSource[] sfxSources, musicSources;
@@ -66,11 +69,13 @@ public class AudioManager : MonoBehaviour
             {
                 foreach(AudioSource playingSound in soundsInUse.Keys)
                 {
-                    if (playingSound.clip.name == clip)
+                    if (playingSound.clip.name == clip && !irreplaceables.Contains(clip))
                     {
                         ReturnSource(playingSound);
                         return SpawnSound(clip, t, stationarySound, looping, isMusic, volume);      //If an AudioSource with the same clip is already playing, we stop that clip and reuse the AudioSource for the new sound
                     }
+                    else if (playingSound.clip.name == clip && irreplaceables.Contains(clip))
+                        print("success!!");
                 }
                 return null;        //No free AudioSources for that soundtype, sorry
             }

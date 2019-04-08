@@ -24,7 +24,6 @@ public class ControllerShaker : MonoBehaviour
 
     public void Shake(float amount, float duration)
     {
-        print(duration);
         if (currentShake != null)
             StopCoroutine(currentShake);
         currentShake = StartCoroutine(ShakeTime(amount, duration));

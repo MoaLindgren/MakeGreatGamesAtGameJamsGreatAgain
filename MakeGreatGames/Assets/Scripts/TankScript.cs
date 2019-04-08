@@ -92,7 +92,7 @@ public class TankScript : MonoBehaviour
     protected virtual void Update()
     {
         healthSliderDelayed.value = Mathf.Lerp(healthSliderDelayed.value, targetHealth, targetHealth == 0 ? 0.01f : Mathf.Abs((targetHealth / 100f) / (healthSliderDelayed.value / 100f)) / 50f);
-        if(healthSliderDelayed.value < targetHealth || healthSliderDelayed.value - targetHealth < 0.1f)
+        if (healthSliderDelayed.value < targetHealth || healthSliderDelayed.value - targetHealth < 0.1f)
         {
             healthSliderDelayed.value = targetHealth;
         }
@@ -128,7 +128,8 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             return;
-        engineSound.pitch = 0.95f + ((Mathf.Abs(amount) / (maxSpeed / 100f)) / 500f);
+        if (engineSound != null && engineSound.clip != null)
+            engineSound.pitch = 0.95f + ((Mathf.Abs(amount) / (maxSpeed / 100f)) / 500f);
     }
 
     protected void DontMoveTank(float amount)
@@ -190,7 +191,8 @@ public class TankScript : MonoBehaviour
         }
         if (health <= 0)
         {
-            engineSound.pitch = 1f;
+            if (engineSound != null && engineSound.clip != null)
+                engineSound.pitch = 1f;
             health = 0;
             alive = false;
             StartCoroutine("DestroyTimer");
@@ -265,7 +267,7 @@ public class TankScript : MonoBehaviour
 
     protected IEnumerator SuperHealing()
     {
-        for(int i = 0; i < 20; i++)
+        for (int i = 0; i < 20; i++)
         {
             yield return new WaitForSeconds(1f);
             health = Mathf.Clamp(health + (maxHealth / 20), 0, maxHealth);
