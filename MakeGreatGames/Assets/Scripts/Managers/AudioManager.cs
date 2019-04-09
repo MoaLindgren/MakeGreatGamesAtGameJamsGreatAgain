@@ -67,16 +67,15 @@ public class AudioManager : MonoBehaviour
             sourcesTried++;
             if (sourcesTried >= arrToUse.Length)        //If there are no free AudioSources we check if we can reuse one currently playing
             {
-                foreach(AudioSource playingSound in soundsInUse.Keys)
-                {
-                    if (playingSound.clip.name == clip && !irreplaceables.Contains(clip))
+                if (!irreplaceables.Contains(clip))
+                    foreach (AudioSource playingSound in soundsInUse.Keys)
                     {
-                        ReturnSource(playingSound);
-                        return SpawnSound(clip, t, stationarySound, looping, isMusic, volume);      //If an AudioSource with the same clip is already playing, we stop that clip and reuse the AudioSource for the new sound
+                        if (playingSound != null && playingSound.clip != null && playingSound.clip.name == clip)
+                        {
+                            ReturnSource(playingSound);
+                            return SpawnSound(clip, t, stationarySound, looping, isMusic, volume);      //If an AudioSource with the same clip is already playing, we stop that clip and reuse the AudioSource for the new sound
+                        }
                     }
-                    else if (playingSound.clip.name == clip && irreplaceables.Contains(clip))
-                        print("success!!");
-                }
                 return null;        //No free AudioSources for that soundtype, sorry
             }
         }
@@ -99,7 +98,7 @@ public class AudioManager : MonoBehaviour
 
     public void ReturnSource(AudioSource source)        //Returns an AudioSource to the pool when it's finished playing. May be called by SoundPlayTime or externally
     {
-        if (source == null)
+        if (source == null || source.clip == null)
         {
             return;
         }

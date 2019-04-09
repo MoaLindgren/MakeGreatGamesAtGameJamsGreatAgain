@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     Text scoreText;
 
     [SerializeField]
-    PoolScript enemyPool, projectilePool, missilePool, minePool;
+    PoolScript enemyPool, projectilePool, missilePool, minePool, crackPool;
 
     #endregion
 
@@ -113,6 +113,11 @@ public class GameManager : MonoBehaviour
     public PoolScript MinePool
     {
         get { return minePool; }
+    }
+
+    public PoolScript CrackPool
+    {
+        get { return crackPool; }
     }
 
     #endregion

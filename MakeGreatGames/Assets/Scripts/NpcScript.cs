@@ -161,7 +161,7 @@ public class NpcScript : TankScript, IPoolable
             }
             return false;
         }
-        else if(currentUlt == DeployMine)
+        else if (currentUlt == DeployMine)
         {
             if (Vector3.Distance(transform.position, agent.destination) < 10f)
                 return true;
@@ -196,7 +196,8 @@ public class NpcScript : TankScript, IPoolable
         {
             agent.isStopped = true;
         }
-        AudioManager.Instance.ReturnSource(engineSound);
+        if (engineSound != null)
+            AudioManager.Instance.ReturnSource(engineSound);
         agent.enabled = false;
         health = maxHealth;
         targetHealth = maxHealth;

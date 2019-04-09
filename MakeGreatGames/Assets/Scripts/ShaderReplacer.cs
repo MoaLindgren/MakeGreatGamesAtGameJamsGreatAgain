@@ -10,8 +10,7 @@ public class ShaderReplacer : MonoBehaviour
 
     [SerializeField]
     Material mat;
-
-    /*
+    
     void OnEnable()
     {
         print("eyy");
@@ -28,16 +27,17 @@ public class ShaderReplacer : MonoBehaviour
         GetComponent<Camera>().ResetReplacementShader();
         print("yyooooo");
     }
-    */
 
     private void Awake()
     {
         mat = new Material(colorblindShader);
     }
 
+    /*
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         Graphics.Blit(source, destination, mat);
         print("??");
     }
+    */
 }
