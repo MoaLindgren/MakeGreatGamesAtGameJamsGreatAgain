@@ -55,7 +55,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 2.5
+    scalar: 2.9
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -975,7 +975,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 50
+        scalar: 100
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -1025,8 +1025,8 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 2
-      repeatInterval: 0.3
+      cycleCount: 1
+      repeatInterval: 0.01
       probability: 1
   SizeModule:
     enabled: 0
@@ -4777,7 +4777,7 @@ GameObject:
   - component: {fileID: 7821566277164369182}
   - component: {fileID: 2325440754663549808}
   m_Layer: 0
-  m_Name: Particle System (2)
+  m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4820,7 +4820,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 2.5
+    scalar: 2.9
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -53627,20 +53627,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 15.350224
-          tangentMode: 1
+          inSlope: 5.561498
+          outSlope: 5.561498
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333948
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 0.17980766
           value: 1
-          inSlope: 1.4548973
-          outSlope: 1.4548973
-          tangentMode: 0
+          inSlope: 5.561498
+          outSlope: 5.561498
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.92982334
+          inWeight: 0.33333334
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -53680,18 +53680,27 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          inSlope: -63.399952
+          outSlope: -63.399952
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
+          time: 0.015772883
+          value: -1
+          inSlope: -63.644753
+          outSlope: 2.2109854
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 1
+          outWeight: 0.9810124
+        - serializedVersion: 3
+          time: 0.025238037
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          inSlope: 105.65068
+          outSlope: 105.65068
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
@@ -91211,7 +91220,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.01, y: 0.01, z: 0.01}
+    m_Scale: {x: 0.011, y: 0.011, z: 0.011}
     placementMode: 2
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -91915,7 +91924,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 1, g: 1, b: 1, a: 0.31764707}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 1}
@@ -91930,9 +91939,9 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 8785
-        atime1: 30274
-        atime2: 36210
+        atime0: 26356
+        atime1: 36210
+        atime2: 65535
         atime3: 65535
         atime4: 65535
         atime5: 0
@@ -91940,7 +91949,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 4
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -124459,7 +124468,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.01, y: 0.01, z: 0.01}
+    m_Scale: {x: 0.012, y: 0.012, z: 0.012}
     placementMode: 2
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
