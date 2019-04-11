@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour, IPoolable
 {
     [SerializeField]
-    GameObject impactParticles, crackPrefab;
+    GameObject impactParticles, decalOrigin;
 
     [SerializeField]
     ParticleSystem[] projectileParticles;
@@ -66,18 +66,10 @@ public class ProjectileScript : MonoBehaviour, IPoolable
         else if (other.GetComponent<IPoolable>() == null && other.GetComponent<Renderer>() != null)
         {
             RaycastHit hit;
-            Vector3 hitPoint = other.ClosestPointOnBounds(transform.position);
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
             Physics.Raycast(transform.position, hitPoint - transform.position, out hit);
-            GameObject crack = GameManager.Instance.CrackPool.GetObject(hitPoint, other.transform.rotation);
-            if (crack != null && crack.GetComponent<Renderer>() != null)
-            {
-                Material crackMat = crack.GetComponent<Renderer>().material;
-                if (crackMat != null)
-                {
-                    crackMat.SetTexture("_HitTex", other.GetComponent<Renderer>().material.mainTexture);
-                    crackMat.SetVector("_HitPoint", hit.normal);
-                }
-            }
+            GameObject crack = GameManager.Instance.CrackPool.GetObject(hitPoint + new Vector3(0f, 1f, 0f), Quaternion.LookRotation((hitPoint + new Vector3(0f, 1f, 0f)) - (decalOrigin.transform.position + new Vector3(0f, 1f, 0f))));
+            crack.transform.LookAt(hitPoint + new Vector3(0f, 1f, 0f));
         }
         GameObject particles = Instantiate(impactParticles, transform.position, transform.rotation);
         AudioManager.Instance.SpawnSound("ImpactSound", particles.transform, true, false, false, 0.5f);

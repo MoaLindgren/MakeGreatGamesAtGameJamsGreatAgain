@@ -31,6 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3994022932495153319}
+  - {fileID: 4848406975121021585}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,8 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactParticles: {fileID: 3586455950125243878, guid: 5eaec3dd3106ed94fbfd4b66a0fd0733,
     type: 3}
-  crackPrefab: {fileID: 8930427338185346958, guid: c80329ad9b268824d9c902849141113d,
-    type: 3}
+  decalOrigin: {fileID: 4067167004932968862}
   projectileParticles:
   - {fileID: 2172518639933086629}
 --- !u!135 &6145153018402790497
@@ -81,6 +81,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &4067167004932968862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4848406975121021585}
+  m_Layer: 0
+  m_Name: DecalOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4848406975121021585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067167004932968862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 339655855845641624}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3994022932495278631
 PrefabInstance:
   m_ObjectHideFlags: 0
