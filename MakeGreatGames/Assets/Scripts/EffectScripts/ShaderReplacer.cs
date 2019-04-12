@@ -14,7 +14,6 @@ public class ShaderReplacer : MonoBehaviour
     
     void OnEnable()
     {
-        print("eyy");
         ReplaceShader(colorblindShader, null);
     }
 
@@ -28,7 +27,6 @@ public class ShaderReplacer : MonoBehaviour
     private void OnDisable()
     {
         GetComponent<Camera>().ResetReplacementShader();
-        print("yyooooo");
     }
 
     private void Awake()
@@ -40,7 +38,6 @@ public class ShaderReplacer : MonoBehaviour
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         Graphics.Blit(source, destination, mat);
-        print("??");
     }
     */
 }
