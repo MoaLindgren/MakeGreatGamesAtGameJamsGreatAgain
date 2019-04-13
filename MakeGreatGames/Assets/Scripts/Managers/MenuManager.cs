@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     Text[] highScoreNameTexts, highScoreTexts;
 
-    XmlDocument highscoreXML = new XmlDocument(), settingsXML = new XmlDocument(), howToPlayXML = new XmlDocument();
+    XmlDocument highscoreXML = new XmlDocument(), howToPlayXML = new XmlDocument();
 
     static MenuManager instance;
 
@@ -37,12 +37,7 @@ public class MenuManager : MonoBehaviour
         highscoreXML.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         Time.timeScale = 1;
     }
-
-    public void HowToPlay()
-    {
-        SceneManager.LoadScene(2);
-    }
-
+    
     public void ShowHighScores(bool show)
     {
         highScoreMenu.SetActive(show);
