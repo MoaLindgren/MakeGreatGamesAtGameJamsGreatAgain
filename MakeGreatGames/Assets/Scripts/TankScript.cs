@@ -56,16 +56,17 @@ public class TankScript : MonoBehaviour
 
     protected virtual void Awake()
     {
+
+    }
+
+    protected virtual void Start()
+    {
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
         currentSpecialAttack = Nothing;
         directSliderTF = healthSlider.gameObject.GetComponentInParent<Transform>();
         delayedSliderTF = healthSliderDelayed.gameObject.GetComponentInParent<Transform>();
-    }
-
-    protected virtual void Start()
-    {
         InitializeStats();
     }
 

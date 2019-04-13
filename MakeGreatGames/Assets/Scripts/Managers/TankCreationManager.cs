@@ -44,6 +44,8 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
 
         previewTank = Instantiate(tankPrefab);
 
+        previewTank.GetComponent<TankScript>().enabled = false;
+
         previewTankBaseMesh = previewTank.GetComponentInChildren<MeshFilter>();
         previewTankTowerMesh = previewTankBaseMesh.GetComponentInChildren<MeshFilter>();
 
@@ -77,10 +79,9 @@ public class TankCreationManager : MonoBehaviour//, IPointerUpHandler, IPointerD
             {
                 rotAmount = rotDir;
             }
-            else
+            else if(!Input.GetKey(KeyCode.Mouse0))
                 rotAmount = 0f;
         }
-        print(rotAmount);
         if (rotAmount != 0f)
             previewTank.transform.Rotate(0f, rotAmount * Time.deltaTime, 0f);
     }
