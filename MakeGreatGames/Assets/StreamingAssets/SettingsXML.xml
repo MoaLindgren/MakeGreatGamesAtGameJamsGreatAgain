@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Settings>
   <Audio>
-    <Levels Master="-10" Music="-3" SFX="-10" />
+    <Levels Master="-10" Music="0" SFX="-5" />
   </Audio>
 </Settings>

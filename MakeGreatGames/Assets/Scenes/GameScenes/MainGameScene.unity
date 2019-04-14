@@ -3491,31 +3491,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!21 &341964348
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit/ColorblindModeShader
-  m_Shader: {fileID: 4800000, guid: 0b06dc6e5baf421498f65f51ab14cc30, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
 --- !u!1 &421499068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,7 +3890,7 @@ RectTransform:
   - {fileID: 2055469636}
   - {fileID: 132479139}
   m_Father: {fileID: 1743719821}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7005,7 +6980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorblindShader: {fileID: 4800000, guid: 0b06dc6e5baf421498f65f51ab14cc30, type: 3}
-  mat: {fileID: 341964348}
+  mat: {fileID: 1763573865}
 --- !u!20 &1004792665
 Camera:
   m_ObjectHideFlags: 0
@@ -7847,7 +7822,7 @@ RectTransform:
   - {fileID: 1910258757}
   - {fileID: 1766756156}
   m_Father: {fileID: 1743719821}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12814,8 +12789,8 @@ RectTransform:
   - {fileID: 1417766737}
   - {fileID: 18123599}
   - {fileID: 1768045563}
-  - {fileID: 1060693431}
   - {fileID: 490248694}
+  - {fileID: 1060693431}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12830,6 +12805,31 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1959194426}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1763573865
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Unlit/ColorblindModeShader
+  m_Shader: {fileID: 4800000, guid: 0b06dc6e5baf421498f65f51ab14cc30, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
 --- !u!1 &1766756155
 GameObject:
   m_ObjectHideFlags: 0
