@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 <HowToPlay>
-  <Page Name="Example Page 1" Text="Yes, this is how to play gejm." />
-  <Page Name="Example Page 2" Text="Also yes. gejm." />
-  <Page Name="Example Page 3" Text="WOOOHOOOOOO" />
+  <Page Name="Controls"
+        Text="Steering: A and D Keys / Left Stick
+        Accelerate: W / Right Trigger
+        Brake: S / Left Trigger
+        Rotate Tower: Arrow Keys / Right Stick
+        Shoot: Space / A
+        Aim: Left Shift / Left Bumper
+        Spin Wheel: E / X
+        Use Special Ability: Q / Y"
+        Image="None"/>
+  <Page Name="Objectives of the Game" Text="In BANDITANKS!, your objective is to survive the relentless onslaught of enemy tanks for as long as possible. Enemy tanks spawn in waves; the more of them you kill, the more of them appear." Image="None"/>
+  <Page Name="Special Abilities" Text="To help you achieve your ultimate victory against the enemy tanks, you may collect coins and spend them to generate a random special ability, which may then be used for some time afterwards. Beware, however, as the enemy tanks collect and use these coins too!" Image="None"/>
+  <Page Name="Speed Boost" Text="The Speed Boost is just what it sounds like: a temporary boost to your max speed. Useful for efficiently collecting coins, catching up to an enemy or getting out of a tight spot." Image="Speed_Boost"/>
+  <Page Name="Shield" Text="When activated, the shield makes you invulnerable to all damage for a certain duration. Useful when low on health or when taking on more enemies than you would otherwise be able to handle." Image="Shield"/>
+  <Page Name="Heal" Text="The Heal ability instantly restores a portion of your lost health. Useful after being hit a few times." Image="Heal"/>
+  <Page Name="Super Heal" Text="The Super Heal ability restores an amount of health equal to your max health, but it does so slowly over time. Very powerful, but without the instant effect of the normal Heal." Image="Super_Heal"/>
+  <Page Name="Super Shots" Text="The Super Shots ability turns your normal projectiles into super-lethal, electrified fists of instant doom, causing you to instantly kill any enemy hit with it. Beware, however, that any enemy with this ability may instantly kill you as well." Image="Super_Shots"/>
+  <Page Name="Pulse Mine" Text="Deploy a Pulse Mine at your current location, causing any tank that collides with it to take a large amount of damage. Be aware that you may be damaged if you run into your own mines!" Image="Mine"/>
+  <Page Name="Missile" Text="Launch a homing Missile, which chooses an enemy at random and flies toward it, instantly killing them on impact. If you are hit by an enemy's missile, you're dead as shit. Be aware, however, that Missiles may be shot down by normal projectiles!" Image="Missile"/>
 </HowToPlay>

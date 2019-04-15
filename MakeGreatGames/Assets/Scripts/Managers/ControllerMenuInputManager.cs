@@ -19,7 +19,12 @@ public class ControllerMenuInputManager : MonoBehaviour
     [SerializeField]
     Text pageName, pageText;
 
+    [SerializeField]
+    Image abilityImage;
+
     string[] pageTexts, pageNames;
+
+    Sprite[] abilitySprites;
 
     int currentPage = 0;
 
@@ -42,10 +47,12 @@ public class ControllerMenuInputManager : MonoBehaviour
         XmlNodeList textNodes = howToPlayDoc.SelectNodes("//Page");
         pageTexts = new string[textNodes.Count];
         pageNames = new string[textNodes.Count];
+        abilitySprites = new Sprite[textNodes.Count];
         for (int i = 0; i < pageTexts.Length; i++)
         {
             pageTexts[i] = textNodes[i].Attributes["Text"].Value;
             pageNames[i] = textNodes[i].Attributes["Name"].Value;
+            abilitySprites[i] = Resources.Load<Sprite>("AbilitySprites/icon_" + textNodes[i].Attributes["Image"].Value);
         }
     }
 
@@ -103,6 +110,15 @@ public class ControllerMenuInputManager : MonoBehaviour
         else
         {
             nextPageButton.gameObject.SetActive(true);
+        }
+        if(abilitySprites[currentPage] != null)
+        {
+            abilityImage.gameObject.SetActive(true);
+            abilityImage.sprite = abilitySprites[currentPage];
+        }
+        else
+        {
+            abilityImage.gameObject.SetActive(false);
         }
         pageName.text = pageNames[currentPage];
         pageText.text = pageTexts[currentPage];
