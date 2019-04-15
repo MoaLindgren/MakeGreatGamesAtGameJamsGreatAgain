@@ -77,7 +77,7 @@ public class PlayerScript : TankScript
             Shoot();
         }
 
-        if (Input.GetButtonDown("Spin") && coins >= CoinManager.Instance.CoinsToUlt)
+        if (Input.GetButtonDown("Spin") && coins >= CoinManager.Instance.CoinsToUlt && !spinning)
         {
             coins -= CoinManager.Instance.CoinsToUlt;
             UIManager.Instance.Coins = coins;

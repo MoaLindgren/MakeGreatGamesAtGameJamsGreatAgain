@@ -79,7 +79,7 @@ public class NpcScript : TankScript, IPoolable
             currentSpecialAttack();
             currentSpecialAttack = Nothing;
         }
-        if (coins >= CoinManager.Instance.CoinsToUlt)
+        if (coins >= CoinManager.Instance.CoinsToUlt && !spinning)
         {
             coins -= CoinManager.Instance.CoinsToUlt;
             StopCoroutine("SpecialAttackTimer");

@@ -30,7 +30,7 @@ public class TankScript : MonoBehaviour
     [Tooltip("0 = Missile, 1 = Shield, 2 = SpeedBoost, 3 = Heal, 4 = SuperHeal, 5 = Mine, 6 = SuperShots")]
     protected int forcedSpecialIndex;    //Debugging purposes
 
-    protected bool alive = true, shielded = false, canShoot = true;
+    protected bool alive = true, shielded = false, canShoot = true, spinning = false;
 
     protected int maxHealth, shotDamage, health, coins = 0, maxCoins = 10, specialAttackIndex, targetHealth;
 
@@ -164,11 +164,13 @@ public class TankScript : MonoBehaviour
     {
         if (!alive)
             StopCoroutine("SpinWheel");
+        spinning = true;
         if (this is PlayerScript)
         {
             UIManager.Instance.SpinWheel();
         }
         yield return new WaitForSeconds(spinTime);
+        spinning = false;
         specialAttackIndex = forceSpecialAttack ? forcedSpecialIndex : Random.Range(0, specialAttackMethods.Length);
         StartCoroutine("SpecialAttackTimer");
         currentSpecialAttack = specialAttackMethods[specialAttackIndex];
