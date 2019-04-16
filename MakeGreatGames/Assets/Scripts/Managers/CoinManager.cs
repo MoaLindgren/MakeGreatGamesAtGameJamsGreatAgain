@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 
-public class CoinManager : MonoBehaviour
+public class CoinManager : NetworkBehaviour
 {
     [SerializeField]
     GameObject[] coins;     //Coin locations
 
     [SerializeField]
     float minCoinTime, maxCoinTime;     //Min and max time between coin spawns
-    
+
     [SerializeField]
     int coinsToUlt;
 
+    [SyncVar]
     static CoinManager instance;
+
+    bool onNetwork = false;
 
     public static CoinManager Instance
     {
@@ -33,6 +37,7 @@ public class CoinManager : MonoBehaviour
 
     int activeCoins = 0;
 
+    [SyncVar]
     public UnityEvent CoinSpawned = new UnityEvent(), CoinCollected = new UnityEvent();
 
     private void Awake()
@@ -40,10 +45,19 @@ public class CoinManager : MonoBehaviour
         if (instance != null && instance != this)
             Destroy(this);
         instance = this;
+        onNetwork = GetComponent<NetworkIdentity>() != null;
         StartCoroutine("SpawnCoin");
     }
 
     public void CoinPickedUp(GameObject coin)
+    {
+        coin.SetActive(false);
+        activeCoins--;
+        CoinCollected.Invoke();
+    }
+
+    [Command]
+    public void CmdCoinPickedUp(GameObject coin)
     {
         coin.SetActive(false);
         activeCoins--;
@@ -57,8 +71,8 @@ public class CoinManager : MonoBehaviour
         if (activeCoins < coins.Length)
         {
             bool spawnChosen = true;
-            foreach(GameObject GO in coins)     //Avoid inf loops
-                if(!GO.activeSelf)
+            foreach (GameObject GO in coins)     //Avoid inf loops
+                if (!GO.activeSelf)
                 {
                     spawnChosen = false;
                     break;
@@ -68,13 +82,29 @@ public class CoinManager : MonoBehaviour
                 int index = Random.Range(0, coins.Length);
                 if (!coins[index].activeSelf)
                 {
-                    coins[index].SetActive(true);
-                    AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
-                    activeCoins++;
+                    if (onNetwork)
+                        CmdNewCoin(index);
+                    else
+                        NewCoin(index);
                     spawnChosen = true;
                 }
             }
         }
         StartCoroutine("SpawnCoin");
+    }
+
+    void NewCoin(int index)
+    {
+        coins[index].SetActive(true);
+        AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
+        activeCoins++;
+    }
+
+    [Command]
+    void CmdNewCoin(int index)
+    {
+        coins[index].SetActive(true);
+        AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
+        activeCoins++;
     }
 }

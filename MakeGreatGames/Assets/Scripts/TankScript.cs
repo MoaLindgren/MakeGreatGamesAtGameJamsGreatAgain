@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class TankScript : MonoBehaviour
+public class TankScript : NetworkBehaviour
 {
     [SerializeField]
     protected float spinTime, attackCooldown, cameraShakeTakeDamage, cameraShakeShoot, cameraSuperShake, shieldTime, destroyTimer;
@@ -30,7 +31,7 @@ public class TankScript : MonoBehaviour
     [Tooltip("0 = Missile, 1 = Shield, 2 = SpeedBoost, 3 = Heal, 4 = SuperHeal, 5 = Mine, 6 = SuperShots")]
     protected int forcedSpecialIndex;    //Debugging purposes
 
-    protected bool alive = true, shielded = false, canShoot = true, spinning = false;
+    protected bool alive = true, shielded = false, canShoot = true, spinning = false, onNetwork = false;
 
     protected int maxHealth, shotDamage, health, coins = 0, maxCoins = 10, specialAttackIndex, targetHealth;
 
@@ -56,11 +57,15 @@ public class TankScript : MonoBehaviour
 
     protected virtual void Awake()
     {
-
+        onNetwork = GetComponent<NetworkIdentity>() != null;
+        if (onNetwork && !isLocalPlayer)
+            return;
     }
 
     protected virtual void Start()
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
@@ -109,7 +114,7 @@ public class TankScript : MonoBehaviour
     {
         coins++;
     }
-
+    
     protected void RotateTower(float amount)
     {
         if (!alive)
@@ -117,7 +122,7 @@ public class TankScript : MonoBehaviour
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
         tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
     }
-
+    
     protected void RotateTank(float amount)
     {
         if (!alive)
@@ -137,7 +142,7 @@ public class TankScript : MonoBehaviour
     {
         return;
     }
-
+    
     public void Shoot()
     {
         if (!alive || !canShoot)
@@ -279,12 +284,12 @@ public class TankScript : MonoBehaviour
                 UIManager.Instance.ShowDamage(health, maxHealth);
         }
     }
-
+    
     protected void DeployMine()
     {
         GameManager.Instance.MinePool.GetObject(transform.position, Quaternion.identity);
     }
-
+    
     protected void FireMissile()
     {
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
@@ -305,7 +310,7 @@ public class TankScript : MonoBehaviour
             missile.Init(FindObjectOfType<PlayerScript>(), this);
         }
     }
-
+    
     protected void SpawnShield()
     {
         StartCoroutine("Shield");
@@ -315,12 +320,12 @@ public class TankScript : MonoBehaviour
     {
         return;
     }
-
+    
     protected void SpeedBoost()
     {
         StartCoroutine("SpeedBoosted");
     }
-
+    
     protected void Heal()
     {
         AudioSource healingSound = AudioManager.Instance.SpawnSound("HealingSound", transform, false, false, false, 1f);
@@ -328,7 +333,7 @@ public class TankScript : MonoBehaviour
         {
             p.Play();
         }
-        health += 30;
+        health += (maxHealth / 100) * 30;
         if (health > maxHealth)
             health = maxHealth;
         healthSlider.value = health;

@@ -14,7 +14,7 @@ public class CameraScript : MonoBehaviour
         player = FindObjectOfType<PlayerScript>().gameObject;
     }
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y + offsetY, player.transform.position.z + offsetZ);
     }

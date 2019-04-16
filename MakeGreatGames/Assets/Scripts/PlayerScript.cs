@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerScript : TankScript
@@ -23,24 +24,32 @@ public class PlayerScript : TankScript
 
     protected override void Awake()
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         base.Awake();
         rB = GetComponent<Rigidbody>();
     }
 
     protected override void Start()
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         base.Start();
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
     }
 
     public override void AddCoin()
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         base.AddCoin();
         UIManager.Instance.Coins = coins;
     }
 
     protected override void MoveTank(float amount)
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         base.MoveTank(amount);
         if (!alive)
             return;
@@ -49,6 +58,8 @@ public class PlayerScript : TankScript
 
     protected override void Update()
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         base.Update();
         if (!alive)
         {
@@ -57,14 +68,7 @@ public class PlayerScript : TankScript
 
         if (Input.GetButton("Line"))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-            {
-                Debug.DrawRay(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
-                line.SetPosition(0, shotStart.transform.position);
-                line.SetPosition(1, hit.point);
-                line.enabled = true;
-            }
+            DrawLine();
         }
         else
         {
@@ -84,7 +88,7 @@ public class PlayerScript : TankScript
             StopCoroutine("SpecialAttackTimer");
             StartCoroutine("SpinWheel");
         }
-        
+
         if (Input.GetButtonDown("Ultimate") && currentSpecialAttack != Nothing)
         {
             currentSpecialAttack();
@@ -94,8 +98,22 @@ public class PlayerScript : TankScript
         }
     }
 
+    protected void DrawLine()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            Debug.DrawRay(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
+            line.SetPosition(0, shotStart.transform.position);
+            line.SetPosition(1, hit.point);
+            line.enabled = true;
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (onNetwork && !isLocalPlayer)
+            return;
         if (!alive)
         {
             return;
