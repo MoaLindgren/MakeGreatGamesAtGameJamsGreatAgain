@@ -14,7 +14,7 @@ public class ShaderReplacer : MonoBehaviour
     
     void OnEnable()
     {
-        //ReplaceShader(colorblindShader, null);
+        ReplaceShader(colorblindShader, null);
     }
 
     void ReplaceShader(Shader shader, string tag)
