@@ -52,7 +52,7 @@ namespace Prototype.NetworkLobby
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
-
+        
         void Start()
         {
             s_Singleton = this;
@@ -66,7 +66,7 @@ namespace Prototype.NetworkLobby
 
             SetServerInfo("Offline", "None");
         }
-
+        
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
             if (SceneManager.GetSceneAt(0).name == lobbyScene)

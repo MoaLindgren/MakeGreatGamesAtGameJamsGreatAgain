@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
+//using UnityEngine.Experimental.Rendering;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class ShaderReplacer : MonoBehaviour
 {
     [SerializeField]
@@ -14,24 +14,24 @@ public class ShaderReplacer : MonoBehaviour
     
     void OnEnable()
     {
-        ReplaceShader(colorblindShader, null);
+        //ReplaceShader(colorblindShader, null);
     }
 
     void ReplaceShader(Shader shader, string tag)
     {
         //Camera.main.SetReplacementShader(shader, tag);
-        DrawRendererSettings dRS = new DrawRendererSettings(Camera.main, new ShaderPassName());
-        dRS.SetOverrideMaterial(mat, 0);
+        //DrawRendererSettings dRS = new DrawRendererSettings(Camera.main, new ShaderPassName());
+        //dRS.SetOverrideMaterial(mat, 0);
     }
 
     private void OnDisable()
     {
-        GetComponent<Camera>().ResetReplacementShader();
+        //GetComponent<Camera>().ResetReplacementShader();
     }
 
     private void Awake()
     {
-        mat = new Material(colorblindShader);
+        //mat = new Material(colorblindShader);
     }
 
     /*
