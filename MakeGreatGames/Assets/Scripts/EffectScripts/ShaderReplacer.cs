@@ -12,6 +12,8 @@ public class ShaderReplacer : MonoBehaviour
     [SerializeField]
     Material mat;
     
+    
+    /*
     void OnEnable()
     {
         ReplaceShader(colorblindShader, null);
@@ -34,7 +36,6 @@ public class ShaderReplacer : MonoBehaviour
         //mat = new Material(colorblindShader);
     }
 
-    /*
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         Graphics.Blit(source, destination, mat);

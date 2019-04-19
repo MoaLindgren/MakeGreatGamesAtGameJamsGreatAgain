@@ -83,6 +83,12 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void LoadLobbyScene()
+    {
+        //LoadScene(2);
+        SceneManager.LoadScene(2);
+    }
+
     void LoadScene(int sceneIndex)
     {
         if (loadingScreen != null)
@@ -98,7 +104,7 @@ public class MenuManager : MonoBehaviour
             if (loadingScreen != null)
             {
                 Slider slider = loadingScreen.GetComponentInChildren<Slider>();
-                slider.value = job.progress;
+                slider.value = (int)job.progress;
                 slider.gameObject.GetComponentInChildren<Text>().text = (job.progress * 100).ToString() + "%";
             }
             yield return null;

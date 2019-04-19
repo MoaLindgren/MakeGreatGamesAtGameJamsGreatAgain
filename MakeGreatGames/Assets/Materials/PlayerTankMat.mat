@@ -9,14 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerTankMat
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _AXF_BRDF_TYPE_SVBRDF _EMISSION _EMISSIVE_COLOR_MAP _NORMALMAP_TANGENT_SPACE
-    _NORMALMAP_TANGENT_SPACE0 _NORMALMAP_TANGENT_SPACE1 _NORMALMAP_TANGENT_SPACE2
-    _NORMALMAP_TANGENT_SPACE3 _TERRAIN_INSTANCED_PERPIXEL_NORMAL
+  m_ShaderKeywords: _EMISSION _EMISSIVE_COLOR_MAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap: {}
+  m_CustomRenderQueue: 2050
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - DistortionVectors
   - TransparentDepthPrepass
@@ -51,6 +50,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -484,9 +487,11 @@ Material:
     - _EnableSpecularOcclusion: 0
     - _EnableWind: 0
     - _EnergyConservingSpecularColor: 1
+    - _EnvironmentReflections: 1
     - _Flags: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
+    - _GlossinessSource: 0
     - _GlossyReflections: 1
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02
@@ -598,6 +603,7 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _Parallax: 0.02
     - _PreRefractionPass: 0
+    - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
@@ -606,6 +612,8 @@ Material:
     - _SVBRDF_BRDFVariants: 0
     - _SVBRDF_HeightMapMaxMM: 0
     - _SVBRDF_SpecularLobeMapScale: 1
+    - _SampleGI: 0
+    - _Shininess: 0
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
     - _Smoothness: 0.5
@@ -623,7 +631,9 @@ Material:
     - _SmoothnessRemapMin1: 0
     - _SmoothnessRemapMin2: 0
     - _SmoothnessRemapMin3: 0
+    - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
+    - _SpecSource: 0
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularHighlights: 1
@@ -686,10 +696,16 @@ Material:
     - _UVDetail3: 0
     - _UVEmissive: 0
     - _UVSec: 0
+    - _UseAoMap: 0
+    - _UseColorMap: 0
     - _UseDensityMode: 0
     - _UseEmissiveIntensity: 0
+    - _UseEmissiveMap: 0
     - _UseHeightBasedBlend: 0
     - _UseMainLayerInfluence: 0
+    - _UseMetallicMap: 0
+    - _UseNormalMap: 0
+    - _UseRoughnessMap: 0
     - _UseShadowThreshold: 0
     - _VertexColorMode: 0
     - _WorkflowMode: 1
@@ -739,3 +755,5 @@ Material:
     - _UVMappingMaskBlendMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UnlitColor: {r: 1, g: 1, b: 1, a: 1}
+    - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _UvTiling: {r: 1, g: 1, b: 0, a: 0}

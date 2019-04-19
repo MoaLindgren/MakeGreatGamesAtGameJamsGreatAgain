@@ -14,8 +14,7 @@ public class CoinManager : NetworkBehaviour
 
     [SerializeField]
     int coinsToUlt;
-
-    [SyncVar]
+    
     static CoinManager instance;
 
     bool onNetwork = false;
