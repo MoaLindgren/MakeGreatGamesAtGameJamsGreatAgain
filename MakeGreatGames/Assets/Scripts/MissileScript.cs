@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class MissileScript : MonoBehaviour, IPoolable
@@ -18,7 +19,7 @@ public class MissileScript : MonoBehaviour, IPoolable
 
     Material mat;
 
-    bool active;
+    bool active, onNetwork;
 
     float sinPos = 0f, colorAmount = 127.5f;
 
@@ -28,6 +29,7 @@ public class MissileScript : MonoBehaviour, IPoolable
 
     private void Awake()
     {
+        onNetwork = GetComponent<NetworkTransform>() == null ? false : true;
         particles = GetComponentsInChildren<ParticleSystem>();
         emissionRates = new float[particles.Length];
         for (int i = 0; i < particles.Length; i++)
@@ -64,16 +66,34 @@ public class MissileScript : MonoBehaviour, IPoolable
         }
         if (target == null || (target is NpcScript && !(target as NpcScript).IsActive()))
         {
-            if (WaveSpawner.Instance.CurrentWaveTanks.Count > 0)
+            if (!onNetwork)
             {
-                target = WaveSpawner.Instance.CurrentWaveTanks[Random.Range(0, WaveSpawner.Instance.CurrentWaveTanks.Count)].GetComponent<TankScript>();
+                if (WaveSpawner.Instance.CurrentWaveTanks.Count > 0)
+                {
+                    target = WaveSpawner.Instance.CurrentWaveTanks[Random.Range(0, WaveSpawner.Instance.CurrentWaveTanks.Count)].GetComponent<TankScript>();
+                }
+                else
+                {
+                    target = null;
+                    Vector3 newTarget = CoinManager.Instance.Coins[Random.Range(0, CoinManager.Instance.Coins.Length)].transform.position;
+                    newTarget.y = transform.position.y;
+                    agent.destination = newTarget;
+                }
             }
             else
             {
-                target = null;
-                Vector3 newTarget = CoinManager.Instance.Coins[Random.Range(0, CoinManager.Instance.Coins.Length)].transform.position;
-                newTarget.y = transform.position.y;
-                agent.destination = newTarget;
+                PlayerScript[] allPlayers = FindObjectsOfType<PlayerScript>();
+                bool targetAcquired = false;
+                int index;
+                while (!targetAcquired)
+                {
+                    index = Random.Range(0, allPlayers.Length);
+                    if(allPlayers[index] != shooter)
+                    {
+                        target = allPlayers[index];
+                        targetAcquired = true;
+                    }
+                }
             }
         }
         if (target != null)

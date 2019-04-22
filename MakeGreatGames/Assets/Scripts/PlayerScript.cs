@@ -10,9 +10,19 @@ public class PlayerScript : TankScript
     [SerializeField]
     LineRenderer line;
 
+    [SerializeField]
+    GameObject camPrefab;
+
     Rigidbody rB;
 
     float rotationCompensation = 0f;
+
+    CameraScript cam;
+
+    public CameraScript Cam
+    {
+        get { return cam; }
+    }
 
     public float RotationCompensation
     {
@@ -24,14 +34,14 @@ public class PlayerScript : TankScript
 
     protected override void Awake()
     {
-        if (onNetwork && !isLocalPlayer)
-            return;
         base.Awake();
-        rB = GetComponent<Rigidbody>();
     }
 
     protected override void Start()
     {
+        cam = Instantiate(camPrefab).GetComponentInChildren<CameraScript>();
+        cam.AssignPlayer(gameObject);
+        rB = GetComponent<Rigidbody>();
         if (onNetwork && !isLocalPlayer)
             return;
         base.Start();

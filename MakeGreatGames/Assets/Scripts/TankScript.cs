@@ -55,17 +55,20 @@ public class TankScript : NetworkBehaviour
 
     protected float speed, maxSpeed, turnSpeed, towerTurnSpeed, projectileSpeed, acceleration, ultStartedTime = 0f;
 
+    protected Camera targetCam;
+
+    public bool OnNetwork
+    {
+        get { return onNetwork; }
+    }
+
     protected virtual void Awake()
     {
         onNetwork = GetComponent<NetworkIdentity>() != null;
-        if (onNetwork && !isLocalPlayer)
-            return;
     }
 
     protected virtual void Start()
     {
-        if (onNetwork && !isLocalPlayer)
-            return;
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
@@ -93,6 +96,11 @@ public class TankScript : NetworkBehaviour
         healthSliderDelayed.maxValue = maxHealth;
         healthSliderDelayed.value = health;
         targetHealth = maxHealth;
+        targetCam = GameManager.Instance.GetCam();
+        if(onNetwork && !isLocalPlayer)
+        {
+            GetComponentInChildren<AudioListener>().enabled = false;
+        }
     }
 
     protected virtual void Update()
@@ -106,8 +114,10 @@ public class TankScript : NetworkBehaviour
 
     protected void LateUpdate()
     {
-        directSliderTF.LookAt(directSliderTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
-        delayedSliderTF.LookAt(directSliderTF.position + GameManager.Instance.Cam.transform.rotation * Vector3.forward, GameManager.Instance.Cam.transform.rotation * Vector3.up);
+        if (onNetwork && !isLocalPlayer)
+            return;
+        directSliderTF.LookAt(directSliderTF.position + targetCam.transform.rotation * Vector3.forward, targetCam.transform.rotation * Vector3.up);
+        delayedSliderTF.LookAt(directSliderTF.position + targetCam.transform.rotation * Vector3.forward, targetCam.transform.rotation * Vector3.up);
     }
 
     public virtual void AddCoin()

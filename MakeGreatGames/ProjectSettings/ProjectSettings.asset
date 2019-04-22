@@ -649,10 +649,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 7717818e-487e-4ab0-a64a-17d3cbe2748d
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: BANDITANKS
+  organizationId: kazztruul
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

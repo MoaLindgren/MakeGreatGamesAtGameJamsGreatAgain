@@ -247,6 +247,8 @@ MonoBehaviour:
   forceSpecialAttack: 0
   forcedSpecialIndex: 4
   line: {fileID: 8429361019541647097}
+  camPrefab: {fileID: 1563396786440213145, guid: 908da0978d673694082e5994e49d2fb0,
+    type: 3}
 --- !u!54 &1166912500125730362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -294,7 +296,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166912500125730367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
@@ -327,7 +329,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166912500125730367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
@@ -528,17 +530,20 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5855410374113547073}
@@ -682,17 +687,20 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 285573672449714647}
@@ -1406,15 +1414,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2096568029862941817}
     m_Modifications:
-    - target: {fileID: 4189909752012059215, guid: c2e94544e841f2d4b93a32b4001c259e,
-        type: 3}
-      propertyPath: m_Name
-      value: Healing_Effect
-      objectReference: {fileID: 0}
     - target: {fileID: 1106603217136381047, guid: c2e94544e841f2d4b93a32b4001c259e,
         type: 3}
       propertyPath: moveWithTransform
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189909752012059215, guid: c2e94544e841f2d4b93a32b4001c259e,
+        type: 3}
+      propertyPath: m_Name
+      value: Healing_Effect
       objectReference: {fileID: 0}
     - target: {fileID: 7821566277164369182, guid: c2e94544e841f2d4b93a32b4001c259e,
         type: 3}
@@ -2211,15 +2219,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8429361019468322964}
     m_Modifications:
-    - target: {fileID: 270519871128080630, guid: e5224995db114cf41ba5d92269b2fe3f,
-        type: 3}
-      propertyPath: m_Name
-      value: PowerShot
-      objectReference: {fileID: 0}
     - target: {fileID: 6375150835294236593, guid: e5224995db114cf41ba5d92269b2fe3f,
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 270519871128080630, guid: e5224995db114cf41ba5d92269b2fe3f,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerShot
       objectReference: {fileID: 0}
     - target: {fileID: 3881731928164954613, guid: e5224995db114cf41ba5d92269b2fe3f,
         type: 3}

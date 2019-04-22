@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 struct PlayerInfo
 {
@@ -47,6 +48,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     PoolScript enemyPool, projectilePool, missilePool, minePool, crackPool;
 
+    [SerializeField]
+    bool onlineMode;
+
     #endregion
 
     #region PrivateVariables
@@ -55,15 +59,11 @@ public class GameManager : MonoBehaviour
 
     int score = 0;
 
-    Camera cam;
-
     static GameManager instance;
 
     string playerName = "Air Guitar Elemental";
 
-    bool paused = false;
-
-    bool gameRunning = false;
+    bool paused = false, gameRunning = false;
 
     #endregion
 
@@ -88,11 +88,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance
     {
         get { return instance; }
-    }
-
-    public Camera Cam
-    {
-        get { return cam; }
     }
 
     public PoolScript EnemyPool
@@ -131,10 +126,11 @@ public class GameManager : MonoBehaviour
         instance = this;
         SceneManager.sceneLoaded += ResetTimescale;
         Cursor.visible = false;
-        highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         statsXML.Load(Application.streamingAssetsPath + "/TankStatsXML.xml");
+        if (onlineMode)
+            return;
+        highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
-        cam = FindObjectOfType<Camera>();
         if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
         {
             using (StreamReader reader = File.OpenText(Application.persistentDataPath + "/PlayerName.dat"))
@@ -153,11 +149,25 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Start"))
+        if (Input.GetButtonDown("Start") && FindObjectOfType<PlayerScript>().OnNetwork)
         {
             paused = !paused;
             PauseAndUnpause(paused);
         }
+    }
+
+    public Camera GetCam()
+    {
+        PlayerScript[] allPlayers = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in allPlayers)
+        {
+            if (allPlayers.Length == 1 || player.isLocalPlayer)
+            {
+                return player.Cam.GetComponent<Camera>();
+            }
+        }
+        print("No valid camera found. Fuck.");
+        return null;
     }
 
     public T GetTankStat<T>(string baseOrTower, string objectName, string statName) where T : IComparable
@@ -200,7 +210,12 @@ public class GameManager : MonoBehaviour
     {
         if (tank is PlayerScript)
         {
-            GameOver();
+            if (!onlineMode)
+                GameOver();
+            else
+            {
+
+            }
         }
         else
         {

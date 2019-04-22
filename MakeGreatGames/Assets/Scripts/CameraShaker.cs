@@ -57,6 +57,8 @@ public class CameraShaker : MonoBehaviour
     {
         while (shakeDuration > 0.01f && GameManager.Instance.GameRunning)
         {
+            if (GameManager.Instance.Paused)
+                yield return null;
             Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;//A Vector3 to add to the Local Rotation
             rotationAmount.z = 0;//Don't change the Z; it looks funny.
 

@@ -9,9 +9,9 @@ public class CameraScript : MonoBehaviour
 
     GameObject player;
 
-    private void Start()
+    public void AssignPlayer(GameObject player)
     {
-        player = FindObjectOfType<PlayerScript>().gameObject;
+        this.player = player;
     }
 
     void LateUpdate()
