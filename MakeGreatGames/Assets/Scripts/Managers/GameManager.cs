@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
         {
             if (allPlayers.Length == 1 || player.isLocalPlayer)
             {
+                //print(allPlayers.Length);
                 return player.Cam.GetComponent<Camera>();
             }
         }

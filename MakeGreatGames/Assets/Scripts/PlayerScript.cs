@@ -11,7 +11,7 @@ public class PlayerScript : TankScript
     LineRenderer line;
 
     [SerializeField]
-    GameObject camPrefab;
+    GameObject camPrefab, audioListener;
 
     Rigidbody rB;
 
@@ -35,16 +35,17 @@ public class PlayerScript : TankScript
     protected override void Awake()
     {
         base.Awake();
+        cam = Instantiate(camPrefab).GetComponentInChildren<CameraScript>();
     }
 
     protected override void Start()
     {
-        cam = Instantiate(camPrefab).GetComponentInChildren<CameraScript>();
         cam.AssignPlayer(gameObject);
         rB = GetComponent<Rigidbody>();
+        base.Start();
         if (onNetwork && !isLocalPlayer)
             return;
-        base.Start();
+        Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
     }
 

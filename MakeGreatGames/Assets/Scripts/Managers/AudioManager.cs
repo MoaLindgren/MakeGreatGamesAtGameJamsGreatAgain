@@ -76,6 +76,7 @@ public class AudioManager : MonoBehaviour
                             return SpawnSound(clip, t, stationarySound, looping, isMusic, volume);      //If an AudioSource with the same clip is already playing, we stop that clip and reuse the AudioSource for the new sound
                         }
                     }
+                print("hepp");
                 return null;        //No free AudioSources for that soundtype, sorry
             }
         }
