@@ -250,8 +250,6 @@ MonoBehaviour:
   line: {fileID: 8429361019541647097}
   camPrefab: {fileID: 1563396786440213145, guid: 908da0978d673694082e5994e49d2fb0,
     type: 3}
-  audioListener: {fileID: 632978135900763935, guid: a26cc21a20e6b124988f7b78021329da,
-    type: 3}
 --- !u!54 &1166912500125730362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -336,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -667,6 +665,61 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &7931619750349285991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989613927695015047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &4161710084473187505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989613927695015047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 0
+  m_InterpolateMovement: 0
 --- !u!1 &4997749600645012766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,6 +2192,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b7fc6df323cfe114e8598e273819a986, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b052313e1bbb7b5439740586702c124c, type: 3}
+--- !u!1 &4989613927695015045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: b052313e1bbb7b5439740586702c124c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4989613927695112741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4989613927695237287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: b052313e1bbb7b5439740586702c124c,
@@ -2154,12 +2213,6 @@ GameObject:
 --- !u!4 &4989613927695237285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b052313e1bbb7b5439740586702c124c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4989613927695112741}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4989613927695015045 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: b052313e1bbb7b5439740586702c124c,
     type: 3}
   m_PrefabInstance: {fileID: 4989613927695112741}
   m_PrefabAsset: {fileID: 0}
