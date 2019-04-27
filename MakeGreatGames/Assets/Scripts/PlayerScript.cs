@@ -46,7 +46,7 @@ public class PlayerScript : TankScript
         cam.AssignPlayer(gameObject);
         rB = GetComponent<Rigidbody>();
         base.Start();
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !hasAuthority)
             return;
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
@@ -56,7 +56,7 @@ public class PlayerScript : TankScript
 
     public override void AddCoin()
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !hasAuthority)
             return;
         base.AddCoin();
         UIManager.Instance.Coins = coins;
@@ -64,7 +64,7 @@ public class PlayerScript : TankScript
 
     protected override void MoveTank(float amount)
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !hasAuthority)
             return;
         base.MoveTank(amount);
         if (!alive)
@@ -76,7 +76,7 @@ public class PlayerScript : TankScript
 
     protected override void Update()
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !hasAuthority)
             return;
         base.Update();
         if (!alive)
@@ -130,7 +130,7 @@ public class PlayerScript : TankScript
 
     private void FixedUpdate()
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !hasAuthority)
             return;
         if (!alive)
         {
