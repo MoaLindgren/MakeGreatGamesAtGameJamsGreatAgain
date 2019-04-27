@@ -19,6 +19,9 @@ public class PlayerScript : TankScript
 
     CameraScript cam;
 
+    [SyncVar]
+    Vector3 onlinePos;
+
     public CameraScript Cam
     {
         get { return cam; }
@@ -47,6 +50,8 @@ public class PlayerScript : TankScript
             return;
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
+        if (onNetwork)
+            onlinePos = transform.position;
     }
 
     public override void AddCoin()
@@ -65,6 +70,8 @@ public class PlayerScript : TankScript
         if (!alive)
             return;
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
+        if (onNetwork)
+            onlinePos = transform.position;
     }
 
     protected override void Update()
