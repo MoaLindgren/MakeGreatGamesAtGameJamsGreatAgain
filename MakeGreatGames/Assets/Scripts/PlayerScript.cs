@@ -95,7 +95,7 @@ public class PlayerScript : TankScript
 
         if (Input.GetAxis("Fire") > 0.5f && canShoot)
         {
-            CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
+            //CameraShaker.Instance.ShakeCamera(shotDamage * cameraShakeShoot, 0.5f);
             Shoot();
         }
 

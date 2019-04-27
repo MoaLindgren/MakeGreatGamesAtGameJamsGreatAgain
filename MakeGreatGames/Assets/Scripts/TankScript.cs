@@ -205,7 +205,7 @@ public class TankScript : NetworkBehaviour
         if (this is PlayerScript)
         {
             UIManager.Instance.ShowDamage(health, maxHealth);
-            CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
+            //CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
         }
         if (health <= 0)
         {
