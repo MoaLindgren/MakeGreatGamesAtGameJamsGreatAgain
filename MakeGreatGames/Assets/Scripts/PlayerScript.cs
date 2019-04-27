@@ -11,7 +11,7 @@ public class PlayerScript : TankScript
     LineRenderer line;
 
     [SerializeField]
-    GameObject camPrefab, audioListener;
+    GameObject camPrefab;
 
     Rigidbody rB;
 
