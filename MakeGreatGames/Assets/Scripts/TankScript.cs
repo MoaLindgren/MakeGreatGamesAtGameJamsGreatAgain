@@ -13,7 +13,7 @@ public class TankScript : NetworkBehaviour
     protected int specialAttackTimer;
 
     [SerializeField]
-    protected GameObject tankBase, tower, trackingMissile, mine;
+    protected GameObject tankBase, tower, trackingMissile, mine, audioListener;
 
     [SerializeField]
     protected Transform shotStart, missileStart;
@@ -97,9 +97,9 @@ public class TankScript : NetworkBehaviour
         healthSliderDelayed.value = health;
         targetHealth = maxHealth;
         targetCam = GameManager.Instance.GetCam();
-        if(onNetwork && !isLocalPlayer)
+        if(!onNetwork || isLocalPlayer)
         {
-            GetComponentInChildren<AudioListener>().enabled = false;
+            Instantiate(audioListener, tankBase.transform);
         }
     }
 
