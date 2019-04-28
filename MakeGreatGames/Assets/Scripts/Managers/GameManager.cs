@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         PlayerScript[] allPlayers = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in allPlayers)
         {
-            if (allPlayers.Length == 1 || player.isLocalPlayer)
+            if (!player.OnNetwork || player.isLocalPlayer)
             {
                 //print(allPlayers.Length);
                 return player.Cam.GetComponent<Camera>();
