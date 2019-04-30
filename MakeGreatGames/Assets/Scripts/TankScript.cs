@@ -97,10 +97,6 @@ public class TankScript : NetworkBehaviour
         healthSliderDelayed.value = health;
         targetHealth = maxHealth;
         targetCam = GameManager.Instance.GetCam();
-        if(this is PlayerScript && (!onNetwork || isLocalPlayer))
-        {
-            Instantiate(audioListener, tankBase.transform);
-        }
     }
 
     protected virtual void Update()

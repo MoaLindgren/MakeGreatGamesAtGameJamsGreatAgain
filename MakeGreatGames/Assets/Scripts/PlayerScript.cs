@@ -50,6 +50,7 @@ public class PlayerScript : TankScript
             return;
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
+        onlinePos = transform.position;
         if (onNetwork)
             CmdUpdateNetworkPosition();
     }
@@ -70,6 +71,7 @@ public class PlayerScript : TankScript
         if (!alive)
             return;
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
+        onlinePos = transform.position;
         if (onNetwork)
             CmdUpdateNetworkPosition();
     }
@@ -77,7 +79,7 @@ public class PlayerScript : TankScript
     [Command]
     void CmdUpdateNetworkPosition()
     {
-            onlinePos = transform.position;
+        transform.position = onlinePos;
     }
 
     protected override void Update()
