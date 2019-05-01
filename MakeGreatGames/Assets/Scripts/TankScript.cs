@@ -110,7 +110,7 @@ public class TankScript : NetworkBehaviour
 
     protected void LateUpdate()
     {
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork && !isLocalPlayer && !hasAuthority)
             return;
         directSliderTF.LookAt(directSliderTF.position + targetCam.transform.rotation * Vector3.forward, targetCam.transform.rotation * Vector3.up);
         delayedSliderTF.LookAt(directSliderTF.position + targetCam.transform.rotation * Vector3.forward, targetCam.transform.rotation * Vector3.up);
