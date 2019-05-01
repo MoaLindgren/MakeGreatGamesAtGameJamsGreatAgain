@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerScript : TankScript
