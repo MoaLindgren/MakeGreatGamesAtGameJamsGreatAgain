@@ -6096,6 +6096,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4541278210141351676, guid: 1dcacfaa6a74b0347b4c7f490da26377, type: 3}
   poolSize: 3
+  lobbyIndex: 2
+  isOnline: 1
 --- !u!1001 &845962159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10996,6 +10998,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 709937350, guid: df63b58330209d84bba425387c2204c1, type: 3}
   poolSize: 5
+  lobbyIndex: 0
+  isOnline: 1
 --- !u!1 &1564697130
 GameObject:
   m_ObjectHideFlags: 0
@@ -11305,6 +11309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 2406992890102627937, guid: 372d0988c7acd9642982a622110694f7, type: 3}
   poolSize: 50
+  lobbyIndex: 4
+  isOnline: 1
 --- !u!1 &1573834548
 GameObject:
   m_ObjectHideFlags: 0
@@ -13782,6 +13788,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5553166210681229993, guid: f91656aeccd2bac428ee99299ae5be9d, type: 3}
   poolSize: 100
+  lobbyIndex: 0
+  isOnline: 0
 --- !u!1 &1910258756
 GameObject:
   m_ObjectHideFlags: 0

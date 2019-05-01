@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 
 public interface IPoolable
 {
@@ -17,7 +18,10 @@ public class PoolScript : MonoBehaviour
     GameObject prefab;
 
     [SerializeField]
-    int poolSize;
+    int poolSize, lobbyIndex;
+
+    [SerializeField]
+    bool isOnline;
 
     List<GameObject> objectPool = new List<GameObject>();
 
@@ -27,7 +31,7 @@ public class PoolScript : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            objectPool.Add(Instantiate(prefab, transform.position, Quaternion.identity));
+            objectPool.Add(Instantiate(isOnline? NetworkLobbyManager.singleton.spawnPrefabs[lobbyIndex] : prefab, transform.position, Quaternion.identity));
             RenderGO(objectPool[i], false);
             objectPool[i].GetComponent<IPoolable>().DeActivate();
         }
