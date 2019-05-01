@@ -55,7 +55,7 @@ public class PlayerScript : TankScript
         rB = GetComponent<Rigidbody>();
         base.Start();
         nameText.text = playerName;
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !isLocalPlayer)
         {
             print("im here, but im not you");
             return;
@@ -71,7 +71,7 @@ public class PlayerScript : TankScript
 
     public override void AddCoin()
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !isLocalPlayer)
             return;
         base.AddCoin();
         UIManager.Instance.Coins = coins;
@@ -79,18 +79,18 @@ public class PlayerScript : TankScript
 
     protected override void MoveTank(float amount)
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !isLocalPlayer)
             return;
         base.MoveTank(amount);
         if (!alive)
             return;
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
     }
-    
+
 
     protected override void Update()
     {
-        if (onNetwork && !localPlayerAuthority)
+        if (onNetwork && !isLocalPlayer)
             return;
         base.Update();
         if (!alive)
@@ -144,8 +144,8 @@ public class PlayerScript : TankScript
 
     private void FixedUpdate()
     {
-        if (onNetwork && !localPlayerAuthority)
-           return;
+        if (onNetwork && !isLocalPlayer)
+            return;
         if (!alive)
         {
             return;
@@ -216,7 +216,10 @@ public class PlayerScript : TankScript
         float aim = Input.GetAxis("Aim");
         if (Mathf.Abs(aim) > 0.19f)
         {
-            RotateTower(towerTurnSpeed * aim);
+            if (onNetwork && isLocalPlayer)
+                CmdRotateTower(towerTurnSpeed * aim);
+            else if (!onNetwork)
+                RotateTower(towerTurnSpeed * aim);
         }
     }
 }

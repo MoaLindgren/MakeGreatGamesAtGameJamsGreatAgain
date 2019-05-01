@@ -128,6 +128,15 @@ public class TankScript : NetworkBehaviour
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
         tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
     }
+
+    [Command]
+    protected void CmdRotateTower(float amount)
+    {
+        if (!alive)
+            return;
+        float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
+        tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
+    }
     
     protected void RotateTank(float amount)
     {
