@@ -80,7 +80,7 @@ public class CoinManager : NetworkBehaviour
                 int index = Random.Range(0, coins.Length);
                 if (!coins[index].activeSelf)
                 {
-                    if (false)
+                    if (onNetwork)
                         CmdNewCoin(index);
                     else
                         NewCoin(index);
