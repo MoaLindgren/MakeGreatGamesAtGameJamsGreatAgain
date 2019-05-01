@@ -55,7 +55,7 @@ public class PlayerScript : TankScript
         rB = GetComponent<Rigidbody>();
         base.Start();
         nameText.text = playerName;
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork)// && !isLocalPlayer)
         {
             print("im here, but im not you");
             return;
@@ -71,7 +71,7 @@ public class PlayerScript : TankScript
 
     public override void AddCoin()
     {
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork)// && !isLocalPlayer)
             return;
         base.AddCoin();
         UIManager.Instance.Coins = coins;
@@ -79,7 +79,7 @@ public class PlayerScript : TankScript
 
     protected override void MoveTank(float amount)
     {
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork)// && !isLocalPlayer)
             return;
         base.MoveTank(amount);
         if (!alive)
@@ -90,7 +90,7 @@ public class PlayerScript : TankScript
 
     protected override void Update()
     {
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork)// && !isLocalPlayer)
             return;
         base.Update();
         if (!alive)
@@ -144,7 +144,7 @@ public class PlayerScript : TankScript
 
     private void FixedUpdate()
     {
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork)// && !isLocalPlayer)
             return;
         if (!alive)
         {
