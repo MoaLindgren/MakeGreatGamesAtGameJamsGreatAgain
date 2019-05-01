@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     List<string> irreplaceables;        //Sounds we don't want to be replace even if we run out of AudioSources
+
+    [SerializeField]
+    bool onNetwork;
 
     int currentSFXIndex = 0, currentMusicIndex = 0;     //Keep track of which object to use
 
@@ -43,6 +47,8 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < sfxSources.Length; i++)         //Spawn pools
         {
             sfxSources[i] = Instantiate(sfxAudioPrefab, transform).GetComponent<AudioSource>();
+            if (onNetwork)
+                NetworkServer.Spawn(sfxSources[i].gameObject);
         }
         for (int i = 0; i < musicSources.Length; i++)
         {

@@ -31,7 +31,11 @@ public class PoolScript : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            objectPool.Add(Instantiate(isOnline? NetworkLobbyManager.singleton.spawnPrefabs[lobbyIndex] : prefab, transform.position, Quaternion.identity));
+            objectPool.Add(Instantiate(prefab, transform.position, Quaternion.identity));
+            if (isOnline)
+            {
+                NetworkServer.Spawn(objectPool[objectPool.Count - 1]);
+            }
             RenderGO(objectPool[i], false);
             objectPool[i].GetComponent<IPoolable>().DeActivate();
         }
