@@ -60,6 +60,11 @@ public class PlayerScript : TankScript
         nameText.text = playerName;
         if (onNetwork && !isLocalPlayer)
             return;
+        else if(onNetwork)
+        {
+            print("im here, but im not you");
+            return;
+        }
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
         onlinePos = transform.position;
