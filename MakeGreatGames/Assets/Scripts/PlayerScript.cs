@@ -24,9 +24,6 @@ public class PlayerScript : TankScript
     CameraScript cam;
 
     [SyncVar]
-    Vector3 onlinePos;
-
-    [SyncVar]
     string playerName;
 
     public CameraScript Cam
@@ -66,10 +63,8 @@ public class PlayerScript : TankScript
         cam.AssignPlayer(gameObject);
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
-        onlinePos = transform.position;
         if (onNetwork)
         {
-            CmdUpdateNetworkPosition();
             SpawnShield();
         }
     }
@@ -90,16 +85,8 @@ public class PlayerScript : TankScript
         if (!alive)
             return;
         rB.MovePosition(transform.position + amount * transform.forward * Time.deltaTime);
-        onlinePos = transform.position;
-        if (onNetwork)
-            CmdUpdateNetworkPosition();
     }
-
-    [Command]
-    void CmdUpdateNetworkPosition()
-    {
-        transform.position = onlinePos;
-    }
+    
 
     protected override void Update()
     {
