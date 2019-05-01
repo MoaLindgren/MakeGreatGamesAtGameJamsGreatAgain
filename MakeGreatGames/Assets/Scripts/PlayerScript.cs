@@ -54,7 +54,6 @@ public class PlayerScript : TankScript
 
     protected override void Start()
     {
-        cam.AssignPlayer(gameObject);
         rB = GetComponent<Rigidbody>();
         base.Start();
         nameText.text = playerName;
@@ -63,6 +62,7 @@ public class PlayerScript : TankScript
             print("im here, but im not you");
             return;
         }
+        cam.AssignPlayer(gameObject);
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
         onlinePos = transform.position;
