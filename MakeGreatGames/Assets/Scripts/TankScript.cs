@@ -57,6 +57,9 @@ public class TankScript : NetworkBehaviour
 
     protected Camera targetCam;
 
+    [SyncVar]
+    protected float towerRotation;
+
     public bool OnNetwork
     {
         get { return onNetwork; }
@@ -129,17 +132,17 @@ public class TankScript : NetworkBehaviour
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
         tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
         if (onNetwork)
-            CmdRotateTower(amount);
+            CmdRotateTower(tower.transform.rotation.y);
     }
 
     [Command]
-    protected void CmdRotateTower(float amount)
+    protected void CmdRotateTower(float newRot)
     {
         print("Cmd");
         if (!alive)
             return;
-        float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
-        tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
+        towerRotation = newRot;
+        tower.transform.rotation = new Quaternion(tower.transform.rotation.x, newRot, tower.transform.rotation.z, tower.transform.rotation.w);
     }
 
     protected void RotateTank(float amount)
