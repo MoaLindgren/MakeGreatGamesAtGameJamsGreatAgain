@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
             return;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
         PlayerScript player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity).GetComponent<PlayerScript>();
+        if (onlineMode)
+            NetworkServer.Spawn(player.gameObject);
         if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
         {
             using (StreamReader reader = File.OpenText(Application.persistentDataPath + "/PlayerName.dat"))
