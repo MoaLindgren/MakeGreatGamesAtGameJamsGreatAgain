@@ -54,8 +54,8 @@ public class CoinManager : NetworkBehaviour
         CoinCollected.Invoke();
     }
 
-    [Command]
-    public void CmdCoinPickedUp(GameObject coin)
+    [ClientRpc]
+    public void RpcCoinPickedUp(GameObject coin)
     {
         coin.SetActive(false);
         activeCoins--;
@@ -80,9 +80,6 @@ public class CoinManager : NetworkBehaviour
                 int index = Random.Range(0, coins.Length);
                 if (!coins[index].activeSelf)
                 {
-                    if (onNetwork)
-                        CmdNewCoin(index);
-                    else
                         NewCoin(index);
                     spawnChosen = true;
                 }
@@ -96,10 +93,14 @@ public class CoinManager : NetworkBehaviour
         coins[index].SetActive(true);
         AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
         activeCoins++;
+        if (onNetwork)
+        {
+            RpcNewCoin(index);
+        }
     }
 
-    [Command]
-    void CmdNewCoin(int index)
+    [ClientRpc]
+    void RpcNewCoin(int index)
     {
         coins[index].SetActive(true);
         AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
