@@ -44,6 +44,7 @@ public class CoinManager : NetworkBehaviour
             Destroy(this);
         instance = this;
         onNetwork = GetComponent<NetworkIdentity>() != null;
+        print("Hello!");
         StartCoroutine("SpawnCoin");
     }
 
@@ -64,7 +65,9 @@ public class CoinManager : NetworkBehaviour
 
     IEnumerator SpawnCoin()
     {
+        print("Waiting......");
         yield return new WaitForSeconds(Random.Range(minCoinTime, maxCoinTime));
+        print("Done waiting!");
         CoinSpawned.Invoke();
         if (activeCoins < coins.Length)
         {
@@ -90,11 +93,13 @@ public class CoinManager : NetworkBehaviour
 
     void NewCoin(int index)
     {
+        print("Coin!");
         coins[index].SetActive(true);
         AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
         activeCoins++;
         if (onNetwork)
         {
+            print("Online Coin!");
             RpcNewCoin(index);
         }
     }

@@ -57,7 +57,7 @@ public class PlayerScript : TankScript
         nameText.text = playerName;
         if (onNetwork && !isLocalPlayer && !hasAuthority)
         {
-            print("im here, but im not you");
+            nameText.color = Color.red;
             return;
         }
         cam.AssignPlayer(gameObject);
