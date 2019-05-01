@@ -192,8 +192,21 @@ public class TankScript : NetworkBehaviour
         ProjectileScript shot = GameManager.Instance.ProjectilePool.GetObject(shotStart.position, shotStart.rotation).GetComponent<ProjectileScript>();
         shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
         AudioSource shotSound = AudioManager.Instance.SpawnSound("ShotSound", shotStart, false, false, false, this is PlayerScript ? 1f : 0.8f);
-        StopCoroutine("AttackCooldownTimer");
-        StartCoroutine("AttackCooldownTimer");
+        CmdEnableAttack(false);
+        StopCoroutine("OnlineAttackCooldownTimer");
+        StartCoroutine("OnlineAttackCooldownTimer");
+    }
+
+    protected IEnumerator OnlineAttackCooldownTimer()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        CmdEnableAttack(true);
+    }
+
+    [Command]
+    void CmdEnableAttack(bool enable)
+    {
+        canShoot = enable;
     }
 
     protected IEnumerator AttackCooldownTimer()
