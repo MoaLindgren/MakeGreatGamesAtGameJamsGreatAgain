@@ -198,7 +198,7 @@ public class TankScript : NetworkBehaviour
         health -= damage;
         healthSlider.value = health;
         StartCoroutine("WaitForDamage");
-        if (this is PlayerScript)
+        if (this is PlayerScript && (!onNetwork || localPlayerAuthority))
         {
             UIManager.Instance.ShowDamage(health, maxHealth);
             //CameraShaker.Instance.ShakeCamera(damage * cameraShakeTakeDamage, 2f);
