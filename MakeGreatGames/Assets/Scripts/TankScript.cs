@@ -206,6 +206,7 @@ public class TankScript : NetworkBehaviour
     [Command]
     void CmdEnableAttack(bool enable)
     {
+        print("Can shoot: " + enable);
         canShoot = enable;
     }
 
