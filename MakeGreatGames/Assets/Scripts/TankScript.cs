@@ -31,6 +31,7 @@ public class TankScript : NetworkBehaviour
     [Tooltip("0 = Missile, 1 = Shield, 2 = SpeedBoost, 3 = Heal, 4 = SuperHeal, 5 = Mine, 6 = SuperShots")]
     protected int forcedSpecialIndex;    //Debugging purposes
 
+    [SyncVar]
     protected bool alive = true, shielded = false, canShoot = true, spinning = false, onNetwork = false;
 
     protected int maxHealth, shotDamage, health, coins = 0, maxCoins = 10, specialAttackIndex, targetHealth;
