@@ -59,8 +59,6 @@ public class PlayerScript : TankScript
         base.Start();
         nameText.text = playerName;
         if (onNetwork && !isLocalPlayer)
-            return;
-        else if(onNetwork)
         {
             print("im here, but im not you");
             return;
