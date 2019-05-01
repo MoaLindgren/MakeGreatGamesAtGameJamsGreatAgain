@@ -55,7 +55,7 @@ public class PlayerScript : TankScript
         rB = GetComponent<Rigidbody>();
         base.Start();
         nameText.text = playerName;
-        if (onNetwork && !isLocalPlayer)
+        if (onNetwork && !localPlayerAuthority)
         {
             print("im here, but im not you");
             return;
