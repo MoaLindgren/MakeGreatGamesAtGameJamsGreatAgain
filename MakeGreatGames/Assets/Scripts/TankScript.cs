@@ -123,6 +123,7 @@ public class TankScript : NetworkBehaviour
     
     protected void RotateTower(float amount)
     {
+        print("No Cmd");
         if (!alive)
             return;
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
@@ -141,7 +142,6 @@ public class TankScript : NetworkBehaviour
     
     protected void RotateTank(float amount)
     {
-        print("No Cmd");
         if (!alive)
             return;
         transform.Rotate(0f, amount, 0f);
