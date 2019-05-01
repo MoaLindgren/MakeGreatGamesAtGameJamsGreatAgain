@@ -17,7 +17,7 @@ public class CoinManager : NetworkBehaviour
     
     static CoinManager instance;
 
-    bool onNetwork = false;
+    bool onNetwork;
 
     public static CoinManager Instance
     {
@@ -80,7 +80,7 @@ public class CoinManager : NetworkBehaviour
                 int index = Random.Range(0, coins.Length);
                 if (!coins[index].activeSelf)
                 {
-                    if (onNetwork)
+                    if (false)
                         CmdNewCoin(index);
                     else
                         NewCoin(index);
