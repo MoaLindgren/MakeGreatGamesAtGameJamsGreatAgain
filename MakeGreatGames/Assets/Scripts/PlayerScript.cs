@@ -71,16 +71,16 @@ public class PlayerScript : TankScript
 
     public override void AddCoin()
     {
-        //if (onNetwork && !isLocalPlayer)
-            //return;
+        if (onNetwork && !localPlayerAuthority)
+            return;
         base.AddCoin();
         UIManager.Instance.Coins = coins;
     }
 
     protected override void MoveTank(float amount)
     {
-        if (onNetwork && !isLocalPlayer)
-            //return;
+        if (onNetwork && !localPlayerAuthority)
+            return;
         base.MoveTank(amount);
         if (!alive)
             return;
@@ -90,8 +90,8 @@ public class PlayerScript : TankScript
 
     protected override void Update()
     {
-        //if (onNetwork && !isLocalPlayer)
-            //return;
+        if (onNetwork && !localPlayerAuthority)
+            return;
         base.Update();
         if (!alive)
         {
@@ -144,8 +144,8 @@ public class PlayerScript : TankScript
 
     private void FixedUpdate()
     {
-        //if (onNetwork && !isLocalPlayer)
-            //return;
+        if (onNetwork && !localPlayerAuthority)
+           return;
         if (!alive)
         {
             return;
