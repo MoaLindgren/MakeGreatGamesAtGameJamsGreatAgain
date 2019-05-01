@@ -120,7 +120,7 @@ public class TankScript : NetworkBehaviour
     {
         coins++;
     }
-    
+
     protected void RotateTower(float amount)
     {
         print("No Cmd");
@@ -139,12 +139,14 @@ public class TankScript : NetworkBehaviour
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
         tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
     }
-    
+
     protected void RotateTank(float amount)
     {
         if (!alive)
             return;
         transform.Rotate(0f, amount, 0f);
+        if (onNetwork)
+            CmdRotateTower(amount);
     }
 
     protected virtual void MoveTank(float amount)
@@ -159,7 +161,7 @@ public class TankScript : NetworkBehaviour
     {
         return;
     }
-    
+
     public void Shoot()
     {
         if (!alive || !canShoot)
@@ -301,12 +303,12 @@ public class TankScript : NetworkBehaviour
                 UIManager.Instance.ShowDamage(health, maxHealth);
         }
     }
-    
+
     protected void DeployMine()
     {
         GameManager.Instance.MinePool.GetObject(transform.position, Quaternion.identity);
     }
-    
+
     protected void FireMissile()
     {
         CameraShaker.Instance.ShakeCamera(2 * cameraShakeShoot, 2f);
@@ -327,7 +329,7 @@ public class TankScript : NetworkBehaviour
             missile.Init(FindObjectOfType<PlayerScript>(), this);
         }
     }
-    
+
     protected void SpawnShield()
     {
         StartCoroutine("Shield");
@@ -337,12 +339,12 @@ public class TankScript : NetworkBehaviour
     {
         return;
     }
-    
+
     protected void SpeedBoost()
     {
         StartCoroutine("SpeedBoosted");
     }
-    
+
     protected void Heal()
     {
         AudioSource healingSound = AudioManager.Instance.SpawnSound("HealingSound", transform, false, false, false, 1f);

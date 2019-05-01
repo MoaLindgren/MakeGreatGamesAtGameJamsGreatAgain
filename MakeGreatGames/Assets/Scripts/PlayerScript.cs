@@ -216,10 +216,7 @@ public class PlayerScript : TankScript
         float aim = Input.GetAxis("Aim");
         if (Mathf.Abs(aim) > 0.19f)
         {
-            if (onNetwork)
-                CmdRotateTower(towerTurnSpeed * aim);
-            else if (!onNetwork)
-                RotateTower(towerTurnSpeed * aim);
+            RotateTower(towerTurnSpeed * aim);
         }
     }
 }
