@@ -100,7 +100,10 @@ public class PlayerScript : TankScript
 
         if (Input.GetButton("Line"))
         {
-            DrawLine();
+            if (!onNetwork)
+                DrawLine();
+            else
+                CmdDrawLine();
         }
         else
         {
@@ -131,6 +134,19 @@ public class PlayerScript : TankScript
     }
 
     protected void DrawLine()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            Debug.DrawRay(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
+            line.SetPosition(0, shotStart.transform.position);
+            line.SetPosition(1, hit.point);
+            line.enabled = true;
+        }
+    }
+
+    [Command]
+    protected void CmdDrawLine()
     {
         RaycastHit hit;
         if (Physics.Raycast(shotStart.transform.position, shotStart.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
@@ -201,12 +217,18 @@ public class PlayerScript : TankScript
         currentMovement(speed);
         if (horizontal < -0.19f)
         {
-            RotateTank(-turnSpeed * Mathf.Abs(horizontal));
+            if (onNetwork)
+                CmdRotateTank(-turnSpeed * Mathf.Abs(horizontal));
+            else
+                RotateTank(-turnSpeed * Mathf.Abs(horizontal));
             rotationCompensation = -turnSpeed;
         }
         else if (horizontal > 0.19f)
         {
-            RotateTank(turnSpeed * Mathf.Abs(horizontal));
+            if (onNetwork)
+                CmdRotateTank(turnSpeed * Mathf.Abs(horizontal));
+            else
+                RotateTank(turnSpeed * Mathf.Abs(horizontal));
             rotationCompensation = turnSpeed;
         }
         else
@@ -216,7 +238,10 @@ public class PlayerScript : TankScript
         float aim = Input.GetAxis("Aim");
         if (Mathf.Abs(aim) > 0.19f)
         {
-            RotateTower(towerTurnSpeed * aim);
+            if (onNetwork)
+                CmdRotateTower(towerTurnSpeed * aim);
+            else
+                RotateTower(towerTurnSpeed * aim);
         }
     }
 }

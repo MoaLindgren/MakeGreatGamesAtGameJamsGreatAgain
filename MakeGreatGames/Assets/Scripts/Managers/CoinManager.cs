@@ -9,15 +9,19 @@ public class CoinManager : NetworkBehaviour
     [SerializeField]
     GameObject[] coins;     //Coin locations
 
+    [SyncVar]
     [SerializeField]
     float minCoinTime, maxCoinTime;     //Min and max time between coin spawns
 
     [SerializeField]
     int coinsToUlt;
-    
+
     static CoinManager instance;
 
     bool onNetwork;
+
+    [SyncVar]
+    float waitTime, lastSpawn;
 
     public static CoinManager Instance
     {
@@ -35,7 +39,7 @@ public class CoinManager : NetworkBehaviour
     }
 
     int activeCoins = 0;
-    
+
     public UnityEvent CoinSpawned = new UnityEvent(), CoinCollected = new UnityEvent();
 
     private void Awake()
@@ -45,6 +49,57 @@ public class CoinManager : NetworkBehaviour
         instance = this;
         onNetwork = GetComponent<NetworkIdentity>() != null;
         print("Hello!");
+        if (onNetwork)
+        {
+            lastSpawn = Time.time;
+            CmdSetSpawnTimer();
+        }
+        else
+            StartCoroutine("SpawnCoin");
+    }
+
+    private void Update()
+    {
+        if (!onNetwork)
+            return;
+        if (Time.time >= lastSpawn + waitTime)
+        {
+            if (activeCoins < coins.Length)
+            {
+                bool spawnChosen = true;
+                foreach (GameObject GO in coins)     //Avoid inf loops
+                    if (!GO.activeSelf)
+                    {
+                        spawnChosen = false;
+                        break;
+                    }
+                while (!spawnChosen)
+                {
+                    int index = Random.Range(0, coins.Length);
+                    if (!coins[index].activeSelf)
+                    {
+                        NewCoin(index);
+                        spawnChosen = true;
+                        CoinSpawned.Invoke();
+                    }
+                }
+            }
+            lastSpawn = Time.time;
+            if (onNetwork)
+                CmdSetSpawnTimer();
+            else
+                StartCoroutine("SpawnCoin");
+        }
+    }
+
+    [Command]
+    void CmdSetSpawnTimer()
+    {
+        waitTime = Time.time + Random.Range(minCoinTime, maxCoinTime);
+    }
+
+    void StartSpawning()
+    {
         StartCoroutine("SpawnCoin");
     }
 
@@ -65,10 +120,7 @@ public class CoinManager : NetworkBehaviour
 
     IEnumerator SpawnCoin()
     {
-        print("Waiting......");
         yield return new WaitForSeconds(Random.Range(minCoinTime, maxCoinTime));
-        print("Done waiting!");
-        CoinSpawned.Invoke();
         if (activeCoins < coins.Length)
         {
             bool spawnChosen = true;
@@ -83,8 +135,9 @@ public class CoinManager : NetworkBehaviour
                 int index = Random.Range(0, coins.Length);
                 if (!coins[index].activeSelf)
                 {
-                        NewCoin(index);
+                    NewCoin(index);
                     spawnChosen = true;
+                    CoinSpawned.Invoke();
                 }
             }
         }
@@ -97,11 +150,6 @@ public class CoinManager : NetworkBehaviour
         coins[index].SetActive(true);
         AudioManager.Instance.SpawnSound("CoinSpawnSound", coins[index].transform, true, false, false, 1f);
         activeCoins++;
-        if (onNetwork)
-        {
-            print("Online Coin!");
-            RpcNewCoin(index);
-        }
     }
 
     [ClientRpc]

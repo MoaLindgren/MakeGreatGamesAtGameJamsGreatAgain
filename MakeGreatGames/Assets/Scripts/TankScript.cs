@@ -70,6 +70,11 @@ public class TankScript : NetworkBehaviour
 
     protected virtual void Start()
     {
+        /*
+        if (onNetwork)
+            currentMovement = CmdMoveTank;
+        else
+        */
         currentMovement = MoveTank;
         currentRotationMethod = RotateTank;
         specialAttackMethods = new SpecialAttackMethod[] { FireMissile, SpawnShield, SpeedBoost, Heal, SuperHeal, DeployMine, SuperShots };
@@ -124,19 +129,15 @@ public class TankScript : NetworkBehaviour
 
     protected void RotateTower(float amount)
     {
-        print("No Cmd");
         if (!alive)
             return;
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
         tower.transform.Rotate(0f, amount - rotationCompensation * 0.28f, 0f);
-        if (onNetwork)
-            CmdRotateTower(amount);
     }
 
     [Command]
     protected void CmdRotateTower(float amount)
     {
-        print("Cmd");
         if (!alive)
             return;
         float rotationCompensation = this is PlayerScript ? (this as PlayerScript).RotationCompensation : 0f;
@@ -150,6 +151,14 @@ public class TankScript : NetworkBehaviour
         transform.Rotate(0f, amount, 0f);
     }
 
+    [Command]
+    protected void CmdRotateTank(float amount)
+    {
+        if (!alive)
+            return;
+        transform.Rotate(0f, amount, 0f);
+    }
+
     protected virtual void MoveTank(float amount)
     {
         if (!alive)
@@ -157,7 +166,16 @@ public class TankScript : NetworkBehaviour
         if (engineSound != null && engineSound.clip != null)
             engineSound.pitch = 0.95f + ((Mathf.Abs(amount) / (maxSpeed / 100f)) / 500f);
     }
-
+    /*
+    [Command]
+    protected virtual void CmdMoveTank(float amount)
+    {
+        if (!alive)
+            return;
+        if (engineSound != null && engineSound.clip != null)
+            engineSound.pitch = 0.95f + ((Mathf.Abs(amount) / (maxSpeed / 100f)) / 500f);
+    }
+    */
     protected void DontMoveTank(float amount)
     {
         return;
