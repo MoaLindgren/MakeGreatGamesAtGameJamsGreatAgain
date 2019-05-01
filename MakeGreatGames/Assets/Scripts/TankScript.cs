@@ -162,10 +162,29 @@ public class TankScript : NetworkBehaviour
         return;
     }
 
-    public void Shoot()
+    protected void Shoot()
     {
         if (!alive || !canShoot)
             return;
+        if (onNetwork)
+        {
+            CmdShoot();
+            return;
+        }
+        foreach (ParticleSystem p in cannonParticles)
+        {
+            p.Play();
+        }
+        ProjectileScript shot = GameManager.Instance.ProjectilePool.GetObject(shotStart.position, shotStart.rotation).GetComponent<ProjectileScript>();
+        shot.Init(shotStart.transform.forward, projectileSpeed, this, shotDamage);
+        AudioSource shotSound = AudioManager.Instance.SpawnSound("ShotSound", shotStart, false, false, false, this is PlayerScript ? 1f : 0.8f);
+        StopCoroutine("AttackCooldownTimer");
+        StartCoroutine("AttackCooldownTimer");
+    }
+
+    [Command]
+    protected void CmdShoot()
+    {
         foreach (ParticleSystem p in cannonParticles)
         {
             p.Play();

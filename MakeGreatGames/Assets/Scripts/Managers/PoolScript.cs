@@ -60,6 +60,10 @@ public class PoolScript : MonoBehaviour
             returnGO.transform.position = position;
             returnGO.transform.rotation = rotation;
         }
+        else if (isOnline)
+        {
+            NetworkServer.Spawn(returnGO);
+        }
         RenderGO(returnGO, true);
         returnGO.GetComponent<IPoolable>().Activate();
         poolIndex = (poolIndex + 1) % objectPool.Count;
