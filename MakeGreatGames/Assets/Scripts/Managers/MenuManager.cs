@@ -89,7 +89,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    void LoadScene(int sceneIndex)
+    public void LoadScene(int sceneIndex)
     {
         if (loadingScreen != null)
             loadingScreen.SetActive(true);
@@ -109,5 +109,10 @@ public class MenuManager : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    public void Disconnect()
+    {
+        Destroy(gameObject);
     }
 }

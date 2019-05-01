@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Start") && FindObjectOfType<PlayerScript>().OnNetwork)
+        if (Input.GetButtonDown("Start") && !onlineMode)
         {
             paused = !paused;
             PauseAndUnpause(paused);
