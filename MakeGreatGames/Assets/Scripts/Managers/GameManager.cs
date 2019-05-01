@@ -11,22 +11,22 @@ using UnityEngine.Networking;
 struct PlayerInfo
 {
     int score;
-    string name;
+    string playerName;
 
     public int Score
     {
         get { return score; }
     }
 
-    public string Name
+    public string PlayerName
     {
-        get { return name; }
+        get { return playerName; }
     }
 
     public PlayerInfo(int score, string name)
     {
         this.score = score;
-        this.name = name;
+        this.playerName = name;
     }
 }
 
@@ -72,6 +72,11 @@ public class GameManager : MonoBehaviour
     public int Score
     {
         set { score += value; }
+    }
+
+    public string PlayerName
+    {
+        get { return playerName; }
     }
 
     public bool GameRunning
@@ -130,7 +135,7 @@ public class GameManager : MonoBehaviour
         if (onlineMode)
             return;
         highScoreXml.Load(Application.streamingAssetsPath + "/HighScoreXML.xml");
-        Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
+        PlayerScript player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity).GetComponent<PlayerScript>();
         if (File.Exists(Application.persistentDataPath + "/PlayerName.dat"))
         {
             using (StreamReader reader = File.OpenText(Application.persistentDataPath + "/PlayerName.dat"))
@@ -139,6 +144,7 @@ public class GameManager : MonoBehaviour
             }
             File.Delete(Application.persistentDataPath + "/PlayerName.dat");
         }
+        player.PlayerName = playerName;
     }
 
     private void Start()
@@ -270,7 +276,7 @@ public class GameManager : MonoBehaviour
         index = 0;
         foreach (XmlNode node in highScoreXml.SelectNodes("//Player"))
         {
-            node.Attributes[0].InnerText = highScores[index].Name;
+            node.Attributes[0].InnerText = highScores[index].PlayerName;
             node.Attributes[1].InnerText = highScores[index].Score.ToString();
             index++;
         }

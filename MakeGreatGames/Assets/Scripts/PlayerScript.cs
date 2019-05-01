@@ -13,6 +13,9 @@ public class PlayerScript : TankScript
     [SerializeField]
     GameObject camPrefab;
 
+    [SerializeField]
+    Text nameText;
+
     Rigidbody rB;
 
     float rotationCompensation = 0f;
@@ -22,9 +25,17 @@ public class PlayerScript : TankScript
     [SyncVar]
     Vector3 onlinePos;
 
+    [SyncVar]
+    string playerName;
+
     public CameraScript Cam
     {
         get { return cam; }
+    }
+
+    public string PlayerName
+    {
+        set { this.playerName = value; }
     }
 
     public float RotationCompensation
@@ -46,13 +57,17 @@ public class PlayerScript : TankScript
         cam.AssignPlayer(gameObject);
         rB = GetComponent<Rigidbody>();
         base.Start();
+        nameText.text = playerName;
         if (onNetwork && !isLocalPlayer)
             return;
         Instantiate(audioListener, tankBase.transform);
         engineSound = AudioManager.Instance.SpawnSound("EngineSound", transform, false, true, false, 1f);
         onlinePos = transform.position;
         if (onNetwork)
+        {
             CmdUpdateNetworkPosition();
+            SpawnShield();
+        }
     }
 
     public override void AddCoin()

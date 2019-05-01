@@ -35,8 +35,7 @@ public class CoinManager : NetworkBehaviour
     }
 
     int activeCoins = 0;
-
-    [SyncVar]
+    
     public UnityEvent CoinSpawned = new UnityEvent(), CoinCollected = new UnityEvent();
 
     private void Awake()
